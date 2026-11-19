@@ -233,6 +233,8 @@ BUG_MODAL = """
   g('bUseLast').addEventListener('click',function(){
     if(window.__pdrLastId) g('bPaste').value=window.__pdrLastId;
   });
+  g('bugX').addEventListener('click',close);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && modal.style.display==='flex') close(); });
   modal.addEventListener('click',function(e){ if(e.target===modal) close(); });
 
   function done(payload){
