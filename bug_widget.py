@@ -23,6 +23,10 @@ BUG_CSS = """<style>
     padding:9px 16px; border-radius:8px; cursor:pointer; margin-right:14px;
     box-shadow:0 2px 6px rgba(0,0,0,.18); font-family:inherit; white-space:nowrap; }
   .bug-btn:hover { background:#ea580c; }
+  .mrn-btn { background:#0ea5a4; color:#fff; border:none; font-weight:700; font-size:13.5px;
+    padding:9px 16px; border-radius:8px; cursor:pointer; margin-right:10px;
+    box-shadow:0 2px 6px rgba(0,0,0,.18); font-family:inherit; white-space:nowrap; }
+  .mrn-btn:hover { background:#0b7c7b; }
   .bug-overlay { position:fixed; inset:0; background:rgba(15,23,42,.5); display:none;
     align-items:center; justify-content:center; z-index:9999; }
   .bug-card { background:#fff; width:540px; max-width:94vw; max-height:92vh; overflow:auto;
@@ -79,6 +83,7 @@ BUG_CSS = """<style>
 </style>"""
 
 BUG_BTN = '<button type="button" id="bugBtn" class="bug-btn">&#9888; Missing data</button>'
+MRN_BTN = '<button type="button" id="mrnBtn" class="mrn-btn">&#9776; MRN Array</button>'
 
 BUG_MODAL = """
 <div id="bugModal" class="bug-overlay">
@@ -154,6 +159,20 @@ BUG_MODAL = """
     </div>
 
     <div class="bug-done" id="bugDone" style="display:none"></div>
+  </div>
+</div>
+<div id="mrnModal" class="bug-overlay">
+  <div class="bug-card" style="width:460px">
+    <div class="bug-head" style="background:#0ea5a4"><span>MRN array</span><span class="bug-x" id="mrnX" title="Close">&times;</span></div>
+    <div class="bug-ctx" id="mrnCtx" style="background:#e6f6f5;color:#0b5b5b;border-bottom-color:#b9e6e3"></div>
+    <div class="bug-body">
+      <p style="margin:0 0 8px;color:#475467;font-size:12.5px">The <b>QE|Source|MRN</b> identifiers that define this person (one per line):</p>
+      <textarea id="mrnText" class="mrnbox" readonly style="min-height:160px"></textarea>
+      <div class="bug-foot" style="justify-content:flex-end">
+        <button type="button" class="bug-secondary" id="mrnDone">Close</button>
+        <button type="button" class="bug-primary" id="mrnCopy">Copy</button>
+      </div>
+    </div>
   </div>
 </div>
 <div id="pdrToast" class="pdr-toast"></div>
@@ -301,6 +320,24 @@ BUG_MODAL = """
     try { if(navigator.clipboard) navigator.clipboard.writeText(tok); } catch(err){}
     toast('Data ID copied \\u2014 open \u201cMissing data\u201d \u2192 PDR has it, then paste');
   });
+
+  // ---- MRN Array button ----
+  var mrnModal=g('mrnModal');
+  function mrnClose(){ mrnModal.style.display='none'; }
+  g('mrnBtn').addEventListener('click',function(){
+    var p=visiblePatient(); if(!p) return;
+    g('mrnCtx').textContent=(p.getAttribute('data-first')||'')+' '+(p.getAttribute('data-last')||'');
+    g('mrnText').value=mrnsDisplay(parseMrns(p));
+    mrnModal.style.display='flex';
+  });
+  g('mrnX').addEventListener('click',mrnClose);
+  g('mrnDone').addEventListener('click',mrnClose);
+  mrnModal.addEventListener('click',function(e){ if(e.target===mrnModal) mrnClose(); });
+  g('mrnCopy').addEventListener('click',function(){
+    var t=g('mrnText'); t.focus(); t.select();
+    try { if(navigator.clipboard) navigator.clipboard.writeText(t.value); else document.execCommand('copy'); } catch(e){}
+    toast('MRN array copied');
+  });
 })();
 </script>
 """
@@ -310,6 +347,6 @@ def inject(html):
     """Add the Missing-data report button, modal, and per-row copy icons."""
     html = html.replace('</head>', BUG_CSS + '\n</head>', 1)
     html = html.replace('<div class="spacer"></div>',
-                        '<div class="spacer"></div>' + BUG_BTN, 1)
+                        '<div class="spacer"></div>' + MRN_BTN + BUG_BTN, 1)
     html = html.replace('</body>', BUG_MODAL + '\n</body>', 1)
     return html
