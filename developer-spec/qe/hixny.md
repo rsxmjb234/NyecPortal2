@@ -8,7 +8,7 @@ Common rules (processing, drill-in, Missing data) are in docs 02 and 03. This fi
 ## Positioning (from hixny.org, paraphrased)
 
 - Workflow-first: the viewer launches **inside the EHR at the point of care, in one click**.
-- Parses CCD data and surfaces insights, instead of showing CCDs as PDFs.
+- Parses clinical document data and surfaces insights, instead of showing CCDs as PDFs.
 - Strong data quality and security messaging.
 
 ## Look and structure [Demo]

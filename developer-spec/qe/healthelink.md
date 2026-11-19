@@ -27,7 +27,7 @@ From the training guide. Not implemented in the demo.
 1. **Access path**: HEALTHeCOMMUNITY Portal badges, then the HEALTHeLINK badge, then a **Confidentiality Acknowledgement**, then **Duo two-factor**, then Fusion Gateway, then the viewer.
 2. **Patient Search** (left "Search Criteria" panel): Last name, First name and DOB are **required**. The results table has Name, Age, Gender, DOB, Address, Master Patient Identifier. A caret expands **per-source rows** showing Medical Record Number, Assigning Authority and Info Types (icons).
 3. **Consent gates visibility.** A patient without consent does not expose data.
-4. **Lab Results full column set**: Lab Test, Result, Units, Flag, Reference Range, **Status, Trend, Order, Facility**, Collection Date, with a search box and a sort/filter control. The demo omits Status, Trend, Order, Facility. The CCD parser already reads status. Facility, order and trend need new source data.
+4. **Lab Results full column set**: Lab Test, Result, Units, Flag, Reference Range, **Status, Trend, Order, Facility**, Collection Date, with a search box and a sort/filter control. The demo omits Status, Trend, Order, Facility. The demo model carries a result status; facility, order and trend need new data from PDR.
 5. **Reports**: per-section reports (default last 30 days) to view, download and print; a "New Report" builder by data type and date range; saved named reports.
 6. **Audit**: same-name access check, **break-the-glass**, patient-data-access audit.
 

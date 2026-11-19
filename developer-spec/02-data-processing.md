@@ -2,72 +2,51 @@
 
 Every QE view is a different presentation of the same processing pipeline. Nothing in this document is QE-specific. If a QE needs something different, it is in `qe/<name>.md`.
 
-Reference implementation: `ccda_parse.py` (functions `parse_ccd`, `load_oru_hl7`, `_reconcile_oru`, `_dedup_person`, `merge_by_person`).
+Reference implementation: `ccda_parse.py` (functions `merge_by_person`, `_dedup_person`, `_reconcile_oru`). In the demo that file also parsed C-CDA and HL7; that parsing is **not** part of the new build. Only the merge, de-duplication and reconciliation rules matter.
 
-Pipeline:
+Pipeline (what the viewer does with the person data it is given):
 
 ```
- C-CDA XML  ─┐                                   ┌─> QE view (Hixny / HEALTHeLINK / Bronx / ...)
- HL7 ORU    ─┼─> parse ─> identify person ─> merge ─> de-duplicate ─> reconcile labs ─> display + drill-in
- MPI / IDs  ─┘
+ PDR person data (see 04) --> merge sources --> de-duplicate --> reconcile labs --> display + drill-in
 ```
 
-## 1. Inputs
+How the data is obtained from PDR is outside this specification. The team already knows how to call PDR. **Assume the data arrives shaped like [04-pdr-data-model.md](04-pdr-data-model.md).**
 
-| Input | Format | Demo location |
-|-------|--------|---------------|
-| Clinical documents | C-CDA (CCD) XML, one document per source per person | `demo-marcus/ccda/*.xml` |
-| Lab results | HL7 v2.5.1 `ORU^R01`, one message file per source | `demo-marcus/oru-hl7/*_ORU.hl7` |
-| Identity anchors | MPI CSV: `qe,source,mrn,eid,mpid,first_name,last_name,dob,gender` | `demo-marcus/mpi/marcus_mpi.csv` |
+## 1. Input
+
+The viewer receives the data for one person, in the shape described in [04-pdr-data-model.md](04-pdr-data-model.md): demographics, the MRN array, and lists for conditions, medications, labs (grouped by panel), lab feed results (`oru`), immunizations, vitals, procedures, encounters and allergies.
 
 Requirements:
-- Parsing **must** tolerate missing sections and missing optional fields. A missing section produces an empty section ("No X on file"), never an error page.
-- A document that cannot be parsed **must not** block the other documents for that person. Record the failure (file, reason) for operations. **[Prod]**
+- Missing lists or missing optional fields **must** produce an empty section ("No X on file"), never an error page.
+- A bad or partial record **must not** block the rest of the person's data. Log it for operations. **[Prod]**
 - Unknown or unmapped codes **must** still display the best available text (display name, then original text, then the raw code).
+- Field names, value formats and flags in 04 are an **assumption** based on the demo. If PDR's real field names differ, map them once at the boundary and keep the rest of the viewer on the model in 04.
 
 ## 2. Person identity and MRNs
 
-### 2.1 Identifiers in a C-CDA (`recordTarget/patientRole/id`)
+The person data carries an **MRN array**: every `(QE, Source, MRN)` that identifies this person, and a cross-source person key (MPID).
 
-| Identifier | How to recognize it | Use |
-|------------|--------------------|-----|
-| Source MRN | `id` with `assigningAuthorityName="QE\|Source"`; `extension` = MRN | One entry in the MRN array |
-| MPID | `id` whose `root` ends in `.mpid` | **Cross-source person key** |
-| EID | `id` whose `root` ends in `.eid` | QE's own ID, kept for reference |
-
-The first source MRN found is the document's primary MRN.
-
-### 2.2 Identifiers in an HL7 ORU (`PID-3`, repeating, `~` separated)
-
-```
-340474^^^HEALTHIX&MSSM^MR ~ HX-EID-1234^^^HEALTHIX^PI ~ MARCUS-GOLDEN-0001^^^NYEC^PI
-```
-
-First repetition is the source MRN. Component 4 is `QE&Source`. Also read PID-5 (name), PID-7 (DOB), PID-8 (sex), PID-11 (address).
-
-### 2.3 Matching rules
-
-1. **Person key** = MPID when present. Fallback = `family|given|DOB`.
-2. All documents with the same person key merge into **one virtual record**.
-3. An ORU attaches to the document whose source MRN equals the ORU's PID-3 MRN.
-   - The demo matches on MRN alone. **Production must match on the full triple (QE, Source, MRN)**, because two sources can issue the same MRN value.
-4. **MRN array** = union of every `(QE, Source, MRN)` from CCDs and ORUs, de-duplicated on the triple. It drives the MRN Array button and is stamped on every Missing data ticket.
+Rules:
+1. The MRN array drives the MRN Array button and is stamped on every Missing data ticket.
+2. The MRN array **must** be de-duplicated on the triple (QE, Source, MRN).
+3. If PDR returns more than one record for the same person (for example one per source), group them by MPID (fallback `family|given|DOB`) into one virtual record, then apply section 3. If PDR already returns one merged record, section 3 still applies as display de-duplication.
+4. Lab feed results (`oru`) that carry a QE, Source and MRN **must** be matched to a source on the full triple, never on MRN alone, because two sources can issue the same MRN value. (The demo matched on MRN alone; that is a known gap.)
 
 Requirements:
 - **Must** show how many sources contributed and list them (MRN Array).
-- **Should** surface a warning when two documents share an MPID but disagree on DOB or sex. Do not merge silently. **[Prod]**
-- **[Prod]** Matching confidence and merge decisions **must** be auditable.
+- **Should** warn when records for one MPID disagree on DOB or sex. Do not merge silently. **[Prod]**
+- **[Prod]** Matching decisions **must** be auditable.
 
 ## 3. Merge and de-duplication by data type
 
 After grouping by person, concatenate each data type across documents, then collapse duplicates using the key below. The first occurrence wins. **De-duplication hides duplicates in the merged view only. Never delete the source record.** Keep the raw documents and be able to show which sources contributed each item. **[Prod]**
 
-| Data type | C-CDA section (title) | Fields extracted | De-dup key |
+| Data type | Originating C-CDA section (informational) | Fields | De-dup key |
 |-----------|----------------------|------------------|-----------|
 | Conditions | `Problems` | name (SNOMED display), onset, resolved, status | (name, onset) |
 | Medications | `Medications` | name (RxNorm), start, stop, status, dose, route, frequency, prescriber, refills, indication, RxNorm code | (name, start) |
 | Lab results | `Diagnostic Results` | panel, test, value, unit, flag, reference range, date, LOINC, status | panel: (panel, date); result: (LOINC, date, value) |
-| Lab results (ORU) | HL7 OBX | test, value, unit, range, flag, date, LOINC | (LOINC, date, value) |
+| Lab feed results (`oru`) | HL7 OBX (informational) | test, value, unit, range, flag, date, LOINC | (LOINC, date, value) |
 | Immunizations | `Immunizations` | name, date | (name, date) |
 | Vital signs | `Vital Signs` | test, value, unit, date | (test, value, date) |
 | Procedures | `Surgeries`, else `Procedures` | name, date | (name, date) |
@@ -129,19 +108,18 @@ Low, High, Abnormal, Critical High and Critical Low are **abnormal**. Abnormal r
 
 Display text resolution order for any coded value: `displayName`, then `translation/displayName`, then the referenced narrative text (`originalText/reference`), then the raw code.
 
-## 8. Encounters / ADT encoding
+## 8. Encounters / ADT fields
 
-| Field | C-CDA location |
-|-------|----------------|
-| Type | `encounter/code` |
-| Admit / discharge | `encounter/effectiveTime` low / high (no high = outpatient or open) |
-| Facility | `encounter/participant[@typeCode='LOC']/participantRole/playingEntity/name` |
-| Attending | `encounter/performer[1]/assignedEntity/assignedPerson/name` |
-| PCP | `encounter/performer[2]/assignedEntity/assignedPerson/name` |
-| Discharge disposition | `sdtc:dischargeDispositionCode/@displayName` |
-| Reason for visit | `encounter/entryRelationship/observation/value/@displayName` |
+| Field | Meaning |
+|-------|---------|
+| `name` / `etype` | Encounter type (inpatient admission, ED visit, office visit, follow-up) |
+| `start` / `stop` | Admit and discharge date. No `stop` means an outpatient or open encounter; show a dash |
+| `facility` | Where it happened. Never invent one when it is blank |
+| `attending`, `pcp` | Provider names |
+| `disposition` | Discharge disposition. Only present for stays that ended with a discharge |
+| `reason` | Reason for visit |
 
-The performer order (first attending, second PCP) is a demo convention. **[Prod]** Use `assignedEntity/code` (NUCC) to identify the role rather than position.
+The C-CDA locations these came from are listed in Appendix A. In the new build, PDR supplies the fields directly. Use a provider role when PDR gives one; do not depend on list position to tell attending from PCP.
 
 ## 9. Drill-in detail (every QE)
 
@@ -186,7 +164,7 @@ The demo has none of these. All are required in the secure portal. Details come 
 
 ## 13. Acceptance test: Marcus Evans
 
-Use the sample bundle. After processing, every QE view **must** show:
+Use the fixture `fixtures/marcus_evans.json` (see 04). After processing, every QE view **must** show:
 
 | Check | Expected |
 |-------|----------|
@@ -199,3 +177,32 @@ Use the sample bundle. After processing, every QE view **must** show:
 | BMP duplicates | Glucose, creatinine, sodium: ORU preferred, CCD crossed off |
 | HbA1c 6.1 % | ORU only, flagged High |
 | Drill-in | Opens for encounter, medication, CCD lab and ORU lab rows with the extra fields in section 9 |
+
+## Appendix A. Where the fields came from in the demo (informational)
+
+The demo built its data from C-CDA XML and HL7 v2 ORU files. The new build does **not** parse these. The tables explain where each field in 04 originated, in case PDR exposes the same concepts under other names.
+
+Identifiers in a C-CDA (`recordTarget/patientRole/id`):
+
+| Identifier | How to recognize it | Use |
+|------------|--------------------|-----|
+| Source MRN | `id` with `assigningAuthorityName="QE\|Source"`; `extension` = MRN | One MRN array entry |
+| MPID | `id` whose `root` ends in `.mpid` | Cross-source person key |
+| EID | `id` whose `root` ends in `.eid` | QE's own ID |
+
+Identifiers in an HL7 ORU (`PID-3`, repeating, `~` separated): `340474^^^HEALTHIX&MSSM^MR ~ HX-EID-1234^^^HEALTHIX^PI ~ MARCUS-GOLDEN-0001^^^NYEC^PI`. First repetition is the source MRN; component 4 is `QE&Source`.
+
+Encounter fields in a C-CDA:
+
+| Field | C-CDA location |
+|-------|----------------|
+| Type | `encounter/code` |
+| Admit / discharge | `encounter/effectiveTime` low / high |
+| Facility | `encounter/participant[@typeCode='LOC']/participantRole/playingEntity/name` |
+| Attending / PCP | `encounter/performer[1]` and `[2]`, under `assignedEntity/assignedPerson/name` |
+| Discharge disposition | `sdtc:dischargeDispositionCode/@displayName` |
+| Reason | `encounter/entryRelationship/observation/value/@displayName` |
+
+Medication fields: `substanceAdministration` with `effectiveTime` (IVL low/high, and a PIVL period for frequency), `routeCode`, `doseQuantity`, `repeatNumber` (refills), `author` (prescriber), `entryRelationship` (indication), and the RxNorm code under `consumable/manufacturedProduct/manufacturedMaterial/code`.
+
+Lab results in a C-CDA: `Diagnostic Results` section, `organizer` (panel) with `component/observation` (result), `interpretationCode` (flag), `referenceRange`, LOINC `code`. In HL7: `OBX-3` code^name, `OBX-5` value, `OBX-6` unit, `OBX-7` range, `OBX-8` flag, `OBX-14` date.

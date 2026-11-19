@@ -4,14 +4,28 @@ Audience: the developer building this inside the secure portal.
 Source of truth for behavior: the working demo (below) plus these documents.
 All demo data is 100% synthetic.
 
+## Start here
+
+1. Read [06-project-context.md](06-project-context.md) for what exists, what was decided, and the build order.
+2. Everything else is reference. Feed all the `.md` files to the model or developer; use `fixtures/` as test data and `images/` as visual reference.
+
+## Data assumption
+
+The viewer is built on data returned by **PDR**. These documents **assume PDR returns person data shaped like the demo's merged record** ([04-pdr-data-model.md](04-pdr-data-model.md)). They do **not** describe how to call PDR. The team already knows that. The demo itself read static files; none of that file handling is part of the new build.
+
 ## Reading order
 
 | # | File | What it covers |
 |---|------|----------------|
-| 1 | [01-home-page.md](01-home-page.md) | Home page, one card per Qualified Entity (QE), and what each QE card must do |
-| 2 | [02-data-processing.md](02-data-processing.md) | Requirements that apply to **every** QE: how each data type is ingested, normalized, merged, de-duplicated and displayed |
-| 3 | [03-missing-data-logging.md](03-missing-data-logging.md) | "Missing data" ticket feature + MRN Array (full build spec with screenshots) |
-| 4 | [qe/](qe/) | One file per QE with QE-specific needs |
+| 6 | [06-project-context.md](06-project-context.md) | Purpose, decisions made, status, gaps, build order, a starter prompt |
+| 1 | [01-home-page.md](01-home-page.md) | Home page, one card per Qualified Entity (QE) |
+| 2 | [02-data-processing.md](02-data-processing.md) | Rules for **every** QE: identity, merge, de-duplication, lab reconciliation, drill-in |
+| 3 | [03-missing-data-logging.md](03-missing-data-logging.md) | "Missing data" tickets and MRN Array (full build spec) |
+| 4 | [04-pdr-data-model.md](04-pdr-data-model.md) | The assumed shape of the data the viewer receives, with an example |
+| 5 | [05-ui-design.md](05-ui-design.md) | Visual design of each view and the shared widgets, with screenshots |
+| - | [qe/](qe/) | One file per QE with QE-specific needs |
+| - | `fixtures/` | `marcus_evans.json` (full), `marcus_evans.sample.json` (short) |
+| - | `images/` | Screenshots of every view and widget |
 
 QE files: [Hixny](qe/hixny.md) · [HEALTHeLINK](qe/healthelink.md) · [Bronx RHIO](qe/bronx-rhio.md) ·
 [Healthix](qe/healthix.md) · [HealtheConnections](qe/healtheconnections.md) · [Rochester RHIO](qe/rochester-rhio.md)
@@ -45,17 +59,4 @@ Each requirement is tagged where it matters:
 - Code: https://github.com/rsxmjb234/NyecPortal2
 - One synthetic patient, **Marcus Evans** (DOB 06/01/1950, M), appears in 10 sources across 5 QEs, rendered in three QE styles from the same merged data.
 
-| File | Role |
-|------|------|
-| `make_person.py` | Generates the Marcus bundle (10 CCDs, 10 HL7 ORUs, MPI CSV) |
-| `ccda_parse.py` | **Shared parser + merge + de-dup rules** (the logic in doc 02) |
-| `build_smart.py` / `build_chart.py` / `build_bronx.py` | Hixny, HEALTHeLINK, Bronx RHIO renderers |
-| `bug_widget.py` | Missing data, MRN Array and drill-in detail widget |
-| `build_home.py` | Home page + orchestration |
-
-The demo is static HTML generated at build time. The secure portal will be dynamic.
-Treat the demo as the behavioral reference and these documents as the requirements. Do not copy the static-HTML approach.
-
-## Sample data
-
-`s3://nyec-synthetic-data/demo-marcus/` (ccda/, oru-hl7/, mpi/marcus_mpi.csv, README.md). Contains the 10 CCDs and 10 HL7 ORU files used for every example in these documents.
+The demo is static HTML generated at build time. The secure portal is dynamic. Treat the demo as the behavioral reference and these documents as the requirements. File map: [06-project-context.md](06-project-context.md), section 6.

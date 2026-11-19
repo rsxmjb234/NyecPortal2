@@ -67,7 +67,7 @@ ADT drill-in extras: discharge disposition, reason for visit, encounter type.
 
 - Real IMAT screens for Summary, Patient Info, Problems, Medications, Immunizations (only ADT and Labs were provided).
 - Is the leading magnifier a link to a separate detail page or an inline expansion?
-- Are ADT events real-time (HL7 ADT feed) or from CCDs? The demo reads them from CCD `Encounters`.
+- Are ADT events real-time (HL7 ADT feed) or from CCDs? The demo derives them from the encounter list in the person data.
 - Statewide and "other sources" panels: shown separately or merged?
 - Authentication and consent handled by IMAT or by the new portal?
 
