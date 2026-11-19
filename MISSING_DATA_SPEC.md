@@ -1,80 +1,88 @@
-# Missing Data — Feature Build Spec
+# Missing Data + MRN Array — Feature Build Spec
 
-A build-ready specification for the **Missing data** feature of the SHIN-NY
-record portal. Written so a fresh agent/engineer can implement it from scratch.
+A build-ready specification so a fresh agent/engineer can reproduce this feature
+**in a different code base**. It describes the behavior, the data model it needs,
+the ticket schema, the S3/Athena storage requirement, and links to a working
+reference implementation.
 
-PDR = the Patient Data Repository (what this portal shows).
-QE  = a Qualified Entity / source feed (e.g. HEALTHIX, HEALTHELINK, HIXNY, GRRHIO, BRONX).
+> PDR = the Patient Data Repository (what this portal shows).
+> QE = a Qualified Entity / source feed (Healthix, HEALTHeLINK, Hixny, GRRHIO,
+> Bronx RHIO, HealtheConnections, …). A **view** of the portal represents one QE
+> (e.g. the "Hixny view").
 
-The portal renders a patient record from **C-CDA documents** plus **genuine HL7
-v2 ORU** lab feeds, and reconciles duplicate labs. The **Missing data** feature
-lets a user report a discrepancy between what PDR shows and what a QE has, so a
-reconciliation team can chase it down. The feature is identical across both
-front-end styles the portal ships (the "HIXNY"/SMART-on-FHIR view and the
-"HEALTHeLINK"/Fusion view).
+The portal renders a patient from **C-CDA documents** + genuine **HL7 v2 ORU**
+lab feeds, merging all documents for one person into a single virtual record and
+de-duplicating labs. This feature adds two top-bar tools: **MRN Array** and
+**Missing data**.
 
 ---
 
-## 1. Trigger
+## 0. Screenshots
 
-- A prominent button in the top app bar of **every** patient view, labelled
-  **"⚠ Missing data"** (warning glyph + text).
-- Clicking it opens a modal, pre-populated from the **currently viewed patient**
-  and the **current screen/section**.
+Images live in [`docs/missing-data/`](https://github.com/rsxmjb234/NyecPortal2/tree/main/docs/missing-data)
+(raw: `https://raw.githubusercontent.com/rsxmjb234/NyecPortal2/main/docs/missing-data/<file>`).
 
-## 2. Step 1 — choose the direction of the discrepancy
+| State | Image |
+|-------|-------|
+| Home — one view per QE | ![home](docs/missing-data/home.png) |
+| Missing data — step 1, pick direction | ![direction](docs/missing-data/step1-direction.png) |
+| Direction A — "QE has it, PDR doesn't" (QE auto-filled to the view's QE) | ![A](docs/missing-data/step2a-qe-has-it.png) |
+| Direction B — "PDR has it, QE doesn't" | ![B](docs/missing-data/step2b-pdr-has-it.png) |
+| Ticket JSON on submit | ![ticket](docs/missing-data/step3-ticket-json.png) |
+| MRN Array button + modal | ![mrn](docs/missing-data/mrn-array.png) |
 
-The modal first asks: **"Where is the data missing?"** with two choices:
+---
+
+## 1. Top-bar buttons
+
+Two buttons in the app bar of **every** patient view (both portal styles),
+styled identically (orange):
+
+- **⚠ Missing data** — opens the reconciliation modal (§3).
+- **☰ MRN Array** — opens a modal listing the person's `QE|Source|MRN`
+  identifiers, one per line, with a **Copy** button (§2).
+
+## 2. MRN Array modal
+
+- Header "MRN array", a context line with the patient name.
+- A read-only, scrollable box listing every `QE|Source|MRN` that defines the
+  person (see §7), one per line.
+- **Copy** copies the whole list to the clipboard; **Close** / × / Esc /
+  click-outside dismiss.
+
+## 3. Missing data — step 1: direction
+
+The modal first asks **"Where is the data missing?"** with two choices:
 
 1. **QE has it — PDR does not** — it's in a QE/source feed but not in PDR.
 2. **PDR has it — QE does not** — it's on this PDR screen but a QE is missing it.
 
-The direction is recorded on the ticket and drives which fields show next.
+`direction` is recorded on the ticket and drives the next step.
 
-## 3. Direction A — "QE has it — PDR does not"
+## 4. Direction A — "QE has it — PDR does not"
 
-The data is somewhere in a QE but not in front of us, so **do not pre-fill**
-QE / Source / MRN — the record on screen is almost certainly *not* the source
-that has it.
+- **QE auto-fills to the QE whose view you are in** (e.g. in the Hixny view, QE
+  defaults to `HIXNY`). **Source** and **MRN** auto-fill from that QE's matching
+  identifier for this person when one exists; all three stay **editable** (the
+  reporter can correct them).
+- Identity (First, Last, DOB) and Screen are read-only.
+- Data-hunt fields adapt to the current screen (§6): an item label
+  (`Lab`/`Medication`/…), **Date**, and a result label. The notes prompt also
+  adapts: *"Describe what `<datatype>` you see in the QE we don't show here."*
 
-Fields:
-| Field | Source | Editable? |
-|-------|--------|-----------|
-| First, Last, DOB | from the viewed patient | read-only |
-| Screen | current section, shown as `"<First> - <Section>"` e.g. `Marcus - Lab Results` | read-only |
-| QE, Source, MRN | **blank**, placeholder "if known" | editable |
-| `<DataType>` (label adapts to screen — see §6) | user | editable |
-| Date | user | editable |
-| Result (label adapts — see §6) | user | editable |
-| Notes | user; prompt adapts: *"Describe what `<datatype>` you see in the QE we don't show here"* | editable |
+## 5. Direction B — "PDR has it — QE does not"
 
-## 4. Direction B — "PDR has it — QE does not"
-
-The element is on the current PDR screen; the patient's **own QE** is the one
-missing it, so **pre-fill** QE / Source / MRN (read-only). Section heading reads
-**"Which PDR element is the QE (`<QE>`) missing?"**
-
-Fields:
-| Field | Source | Editable? |
-|-------|--------|-----------|
-| First, Last, DOB, Screen | viewed patient / current section | read-only |
-| QE, Source, MRN | pre-filled from the patient's assigning authority (`QE\|Source`) + MRN | read-only |
-| Data ID | user pastes an ID copied from a row on the screen (see §7); plus a "Use last copied Data ID" button | editable |
-| Notes | user | editable |
-
-## 5. Auto-captured metadata — on EVERY ticket, both directions
-
-Shown read-only at the end of the form and always included in the payload:
-- **Date** — today's report date.
-- **MRN array** — every MRN that makes up this patient *as of when we looked*,
-  each as `MRN (QE|Source)`. Built from all real source identifiers on the
-  record (exclude internal EID/MPID ids). In a single-source record this has one
-  entry; the structure must support many for multi-source MPI identities.
+- Identity + Screen read-only.
+- **QE/Source/MRN pre-filled (read-only) to the view's QE identifier** for this
+  person. The section heading names the QE: *"Which PDR element is the QE
+  (`<QE>`) missing?"*
+- **Data ID** field: the reporter copies an ID from a row on the screen (§8) and
+  pastes it, or clicks **Use last copied Data ID**.
+- Notes.
 
 ## 6. Screen-adaptive field mapping (Direction A)
 
-The item/result labels, placeholders, and the notes prompt change with the
-active screen. Default (unknown screen) = `Item` / `Value`.
+Default (unknown screen) = `Item` / `Value`.
 
 | Screen | Item label | Result label | Item example | Result example |
 |--------|-----------|--------------|--------------|----------------|
@@ -88,123 +96,134 @@ active screen. Default (unknown screen) = `Item` / `Value`.
 | Encounters | Encounter | Type | Hospital admission | — |
 | Demographics | Demographic | Value | Phone number | — |
 
-Always capture QE / Source / MRN regardless of screen (per §3/§4).
+QE / Source / MRN are always present regardless of screen.
 
-## 7. Copy-a-Data-ID from a row (Direction B helper)
+## 7. The person model (what makes MRN Array meaningful)
 
-- Every data row on screen gets a subtle copy affordance (shown on row hover).
-- Clicking it composes a **Data ID** and copies it to the clipboard, e.g.
-  `PDR|mrn=224906|qe=HEALTHIX|src=MSSM|Glucose [Mass/volume] in Blood | 96.74 | mg/dL | 03/12/2016`
-  and keeps it as "last copied" in memory.
-- The user pastes it into Direction B's **Data ID** field (or clicks "Use last
-  copied Data ID").
-- Clipboard uses the browser Clipboard API (needs HTTPS). The in-memory
-  "last copied" fallback must work even when the OS clipboard is unavailable
-  (e.g. opened via `file://`).
+- A person's documents (many CCDs + many ORUs, from different QEs) are **merged
+  into one virtual record** by a shared person key (a shared MPID when present,
+  else `family|given|dob`).
+- The **source identifiers that define the person** (`mrn_list`) are the union
+  of every real source `<id>` on the CCDs **and** the `QE&Source` / MRN parsed
+  from each HL7 ORU `PID-3`, de-duplicated. Internal enterprise ids (EID) and the
+  MPID are excluded from this list.
+- Each page carries the **view's QE** as `data-view-qe` on `<body>`, and each
+  patient block carries `data-first/last/dob/qe/source/mrn/mrns` (where
+  `data-mrns` is `QE|Source:MRN;QE|Source:MRN;…`).
 
-## 8. Dismissal
+## 8. Copy-a-Data-ID from a row (Direction B helper)
 
-The modal must be dismissable without submitting, from any step:
-- an **×** button in the header,
-- the **Escape** key,
-- a click on the backdrop/overlay.
+- Every data row gets a subtle copy icon (on hover). Clicking composes a
+  **Data ID** like
+  `PDR|mrn=…|qe=…|src=…|<cell> | <cell> | …` and copies it (Clipboard API over
+  HTTPS; an in-memory "last copied" fallback works without the OS clipboard).
+- The reporter pastes it into Direction B, or uses "Use last copied Data ID".
 
-## 9. Ticket JSON schema
+## 9. Auto-captured on EVERY ticket (read-only, both directions)
 
-One ticket per submission. Keys are stable and flat (nested only for
-`patient` and `mrnArray`) so downstream SQL is simple.
+- **Date** — today's report date.
+- **MRN array** — the full `QE|Source|MRN` set for the person (§7), shown as a
+  read-only box and included in the payload as structured objects.
 
-Common keys (all tickets):
-- `ticket` (string) — short id, e.g. `BUG-696916`
-- `direction` (enum) — `QE_HAS__PDR_MISSING` | `PDR_HAS__QE_MISSING`
+## 10. Dismissal
+
+The modal closes without submitting via an **×** button, the **Escape** key, or
+a click on the backdrop. Required on every step.
+
+## 11. Ticket JSON schema
+
+One ticket per submission. Keys are stable; nested only for `patient` and
+`mrnArray`.
+
+Common (all tickets):
+- `ticket` (string) — short id, e.g. `BUG-950879`
+- `direction` — `QE_HAS__PDR_MISSING` | `PDR_HAS__QE_MISSING`
 - `patient` — `{ first, last, dob }`
-- `screen` (string) — `"<First> - <Section>"`
-- `reportDate` (string) — local date the report was made
-- `mrnArray` — `[ { qe, source, mrn }, ... ]`
+- `screen` — `"<Section>"` (the screen the reporter was on)
+- `reportDate` — local date of the report
+- `mrnArray` — `[ { qe, source, mrn }, … ]`
 - `notes` (string)
-- `createdAt` (string, ISO-8601 UTC)
+- `createdAt` — ISO-8601 UTC
 
-Direction A (`QE_HAS__PDR_MISSING`) adds:
-- `qeThatHasIt` (string, may be empty), `source` (string), `mrn` (string)
-- `dataType` (string — the adaptive label, e.g. `Lab`)
-- `item` (string), `date` (string), `result` (string)
+Direction A adds: `qeThatHasIt`, `source`, `mrn`, `dataType`, `item`, `date`, `result`.
+Direction B adds: `qeMissingIt`, `source`, `mrn`, `dataId`.
 
-Direction B (`PDR_HAS__QE_MISSING`) adds:
-- `qeMissingIt` (string), `source` (string), `mrn` (string) — pre-filled
-- `dataId` (string — pasted from the row)
+## 12. Storage requirement — secure S3 + Athena
 
-## 10. Storage requirement — S3 (secure) + Athena
+Persist each ticket to S3 so Athena can report on them.
 
-The current demo only *shows* the JSON. The real build **must persist each
-ticket to S3** so Athena can report on them.
+**Single-line JSON, NO indentation** (mandatory). Serialize with no
+pretty-printing (`json.dumps(obj)` / `JSON.stringify(obj)` with no spacing). One
+ticket = one JSON object on one line — Athena's JSON SerDe reads one record per
+line; indented JSON will not parse.
 
-**Format — single-line JSON, NO indentation.**
-- Serialize with no pretty-printing / no indent (`json.dumps(obj)` /
-  `JSON.stringify(obj)` with no spacing args). One ticket = one JSON object on a
-  single line. This is mandatory: Athena's JSON SerDe reads **one JSON record
-  per line**; indented/multi-line JSON will not parse.
-- Write one compact object per S3 object (a single-line file), or append
-  one-object-per-line into NDJSON roll-ups — either is Athena-readable.
+**Layout (partitioned):**
+`s3://<secure-tickets-bucket>/tickets/dt=YYYY-MM-DD/<ticket>.json`
 
-**Layout — partitioned for Athena.**
-```
-s3://<secure-tickets-bucket>/tickets/dt=YYYY-MM-DD/<ticket>.json
-```
-Partitioning by `dt` keeps scans cheap. (`reportDate`/`createdAt` also live
-inside the record.)
+**Secure bucket:** dedicated bucket, separate from any public/synthetic bucket;
+Block Public Access ON; default encryption at rest (SSE-S3 min, SSE-KMS
+preferred); bucket policy denying non-TLS (`aws:SecureTransport=false`);
+versioning on; least-privilege IAM (writer = `s3:PutObject` to `tickets/*` only;
+reader = Athena/Glue read).
 
-**Secure bucket — requirements.**
-- A dedicated bucket, **separate from any public/synthetic-data bucket**.
-- **Block Public Access = ON** (all four settings).
-- **Default encryption at rest** (SSE-S3 minimum; SSE-KMS preferred).
-- Bucket policy **denying non-TLS** access (`aws:SecureTransport = false`).
-- **Versioning on**; lifecycle to expire/transition as policy dictates.
-- Least-privilege IAM: the writer may only `s3:PutObject` to
-  `tickets/*`; the Athena/Glue reader only `s3:GetObject`/`ListBucket`.
+**No browser writes.** A static page cannot hold AWS credentials. Add a thin
+backend: `POST /tickets` → API Gateway → Lambda (role scoped to `PutObject` on
+the tickets bucket) that validates and writes the compact JSON to the
+partitioned key. The page `fetch`es the finished ticket object to that endpoint.
 
-**Do NOT write from the browser.** A static site cannot hold AWS credentials
-safely. Add a thin backend:
-- `POST /tickets` → **API Gateway** → **Lambda** (role scoped to `PutObject` on
-  the tickets bucket only).
-- The browser `fetch`es the finished ticket object to that endpoint; the Lambda
-  validates and writes the compact JSON to the partitioned key.
-- Keep the in-page confirmation ("ticket captured") but have it reflect the real
-  PUT result/key.
+**Athena:** external table over `s3://<bucket>/tickets/` with
+`org.openx.data.jsonserde.JsonSerDe`, partitioned by `dt`. Columns:
+`ticket string, direction string,
+patient struct<first:string,last:string,dob:string>, screen string,
+qethathasit string, qemissingit string, source string, mrn string,
+datatype string, item string, date string, result string, dataid string,
+mrnarray array<struct<qe:string,source:string,mrn:string>>, notes string,
+reportdate string, createdat string`. Add partitions via `MSCK REPAIR TABLE` or
+partition projection on `dt`. Enables reports by direction, QE, screen/dataType,
+day; most-reported missing elements; QE-vs-PDR gap counts.
 
-**Athena.**
-- External table over `s3://<bucket>/tickets/` using a JSON SerDe
-  (`org.openx.data.jsonserde.JsonSerDe`), partitioned by `dt`.
-- Suggested columns: `ticket string, direction string,
-  patient struct<first:string,last:string,dob:string>, screen string,
-  qethathasit string, qemissingit string, source string, mrn string,
-  datatype string, item string, date string, result string, dataid string,
-  mrnarray array<struct<qe:string,source:string,mrn:string>>, notes string,
-  reportdate string, createdat string`.
-- Add partitions via `MSCK REPAIR TABLE` or partition projection on `dt`.
-- Enables reports like: tickets by direction, by QE, by screen/dataType, by day;
-  most-reported missing elements; QE-vs-PDR gap counts.
+## 13. Reference implementation (this repo: `rsxmjb234/NyecPortal2`)
 
-## 11. Acceptance criteria
+The feature ships as a self-contained injectable widget plus the merge/parse
+support it reads from.
 
-- [ ] "⚠ Missing data" button on every patient view (both styles).
-- [ ] Step 1 offers the two directions; `direction` recorded.
-- [ ] Direction A does **not** pre-fill QE/Source/MRN (editable, "if known").
-- [ ] Direction B **pre-fills** QE/Source/MRN read-only and names the QE in the heading.
-- [ ] Item/Result labels, placeholders, and notes prompt adapt to the screen (§6).
-- [ ] Each row exposes a copy-able Data ID; Direction B can paste it / reuse last.
-- [ ] Every ticket includes `reportDate` and `mrnArray` (read-only), both directions.
-- [ ] Modal closes via ×, Escape, and backdrop click without submitting.
-- [ ] On submit, the ticket is written to the secure S3 bucket as **single-line,
+- [`bug_widget.py`](https://github.com/rsxmjb234/NyecPortal2/blob/main/bug_widget.py)
+  — the buttons, both modals, the per-row copy affordance, the client JS, and
+  `inject(html)` which splices it into a finished page by string replacement
+  (works regardless of the page's templating).
+- [`ccda_parse.py`](https://github.com/rsxmjb234/NyecPortal2/blob/main/ccda_parse.py)
+  — `parse_ccd` (emits `person_key`, `mrn_list`), `load_oru_hl7` (adds the ORU
+  `PID` source|MRN to `mrn_list`), and `merge_by_person` (one virtual record per
+  person; de-dupes clinical items; reconciles ORU vs CCD).
+- [`build_smart.py`](https://github.com/rsxmjb234/NyecPortal2/blob/main/build_smart.py)
+  and [`build_chart.py`](https://github.com/rsxmjb234/NyecPortal2/blob/main/build_chart.py)
+  — stamp `data-view-qe` on `<body>` and `data-first/last/dob/qe/source/mrn/mrns`
+  on each patient block, call `merge_by_person`, and `inject` the widget.
+- [`build_home.py`](https://github.com/rsxmjb234/NyecPortal2/blob/main/build_home.py)
+  — sets the per-view QE (`CHART_QE=HIXNY` / `HEALTHELINK`).
+
+Porting notes for a different code base:
+- You need, per rendered patient: name, DOB, and the person's `QE|Source|MRN`
+  set; plus the current QE (the view) and the current screen/section name. Expose
+  them however your framework prefers (data attributes, a JS global, props).
+- The widget's logic is framework-agnostic vanilla JS; the only couplings are the
+  DOM hooks it reads (`.patient[data-*]`, the active tab/section, `data-view-qe`)
+  and the row copy target.
+
+## 14. Acceptance criteria
+
+- [ ] **MRN Array** and **Missing data** buttons on every patient view.
+- [ ] MRN Array modal lists `QE|Source|MRN` (one per line) with Copy.
+- [ ] Missing data step 1 offers the two directions; `direction` recorded.
+- [ ] Direction A: **QE auto-fills to the current view's QE**; Source/MRN fill
+      from the matching identifier; all editable.
+- [ ] Direction B: QE/Source/MRN pre-filled read-only to the view's QE identifier;
+      heading names the QE; Data ID paste + "use last copied".
+- [ ] Item/Result labels, placeholders, and notes prompt adapt to the screen.
+- [ ] Every ticket includes read-only `reportDate` and `mrnArray` (both directions).
+- [ ] Modal closes via ×, Esc, backdrop without submitting.
+- [ ] On submit the ticket is written to the secure S3 bucket as **single-line,
       no-indent JSON** under a `dt=`-partitioned key via the backend Lambda.
-- [ ] An Athena table can query the tickets and produce reports.
+- [ ] An Athena table queries the tickets and produces reports.
 
-## 12. Reference implementation (current demo)
-
-In this repo the feature is a self-contained, injectable widget:
-- `bug_widget.py` — builds the button, modal (all steps), per-row copy icons,
-  and the client JS; `inject(html)` splices it into a finished page via string
-  replacement (so page f-string brace escaping is irrelevant).
-- The renderers (`build_smart.py`, `build_chart.py`) stamp each patient block
-  with `data-first/last/dob/qe/source/mrn/mrns`, which the widget reads.
-- The demo currently renders the compact ticket JSON on screen instead of
-  PUTting it to S3 — §10 is the remaining work to productionize.
+All demo data is 100% synthetic.
