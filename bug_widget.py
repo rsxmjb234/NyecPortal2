@@ -80,6 +80,16 @@ BUG_CSS = """<style>
     background:#0f172a; color:#e2f5f1; padding:9px 16px; border-radius:999px; font-size:12.5px;
     font-family:system-ui,Arial,sans-serif; opacity:0; transition:opacity .2s; z-index:10000;
     pointer-events:none; box-shadow:0 6px 20px rgba(0,0,0,.3); }
+  /* drill-in detail modal (IMAT-style blue header) */
+  .dtl-head { background:#2196f3; color:#fff; font-weight:700; font-size:16px; padding:14px 18px;
+    display:flex; align-items:center; justify-content:space-between; }
+  .dtl-sub { background:#e3f2fd; color:#0d47a1; font-size:12.5px; padding:8px 18px; border-bottom:1px solid #bbdefb; }
+  table.dtl-tbl { width:100%; border-collapse:collapse; }
+  table.dtl-tbl th { text-align:left; width:190px; color:#607d8b; font-weight:600; font-size:12.5px;
+    padding:9px 12px; border-bottom:1px solid #eef1f2; vertical-align:top; }
+  table.dtl-tbl td { padding:9px 12px; border-bottom:1px solid #eef1f2; vertical-align:top; font-size:13px; }
+  .patient tbody tr { cursor:pointer; }
+  .patient tbody tr.grp, .patient tbody tr.grouphdr, .patient tbody tr.oru-grp { cursor:default; }
 </style>"""
 
 BUG_BTN = '<button type="button" id="bugBtn" class="bug-btn">&#9888; Missing data</button>'
@@ -173,6 +183,14 @@ BUG_MODAL = """
         <button type="button" class="bug-primary" id="mrnCopy">Copy</button>
       </div>
     </div>
+  </div>
+</div>
+<div id="dtlModal" class="bug-overlay">
+  <div class="bug-card" style="width:580px">
+    <div class="dtl-head"><span id="dtlTitle">Detail</span><span class="bug-x" id="dtlX" title="Close">&times;</span></div>
+    <div class="dtl-sub" id="dtlPt"></div>
+    <div class="bug-body" style="padding:4px 6px"><table class="dtl-tbl" id="dtlBody"></table></div>
+    <div class="bug-foot" style="justify-content:flex-end"><button type="button" class="bug-primary" id="dtlClose">Close</button></div>
   </div>
 </div>
 <div id="pdrToast" class="pdr-toast"></div>
@@ -357,6 +375,45 @@ BUG_MODAL = """
     var t=g('mrnText'); t.focus(); t.select();
     try { if(navigator.clipboard) navigator.clipboard.writeText(t.value); else document.execCommand('copy'); } catch(e){}
     toast('MRN array copied');
+  });
+
+  // ---- drill-in detail: click any data row to see its full record ----
+  function _esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+  var dtl=g('dtlModal');
+  function dtlClose(){ dtl.style.display='none'; }
+  function openDetail(tr){
+    var table=tr.closest('table'); if(!table) return;
+    var ths=table.querySelectorAll('thead th');
+    var pat=tr.closest('.patient');
+    var scr=pat?screenOf(pat):'';
+    g('dtlTitle').textContent=(scr||'Record')+' \\u2013 detail';
+    var nm=pat?((pat.getAttribute('data-first')||'')+' '+(pat.getAttribute('data-last')||'')):'';
+    var dob=pat?(pat.getAttribute('data-dob')||''):'';
+    var src=pat?((pat.getAttribute('data-qe')||'')+(pat.getAttribute('data-source')?'|'+pat.getAttribute('data-source'):'')+' MRN '+(pat.getAttribute('data-mrn')||'')):'';
+    g('dtlPt').innerHTML='<b>'+_esc(nm)+'</b> &middot; DOB '+_esc(dob)+' &middot; '+_esc(src);
+    var out='';
+    for(var i=0;i<tr.cells.length;i++){
+      var c=tr.cells[i];
+      if(c.classList.contains('ic')) continue;
+      var lbl=ths[i]?ths[i].textContent.replace(/[\\u21C5\\u2191\\u2193\\u25B2\\u25BC\\u2195]/g,'').trim():'';
+      var val=c.innerText.replace(/\\u29C9/g,'').trim();
+      if(!lbl && !val) continue;
+      out+='<tr><th>'+_esc(lbl||'Value')+'</th><td>'+(_esc(val)||'&ndash;')+'</td></tr>';
+    }
+    g('dtlBody').innerHTML=out;
+    dtl.style.display='flex';
+  }
+  g('dtlX').addEventListener('click',dtlClose);
+  g('dtlClose').addEventListener('click',dtlClose);
+  dtl.addEventListener('click',function(e){ if(e.target===dtl) dtlClose(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && dtl.style.display==='flex') dtlClose(); });
+  document.addEventListener('click',function(e){
+    if(!e.target.closest) return;
+    if(e.target.closest('.pdr-copy')) return;          // copy icon has its own handler
+    var tr=e.target.closest('.patient tbody tr');
+    if(!tr || !tr.cells || !tr.cells.length) return;
+    if(tr.querySelector('td[colspan]')) return;        // group-header row
+    openDetail(tr);
   });
 })();
 </script>
