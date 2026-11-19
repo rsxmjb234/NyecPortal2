@@ -6,7 +6,9 @@
 *.xml
 *.csv
 *.ndjson
+*.hl7
 ccds/
+marcus_bundle/
 
 # --- Security: never commit credentials or secrets ---
 *.pem
