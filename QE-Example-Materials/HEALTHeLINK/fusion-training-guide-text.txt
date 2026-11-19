@@ -1,0 +1,389 @@
+
+===== PAGE 1 =====
+  
+  
+ 
+HEALTHeLINK Fusion User  
+Training Guide 
+November 14, 2025 
+v2.5 
+
+===== PAGE 2 =====
+ HEALTHeLINK Fusion User Training Guide 
+07/24/2025 2475 George Urban Boulevard, Suite 202, Depew, NY 14043 Page 1 of 15 
+Table of Contents 
+HEALTHeLINK Fusion User ......................................................................................................... 0 
+Training Guide ............................................................................................................................ 0 
+Overview .................................................................................................................................. 2 
+Help/ Support ........................................................................................................................... 2 
+Policies & Procedures ............................................................................................................... 2 
+Consent Management .............................................................................................................. 3 
+Accessing HEALTHeLINK Fusion ............................................................................................... 3 
+Logging into HEALTHeLINK Fusion ......................................................................................... 4 
+Confidentiality Acknowledgement ......................................................................................... 5 
+Duo Two-Factor Authentication (TFA)..................................................................................... 5 
+Computer Based Training ...................................................................................................... 7 
+Searching for a Patient .............................................................................................................. 7 
+Accessing a Patient Record-Consent ........................................................................................ 8 
+How to know you have access to a Patient’s Record ............................................................... 8 
+HEALTHeLINK Consent ......................................................................................................... 9 
+Exploring Patient Search Results ............................................................................................. 10 
+Viewing and Interacting with a Patient Record .......................................................................... 10 
+Patient Chart Flags ............................................................................................................. 11 
+Chartbook .......................................................................................................................... 11 
+Searching and Sorting Results ............................................................................................. 11 
+Viewing, Downloading, and Printing Results ............................................................................ 12 
+Generating and Saving a New Report ................................................................................... 13 
+HEALTHeLINK Audit Overview ................................................................................................. 15 
+ 
+ 
+ 
+ 
+ 
+ 
+===== PAGE 3 =====
+ HEALTHeLINK Fusion User Training Guide 
+07/24/2025 2475 George Urban Boulevard, Suite 202, Depew, NY 14043 Page 2 of 15 
+Overview 
+This guide provides an overview of the functions available to you as a HEALTHeLINK-FUSION 
+user. 
+Help/ Support 
+For more information or training on HEALTHeLINK, please contact the Help Desk. 
+For HEALTHeLINK Support 
+24/7 Help Desk Support 877.895.4724 
+Local Help Desk Support 716.842.6343 
+Additional training materials are available at: 
+https://wnyhealthelink.com/for-providers/training-materials/training-videos/ 
+Webinars are also available on the first Monday of each month. Click the 
+link below to register: 
+https://wnyhealthelink.com/for-providers/training-materials/webinars/ 
+Policies & Procedures 
+The Statewide Health Information Network for New York (SHIN-NY), pronounced “shiny”, facilitates 
+the secure electronic exchange of patient health information and connects healthcare 
+professionals statewide. In partnership with the New York State Department of Health, NYeC 
+developed and manages the technology platform that connects New York’s Qualified Entities (QEs) 
+and enables the sharing of data statewide, ensuring that the SHIN-NY provides access to a 
+patient’s electronic medical records wherever and whenever they need it. 
+The SHIN-NY enables collaboration and coordination of care to improve patient outcomes, 
+reduce unnecessary and avoidable tests and procedures, and lower costs. 
+Today, the SHIN-NY connects 100% of the hospitals in New York State, over 100,000 healthcare 
+professionals, and represents millions of people living in or receiving care in New York. 
+Protecting patient privacy is of the utmost importance to HEALTHeLINK. We have developed 
+privacy and security policies and procedures that consider the patient’s rights and concerns. In 
+addition to our current HEALTHeLINK Privacy and Security Policies and Procedures, more 
+information on the SHIN-NY and their Policies and Procedures can be found here: Statewide Health 
+Information Network for New York (SHIN-NY) | NYeC.  
+ 
+===== PAGE 4 =====
+ HEALTHeLINK Fusion User Training Guide 
+07/24/2025 2475 George Urban Boulevard, Suite 202, Depew, NY 14043 Page 3 of 15 
+Consent Management 
+For immediate consent management, HEALTHeLINK staff are available as follows: 
+Monday through Friday, 7:30AM to 5:00PM EST 
+You may fax consents to HEALTHeLINK at 716.206.0996. If the consent is an emergency, you must 
+also call 716.206.0993, option 2. 
+All executed Consent forms should be sent to HEALTHeLINK within 3 business days to the 
+dedicated consent fax line at (716) 206-0039. 
+Please see the  Patient Consent Tip Sheet for more consent information.  
+ 
+Accessing HEALTHeLINK Fusion 
+HEALTHeLINK Fusion can be accessed through the HEALTHeCOMMUNITY Portal at 
+www.wnyhealthelink.com or www.wnylink.com. 
+ 
+Once you log in, you will see badges for each application and practice (see box 1 in screenshot 
+below). If you have multiple HEALTHeLINK accounts, you must choose the badge that displays 
+the organization you are associated with for the patient you are treating. 
+HEALTHeLINK uses the “Messages” section (see box 2 in screenshot below) to communicate 
+important information to users. Please monitor this section for key information on outages, system 
+upgrades and updates. 
+To access HEALTHeLINK Fusion, or any other application on the HEALTHeCOMMUNITY Portal, 
+you will need to disable pop-up blockers on your browser. If you need assistance disabling pop-up 
+blockers, click on the “Having Trouble” link on the log in page and it will direct you to the 
+instructions. You can also contact the Help Desk at 716.842.6343 for guidance. 
+
+===== PAGE 5 =====
+ HEALTHeLINK Fusion User Training Guide 
+07/24/2025 2475 George Urban Boulevard, Suite 202, Depew, NY 14043 Page 4 of 15 
+ 
+Logging into HEALTHeLINK Fusion  
+Once you are logged into the HEALTHeCOMMUNITY Portal you will see the applications you have 
+access to including HEALTHeLINK Fusion. To log into HEALTHeLINK Fusion you will select the 
+HEALTHeLINK Badge:  
+ 
+You will then see the badge for HEALTHeLINK Fusion, your badge will have your organization and 
+your username listed below.  
+ 
+Once you select the HEALTHeLINK Fusion Badge you will be brought to the Confidentiality 
+Acknowledgement and then asked to complete your Duo Two-Factor Authentication explained in 
+the following sections. If this is your first time ever logging into HEALTHeLINK you will need to 
+complete the Computer Based Training, also explained in a following section. Once the above is 
+completed you will be brought to the Fusion Gateway where you will click into the HealthShare 
+application. This is HEALTHeLINK Fusion and where you will have the ability to look up patients.  
+
+===== PAGE 6 =====
+ HEALTHeLINK Fusion User Training Guide 
+07/24/2025 2475 George Urban Boulevard, Suite 202, Depew, NY 14043 Page 5 of 15 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Confidentiality Acknowledgement 
+HEALTHeLINK contains PHI, so HEALTHeLINK requires users to accept terms and conditions 
+every login to the HEALTHeCOMMUNITY Portal. 
+Upon badge click, you will be presented with the Confidentiality Acknowledgement. 
+You must click [Accept] to follow HIPAA and HEALTHeLINK policy and continue into the system. 
+Duo Two-Factor Authentication (TFA) 
+HEALTHeLINK contains PHI, so HEALTHeLINK requires two-factor authentication (TFA), unless 
+your organization is a trusted site. HEALTHeLINK provides TFA through Duo and can be done 
+through three methods: 
+• Mobile Phone (Duo Push, text, or call) 
+• Landline (must not include an extension) 
+• Token 
+Upon first login, if you have not been provided with a token by HEALTHeLINK, you will be asked to 
+register a device for TFA.  
+The preferred method of TFA is through Duo Push, which requires the download of the Duo Mobile 
+application on your mobile phone. If you do not want to download the application, select “Other” 
+option instead of iPhone or Android. 
+You will be prompted to TFA every time you log into HEALTHeLINK or every 12 hours, unless you 
+check the “Yes, this is my device” box as shown below, followed by the “Remember me” option: 
+
+===== PAGE 7 =====
+ HEALTHeLINK Fusion User Training Guide 
+07/24/2025 2475 George Urban Boulevard, Suite 202, Depew, NY 14043 Page 6 of 15 
+ 
+After selecting “Yes, this is my device”, you can then click the “Remember Me” option to avoid having 
+to re-enter your credentials each time at login.  
+ 
+If you are using a shared computer, and DUO was previously used by someone who chose “Yes, this 
+is my device”, you will need to reset this feature by clearing your browser cache. This will then allow 
+you to log in using your own personal device.  
+When sharing computers, you should always select “No, other people use this device”. Please note 
+that if a user selects the “No other people use this device” option, the “Remember me” option will 
+NOT display on subsequent Duo attempts.  
+ 
+
+===== PAGE 8 =====
+ HEALTHeLINK Fusion User Training Guide 
+07/24/2025 2475 George Urban Boulevard, Suite 202, Depew, NY 14043 Page 7 of 15 
+For step-by-step instructions on TFA and managing devices, please go to the Duo Guide found at 
+https://guide.duo.com/universal-prompt for further information.  
+Computer Based Training 
+Before gaining access to patient records, you will first be prompted to complete our Computer 
+Based Training Module.  
+This Computer Based Training (CBT) Module will go through: 
+• Who we are 
+• What we do 
+• Where our data comes from 
+• Patient consent 
+• Compliance training; Your role as a HEALTHeLINK User 
+• Resources, training materials, and webinars available to you 
+Once the video has been watched and the quiz completed, you will then be able to gain access to 
+the HEALTHeLINK system. 
+Searching for a Patient 
+When searching for a patient, it is IMPERATIVE that you DO NOT access your own records or 
+those of anyone else (relatives, co-workers, friends, celebrities, etc.) unless it is directly related 
+to the provision of care. 
+The search box will display upon logging in to HEALTHeLINK Fusion. 
+To search for a patient: 
+ 
+
+===== PAGE 9 =====
+ HEALTHeLINK Fusion User Training Guide 
+07/24/2025 2475 George Urban Boulevard, Suite 202, Depew, NY 14043 Page 8 of 15 
+Under the Search Criteria box on the left-hand side, you will enter the patient’s information that you 
+want to search for. The last name, first name, and date of birth are required to search for a patient. 
+Once you have the patient’s name entered, click on the black “search’ button. 
+Accessing a Patient Record-Consent 
+How to know you have access to a Patient’s Record 
+Once you search for your patient, you will be given a list of patients under the Patient Search 
+Results. From here, you can click on the patient’s name and enter the Clinical Viewer.   
+ 
+Depending on patient consent, you may not be able to view the patient’s record. To determine 
+whether you have access to the patient’s chart based on consent, select the carrot next to the 
+patient’s name. If the patient’s data is populated including the Medical Record Number, Assigning 
+Authority, and Info Type you do have access to the patient’s chart. 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+If you do not have access because the patient does not have an affirmative HEALTHeLINK Consent 
+the Medical Record Number, Assigning Authority, and Info Types will be blank as shown below.  
+ 
+
+===== PAGE 10 =====
+ HEALTHeLINK Fusion User Training Guide 
+07/24/2025 2475 George Urban Boulevard, Suite 202, Depew, NY 14043 Page 9 of 15 
+ 
+ 
+ 
+ 
+ 
+ 
+In addition to the lack of Medical Record Number and Assigning Authority. If a user does not have 
+access to a patient because of their Consent Status the following message will appear win clicking 
+into the patient’s chart:  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+HEALTHeLINK Consent 
+Consent is good for all data within HEALTHeLINK’s system for that patient. To view the 
+HEALTHeLINK consent value, users will need to have access to the Consent Management 
+Application.  
+When gathering HEALTHeLINK patient consent BOTH PAGES OF THE CONSENT FORM NEED TO BE 
+PRESENTED TO THE PATIENT PRIOR TO SIGNING TO ALLOW THE PATIENT TO GIVE INFORMED 
+CONSENT & Our consent form is translated into 11 different languages. If you have a large patient 
+population that speaks a language other than English, we will do our best to accommodate your 
+request. 
+If a patient requests a copy of the consent form signed at your practice, you are required to provide 
+them with a copy. This includes historical consent forms.  
+If the patient has previously consented to a Yes and you are able to access HEALTHeLINK records 
+for that patient, simply ask the patient if they wish to change their mind. Unless the patient is 
+declaring a new consent value, DO NOT COLLECT A NEW CONSENT 
+If the patient requests access to their records, oblige them to the best of your ability. If you are 
+unable to provide them with access to their own data, HEALTHeLINK can assist. The patient can 
+visit https://wnyhealthelink.com/for-patients/patient-data-access/ for more information. 
+
+===== PAGE 11 =====
+ HEALTHeLINK Fusion User Training Guide 
+07/24/2025 2475 George Urban Boulevard, Suite 202, Depew, NY 14043 Page 10 of 15 
+It is possible to access a minor patient (under the age of 18) records. It is important to note that this 
+record could contain minor-consented information for services that are protected under New York 
+State law and may not be re-disclosed to the minor’s parent or guardian without the minor’s written 
+consent. If needed, PCO (Parental Consent Override) is available for access to override the current 
+minor consent. Please contact your Account Manager for additional information. 
+Exploring Patient Search Results 
+Once you have searched for your patient, verified they are consented to HEALTHeLINK, you can 
+view the patient’s records based on the source and information type by selecting the carrot next to 
+the patient’s name. This action will show you the ’Assigning Authority’ and then the ’Info Type.’ 
+The Info Types are represented by an image. You can hover over the image to see what info types 
+the images represent. In this example there are Documents, Laboratory Results, Radiology Results, 
+and Allergies present in this patient’s chart.  
+Once you have determined which individual results you would like to view select the result and 
+click View Selected Records. You will be brought into the patient's chart, but only to view the 
+selected records.  
+To view the entire patient’s chart, navigate back to Patient Selection. You can select Patient 
+Search and search your patient again. Or select Patient Lists and select from your recent 
+searches.  
+ 
+Viewing and Interacting with a Patient Record 
+Once you have entered the clinical viewer, you will be brought to the patient’s summary screen. 
+This screen will display clinical items arranged by date, data source, and the name of the 
+encounter.  
+
+===== PAGE 12 =====
+ HEALTHeLINK Fusion User Training Guide 
+07/24/2025 2475 George Urban Boulevard, Suite 202, Depew, NY 14043 Page 11 of 15 
+Patient Chart Flags 
+At the top of every patient chart, you will see flags or icons that represent different elements found 
+within your patient’s chart. You can hover your mouse over the icon to learn what it is alerting and 
+click on the individual icon to navigate to that element within your patient’s chart.  
+ 
+Chartbook 
+The Chartbook found on the left-hand side is where you will navigate to, to view more details on 
+each individual section of the patient’s chart. If the chartbook section is marked with blue on the 
+left side, this means there is data in that section. There is more information within the chartbook 
+than what is shown on the clinical summary page, be sure to check the individual chartbook 
+sections if you do not see what you are looking for on the clinical summary page.  
+In the example shown below if you select Lab Results from the chartbook, you can see all the 
+individual lab results. All irregular results will be flagged in red on the left-hand side, irregular 
+results may mean high or low.  
+Searching and Sorting Results 
+In both the Clinical Summary page and in each Chartbook you have the option to filter and sort 
+results. However, in an individual Chartbook you will also have an option to search for specific 
+results. 
+ 
+
+===== PAGE 13 =====
+ HEALTHeLINK Fusion User Training Guide 
+07/24/2025 2475 George Urban Boulevard, Suite 202, Depew, NY 14043 Page 12 of 15 
+To sort and filter the results, select the three blue bars on the right-hand side found at the top of 
+both the Clinical Summary page and the individual chartbook pages. In the example below, to sort 
+Lab Results, you can filter by date and then select a primary sort and a secondary sort if desired. 
+You will utilize the arrows to determine if the sort will be ascending vs. descending.  
+ 
+To sort by Collection Date and result name without filtering to a specific date range select the 
+arrows next to the headers on the top of each section and chartbook.  
+ 
+Viewing, Downloading, and Printing Results  
+To print reports, under the chartbook, scroll down to reports, then click on the clinical section that 
+you would like to print. In this screenshot example, the “Laboratory Results Report” is being 
+printed. This report is also defaulted to the last 30 days. On the right-hand side, there is an option 
+
+===== PAGE 14 =====
+ HEALTHeLINK Fusion User Training Guide 
+07/24/2025 2475 George Urban Boulevard, Suite 202, Depew, NY 14043 Page 13 of 15 
+to view, download, or print the report.  
+Generating and Saving a New Report 
+To create reports that are not already available you can create a new report by selecting the blue 
+button in the top right-hand corner of the screen that says, New Report.  
+ 
+Once you have selected New Report, you will have the option to select which Data Type and Date 
+are included in the report.  
+ 
+By clicking on Data Type, you will have a list of data types to select to include in the report. To 
+change what data elements are included within a data type, select the pencil icon on the right.  
+ 
+In the example, Laboratory Results have 43 elements to select to include in your report. Such as, 
+Result Date, Collection Date, Flag, Results, Notes, Facility, etc. 
+
+===== PAGE 15 =====
+ HEALTHeLINK Fusion User Training Guide 
+07/24/2025 2475 George Urban Boulevard, Suite 202, Depew, NY 14043 Page 14 of 15 
+ 
+To then filter the selected data types by date, select dates from the Create New Report screen. You 
+will then have the option to either filter by a date range or select one of the available options.  
+ 
+Once you select the Data Types, Data Elements, and Date range you can generate the report to 
+view, download, print, and save.  
+To save your generated report, select the save option at the top of the generated report screen. A 
+new screen will appear “Save a New Report,” to name the new report, and provide a description of 
+the report. By doing so, this new report will appear on the listed available reports to access the new 
+report at any point in the future.  
+ 
+ 
+
+===== PAGE 16 =====
+ HEALTHeLINK Fusion User Training Guide 
+07/24/2025 2475 George Urban Boulevard, Suite 202, Depew, NY 14043 Page 15 of 15 
+HEALTHeLINK Audit Overview 
+HEALTHeLINK takes the issue of patient confidentiality very seriously and continually monitors 
+user accounts for inappropriate access. Please contact us if you have any questions. 
+HEALTHeLINK performs regular and ad-hoc audits as part of the effort to comply with state, 
+federal, and HIPAA regulations. The list of audits is extensive. Some examples of audits performed 
+regularly are: 
+• Same Name Access Audit: A user that accesses a person with the same last name. 
+• Break the Glass: Access made to a patient’s record for emergency care by an emergency 
+room physician using the “break the glass” function. 
+• Patient Data Access: A report listing all users who have accessed a specific patient in a 
+given timeframe. 
+• Access by a specific user: A report of all accesses made by a specific user in a given time 
+frame. 
+To assure compliance with HEALTHeLINK policies and various state and federal privacy 
+regulations, including HIPAA: 
+• Only access information that is necessary for you to perform your job duties. 
+• Do not access your own records or those of anyone else (relatives, co-workers, 
+celebrities, etc.) unless it is directly related to the provision of care. 
+• Only change the consent status in HEALTHeLINK with a valid, signed consent form from 
+the patient. 
+• Do not share your username or password or other authentication information with anyone. 
+• Remember to log out of HEALTHeCOMMUNITY Portal after each use so that others may not 
+use your identification to access information through your account. 
+This is by no means an exhaustive list of allowed or prohibited activities and should not be relied 
+upon as a complete list of policy or regulatory compliance topics. 
+It is the responsibility of each covered entity to seek its own counsel and develop its own 
+policies, workforce training, communication topics and methods to maintain compliance with 
+State and Federal laws and regulations, including HIPAA. 
+ 
