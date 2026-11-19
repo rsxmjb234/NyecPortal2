@@ -7,7 +7,6 @@ Product: **HEALTHeLINK Fusion** (the HealthShare clinical viewer), reached throu
 Reference: `QE-Example-Materials/HEALTHeLINK/` (official Fusion User Training Guide v2.5, 48 screenshots, extracted text). **This is the most fully documented QE, so use the guide as the visual and workflow reference.**
 Common rules (processing, drill-in, Missing data) are in docs 02 and 03.
 
-
 UI design tokens, colors, shared widget behavior and screenshots: [05-ui-design.md](../05-ui-design.md).
 ## Look and structure [Demo]
 

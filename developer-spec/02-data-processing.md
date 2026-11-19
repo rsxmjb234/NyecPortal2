@@ -29,7 +29,7 @@ The person data carries an **MRN array**: every `(QE, Source, MRN)` that identif
 Rules:
 1. The MRN array drives the MRN Array button and is stamped on every Missing data ticket.
 2. The MRN array **must** be de-duplicated on the triple (QE, Source, MRN).
-3. If PDR returns more than one record for the same person (for example one per source), group them by MPID (fallback `family|given|DOB`) into one virtual record, then apply section 3. If PDR already returns one merged record, section 3 still applies as display de-duplication.
+3. **Confirm with the PDR team first** (see doc 00 open questions): does PDR return one already-merged record per person, or one record per source? If PDR returns one merged record, skip the grouping step and use section 3 for display de-duplication only. If PDR returns per-source records, group by MPID (fallback `family|given|DOB`) and apply section 3 fully.
 4. Lab feed results (`oru`) that carry a QE, Source and MRN **must** be matched to a source on the full triple, never on MRN alone, because two sources can issue the same MRN value. (The demo matched on MRN alone; that is a known gap.)
 
 Requirements:
@@ -41,24 +41,24 @@ Requirements:
 
 After grouping by person, concatenate each data type across documents, then collapse duplicates using the key below. The first occurrence wins. **De-duplication hides duplicates in the merged view only. Never delete the source record.** Keep the raw documents and be able to show which sources contributed each item. **[Prod]**
 
-| Data type | Originating C-CDA section (informational) | Fields | De-dup key |
-|-----------|----------------------|------------------|-----------|
-| Conditions | `Problems` | name (SNOMED display), onset, resolved, status | (name, onset) |
-| Medications | `Medications` | name (RxNorm), start, stop, status, dose, route, frequency, prescriber, refills, indication, RxNorm code | (name, start) |
-| Lab results | `Diagnostic Results` | panel, test, value, unit, flag, reference range, date, LOINC, status | panel: (panel, date); result: (LOINC, date, value) |
-| Lab feed results (`oru`) | HL7 OBX (informational) | test, value, unit, range, flag, date, LOINC | (LOINC, date, value) |
-| Immunizations | `Immunizations` | name, date | (name, date) |
-| Vital signs | `Vital Signs` | test, value, unit, date | (test, value, date) |
-| Procedures | `Surgeries`, else `Procedures` | name, date | (name, date) |
-| Encounters / ADT | `Encounters` | type, facility, admit, discharge, attending, PCP, disposition, reason | (type, admit date, facility) |
-| Allergies | `Allergies` | substance | (substance) |
+| Data type | Fields | De-dup key |
+|-----------|----------------------|-----------|
+| Conditions | name (SNOMED display), onset, resolved, status | (name, onset) |
+| Medications | name (RxNorm), start, stop, status, dose, route, frequency, prescriber, refills, indication, RxNorm code | (name, start) |
+| Lab results (document) | panel, test, value, unit, flag, reference range, date, LOINC, status | panel: (panel, date); result: (LOINC, date, value) |
+| Lab results (feed, `oru`) | test, value, unit, range, flag, date, LOINC | (LOINC, date, value) |
+| Immunizations | name, date | (name, date) |
+| Vital signs | test, value, unit, date | (test, value, date) |
+| Procedures | name, date | (name, date) |
+| Encounters / ADT | type, facility, admit, discharge, attending, PCP, disposition, reason | (type, admit date, facility) |
+| Allergies | substance | (substance) |
 
 Known gaps to fix in the production build:
 - **Encounter key** is now `(type, admit date, facility)`. If facility is blank, two same-type, same-day encounters without a facility will still merge incorrectly — this is acceptable for the demo but should be monitored.
 - **Medication key** (name, start) can merge the same drug started the same day at two doses. **Should** add dose.
 - Sorting in the demo is done on the formatted `MM/DD/YYYY` string, which orders incorrectly across years. **Must** sort on real date values, newest first for encounters, immunizations and procedures.
 
-## 4. Lab de-duplication (CCD vs ORU) – the core rule
+## 4. Lab de-duplication: document results vs feed results – the core rule
 
 The same lab can arrive twice: once inside a CCD and once as an ORU message. The viewer **must** reconcile them.
 

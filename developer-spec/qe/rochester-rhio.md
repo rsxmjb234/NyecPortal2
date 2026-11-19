@@ -22,6 +22,14 @@ Rochester RHIO is **transitioning its HIE services to HealtheConnections** (data
 
 Provider portal screenshots and guide, or confirmation that the portal is superseded. See `QE-Example-Materials/RochesterRHIO/NOTES.md`.
 
+
+## Acceptance criteria (minimum before marking live)
+
+- [ ] Home page card shows "Coming soon" and switches to live by a config change only.
+- [ ] All rules in [02-data-processing.md](../02-data-processing.md) apply once built (merge, de-dup, lab reconciliation, drill-in).
+- [ ] MRN Array and Missing data buttons present, QE field auto-fills to this QE's code.
+- [ ] Reference materials (screenshots, user guide) collected and QE-specific requirements confirmed with the QE before building the view.
+
 ## Open questions
 
 - Separate view, or fold into HealtheConnections? Until when?

@@ -96,24 +96,15 @@ QE / Source / MRN are always present regardless of screen.
 
 ## 7. The person model (what makes MRN Array meaningful)
 
-- A person's documents (many CCDs + many ORUs, from different QEs) are **merged
-  into one virtual record** by a shared person key (a shared MPID when present,
-  else `family|given|dob`).
-- The **source identifiers that define the person** (`mrn_list`) are the union
-  of every real source `<id>` on the CCDs **and** the `QE&Source` / MRN parsed
-  from each HL7 ORU `PID-3`, de-duplicated. Internal enterprise ids (EID) and the
-  MPID are excluded from this list.
-- Each page carries the **view's QE** as `data-view-qe` on `<body>`, and each
-  patient block carries `data-first/last/dob/qe/source/mrn/mrns` (where
-  `data-mrns` is `QE|Source:MRN;QE|Source:MRN;…`).
+- A person's data (from many QE sources) is **merged into one virtual record** by a shared person key (a shared MPID when present, else `family|given|dob`).
+- The **source identifiers that define the person** (`mrn_list`) are the union of every `(QE, Source, MRN)` triple across all sources, de-duplicated. Internal enterprise IDs (EID) and the MPID are excluded.
+- **[Demo]** Each page carries the view's QE as `data-view-qe` on `<body>`, and each patient block carries `data-first/last/dob/qe/source/mrn/mrns` as HTML data attributes. **[Prod]** Pass QE context and the MRN array through the application state (not DOM attributes), and make it available to the Missing data widget at the point of use.
 
 ## 8. Copy-a-Data-ID from a row (Direction B helper)
 
-- Every data row gets a subtle copy icon (on hover). Clicking composes a
-  **Data ID** like
-  `PDR|mrn=…|qe=…|src=…|<cell> | <cell> | …` and copies it (Clipboard API over
-  HTTPS; an in-memory "last copied" fallback works without the OS clipboard).
-- The reporter pastes it into Direction B, or uses "Use last copied Data ID".
+- Every data row gets a subtle copy icon (on hover). Clicking copies a **Data ID** to the clipboard (Clipboard API over HTTPS; an in-memory "last copied" fallback works without it). The reporter pastes it into Direction B, or uses "Use last copied Data ID".
+- **[Demo]** The Data ID is composed from row text: `PDR|mrn=…|qe=…|src=…|<cell> | <cell> | …`. This is fragile — it breaks if the row text changes after a data refresh.
+- **[Prod]** Use a **stable record ID** assigned by PDR to each clinical item. The Data ID should be opaque to the user and survive data updates.
 
 ## 9. Auto-captured on EVERY ticket (read-only, both directions)
 
@@ -187,10 +178,7 @@ support it reads from.
   — the buttons, both modals, the per-row copy affordance, the client JS, and
   `inject(html)` which splices it into a finished page by string replacement
   (works regardless of the page's templating).
-- [`ccda_parse.py`](https://github.com/rsxmjb234/NyecPortal2/blob/main/ccda_parse.py)
-  — `parse_ccd` (emits `person_key`, `mrn_list`), `load_oru_hl7` (adds the ORU
-  `PID` source|MRN to `mrn_list`), and `merge_by_person` (one virtual record per
-  person; de-dupes clinical items; reconciles ORU vs CCD).
+- [`ccda_parse.py`](https://github.com/rsxmjb234/NyecPortal2/blob/main/ccda_parse.py) — **port only the merge and de-duplication functions**: `merge_by_person` (one virtual record per person), `_dedup_person` (collapses duplicates by type), `_reconcile_oru` (marks preferred/superseded between document and feed results). The parsing functions (`parse_ccd`, `load_oru_hl7`) read raw clinical files and are **not needed** in the new build.
 - [`build_smart.py`](https://github.com/rsxmjb234/NyecPortal2/blob/main/build_smart.py)
   and [`build_chart.py`](https://github.com/rsxmjb234/NyecPortal2/blob/main/build_chart.py)
   — stamp `data-view-qe` on `<body>` and `data-first/last/dob/qe/source/mrn/mrns`

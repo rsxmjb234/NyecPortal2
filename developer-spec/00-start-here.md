@@ -51,7 +51,7 @@ The new build is a **secure portal**. It gets its data from PDR. The demo does n
 
 Listed in doc 02 so the new build does not copy them. Summary:
 - ORU matched to a source on MRN alone.
-- Encounter and medication de-duplication keys too loose.
+- Encounter de-duplication key was updated to `(type, admit date, facility)` in doc 02. Medication key `(name, start)` is still too loose — same drug at two doses started the same day will merge incorrectly.
 - Dates sorted as text.
 - "Data ID" built from row text instead of a stable ID.
 - CCD/ORU duplicate test ignores the value, so conflicts are not flagged.
@@ -101,4 +101,4 @@ The demo builds static HTML pages from Python. The new build is a dynamic secure
 
 If you give these documents to a model, a prompt like this works:
 
-> You are building the PDR Community Health Record viewer described in these documents. Data comes from the PDR API, shaped as in 04-pdr-data-model.md. Do not design the API call. Use `fixtures/marcus_evans.json` as a stub. Implement the rules in 02, the widgets in 03 and 05, the Hixny, HEALTHeLINK and Bronx RHIO views in qe/, and the home page in 01. Follow 06 section 7 for order. Flag any requirement that conflicts or is missing instead of guessing.
+> You are building the PDR Community Health Record viewer described in these documents. Data comes from the PDR API, shaped as in 04-pdr-data-model.md. Do not design the API call. Use `fixtures/marcus_evans.json` as a stub. Implement the rules in 02, the widgets in 03 and 05, the Hixny, HEALTHeLINK and Bronx RHIO views in qe/, and the home page in 01. Follow 00 section 7 for order. Flag any requirement that conflicts or is missing instead of guessing.

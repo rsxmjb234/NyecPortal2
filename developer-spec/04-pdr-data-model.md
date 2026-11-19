@@ -59,7 +59,7 @@ All dates in item lists are strings `MM/DD/YYYY`. Empty string means "not presen
 | `indication` | `Diabetes mellitus type 2 (disorder)` | drill-in |
 | `code` | `861007` (RxNorm) | drill-in |
 
-### `labs[]` (results that came inside clinical documents), grouped by panel
+### `labs[]` (structured lab results from clinical summaries), grouped by panel
 
 ```json
 { "panel": "Basic metabolic panel - Blood", "date": "03/15/2025",
