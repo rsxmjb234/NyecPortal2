@@ -29,7 +29,9 @@ BUG_CSS = """<style>
     border-radius:14px; box-shadow:0 20px 60px rgba(0,0,0,.3);
     font-family:system-ui,"Segoe UI",Arial,sans-serif; color:#1f2a37; }
   .bug-head { background:#f97316; color:#fff; font-weight:700; font-size:16px; padding:14px 18px;
-    position:sticky; top:0; }
+    position:sticky; top:0; display:flex; align-items:center; justify-content:space-between; }
+  .bug-x { cursor:pointer; font-size:22px; line-height:1; opacity:.85; padding:0 2px; font-weight:400; }
+  .bug-x:hover { opacity:1; }
   .bug-ctx { background:#fff7ed; color:#9a3412; font-size:12px; padding:8px 18px; border-bottom:1px solid #fde4cf; }
   .bug-body { padding:16px 18px; }
   .md-q { font-weight:700; font-size:14px; margin:4px 0 14px; }
@@ -76,7 +78,7 @@ BUG_BTN = '<button type="button" id="bugBtn" class="bug-btn">&#9888; Missing dat
 BUG_MODAL = """
 <div id="bugModal" class="bug-overlay">
   <div class="bug-card">
-    <div class="bug-head">Missing data</div>
+    <div class="bug-head"><span>Missing data</span><span class="bug-x" id="bugX" title="Close">&times;</span></div>
     <div class="bug-ctx" id="mdCtx"></div>
 
     <div class="bug-body md-step" id="step0">
