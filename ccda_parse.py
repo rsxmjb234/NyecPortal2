@@ -109,6 +109,7 @@ def parse_ccd(path):
             addr = ', '.join(p)
 
     mrn = mrn_aa = mpiid = ''
+    mrn_list = []
     for idel in pr.findall('v3:id', ns):
         aa = idel.get('assigningAuthorityName', '')
         idroot = idel.get('root', '')
@@ -118,8 +119,12 @@ def parse_ccd(path):
         # skip the synthetic EID / MPID ids we stamp for cross-source linkage
         if idroot.endswith('.eid') or idroot.endswith('.mpid'):
             continue
-        if aa and not mrn:          # first real source id (QE|Source) is the MRN
-            mrn, mrn_aa = idel.get('extension', ''), aa
+        if aa:
+            mrn_list.append({'qe': aa.split('|')[0],
+                             'source': aa.split('|')[1] if '|' in aa else '',
+                             'mrn': idel.get('extension', '')})
+            if not mrn:             # first real source id (QE|Source) is the primary MRN
+                mrn, mrn_aa = idel.get('extension', ''), aa
     if not mpiid:
         mpiid = pr.findall('v3:id', ns)[0].get('root', '')
 
@@ -251,8 +256,8 @@ def parse_ccd(path):
     }
 
     return dict(given=given, family=family, gender=gender, dob=dob, age=age, addr=addr,
-                mrn=mrn, mrn_aa=mrn_aa, mpiid=mpiid, race=race, eth=eth, lang=lang,
-                doc_date=doc_date, mpid_tag=mpid_tag, problems=problems, meds=meds,
+                mrn=mrn, mrn_aa=mrn_aa, mrn_list=mrn_list, mpiid=mpiid, race=race, eth=eth,
+                lang=lang, doc_date=doc_date, mpid_tag=mpid_tag, problems=problems, meds=meds,
                 labs=labs, imms=imms, vitals=vitals, procs=procs, encs=encs,
                 allergies=allergies, has=has)
 

@@ -272,8 +272,9 @@ def render_patient(P, idx):
     _aa = P.get('mrn_aa') or ''
     _qe = _aa.split('|')[0] if _aa else ''
     _src = _aa.split('|')[1] if '|' in _aa else ''
+    _mrns = ';'.join(f"{m['qe']}|{m['source']}:{m['mrn']}" for m in P.get('mrn_list', []))
     return f"""
-    <div class="patient" data-idx="{idx}" data-first="{E(P['given'])}" data-last="{E(P['family'])}" data-dob="{E(P['dob'])}" data-qe="{E(_qe)}" data-source="{E(_src)}" data-mrn="{E(P['mrn'])}"{style}>
+    <div class="patient" data-idx="{idx}" data-first="{E(P['given'])}" data-last="{E(P['family'])}" data-dob="{E(P['dob'])}" data-qe="{E(_qe)}" data-source="{E(_src)}" data-mrn="{E(P['mrn'])}" data-mrns="{E(_mrns)}"{style}>
       <div class="pt-banner">
         <div class="avatar">{E(initials)}</div>
         <div class="pt-id">

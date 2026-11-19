@@ -97,9 +97,12 @@ BUG_MODAL = """
         <div class="bug-row"><span>Last</span><input id="aLast" readonly></div>
         <div class="bug-row"><span>DOB</span><input id="aDob" readonly></div>
         <div class="bug-row"><span>Screen</span><input id="aScreen" readonly></div>
-        <div class="bug-row"><span>QE</span><input id="aQe" readonly></div>
-        <div class="bug-row"><span>Source</span><input id="aSource" readonly></div>
-        <div class="bug-row"><span>MRN</span><input id="aMrn" readonly></div>
+      </div>
+      <div class="bug-sep">Which QE / source has it? (if known &mdash; it's likely not this screen's source)</div>
+      <div class="bug-grid">
+        <div class="bug-row"><span>QE</span><input id="aQe" class="edit" placeholder="if known"></div>
+        <div class="bug-row"><span>Source</span><input id="aSource" class="edit" placeholder="if known"></div>
+        <div class="bug-row"><span>MRN</span><input id="aMrn" class="edit" placeholder="if known"></div>
       </div>
       <div class="bug-sep">What does the QE show that's missing from PDR?</div>
       <div class="bug-grid">
@@ -109,6 +112,9 @@ BUG_MODAL = """
       </div>
       <label class="bug-label" id="aNotesLbl">Describe what you see in the QE we don't show here</label>
       <textarea id="aNotes" placeholder="Optional extra detail..."></textarea>
+      <div class="bug-sep">Auto-captured on every ticket</div>
+      <div class="bug-row"><span>Date</span><input id="aRptDate" readonly></div>
+      <div class="bug-row" style="margin-top:8px"><span>MRN array</span><input id="aMrnArr" readonly></div>
       <div class="bug-foot">
         <button type="button" class="bug-secondary md-back">&larr; Back</button>
         <button type="button" class="bug-primary" id="bugGoA">Go</button>
@@ -131,6 +137,9 @@ BUG_MODAL = """
       <button type="button" class="bug-secondary" id="bUseLast" style="margin-top:8px">Use last copied Data ID</button>
       <label class="bug-label">Notes</label>
       <textarea id="bNotes" placeholder="Anything else the QE should pull in..."></textarea>
+      <div class="bug-sep">Auto-captured on every ticket</div>
+      <div class="bug-row"><span>Date</span><input id="bRptDate" readonly></div>
+      <div class="bug-row" style="margin-top:8px"><span>MRN array</span><input id="bMrnArr" readonly></div>
       <div class="bug-foot">
         <button type="button" class="bug-secondary md-back">&larr; Back</button>
         <button type="button" class="bug-primary" id="bugGoB">Go</button>
@@ -169,6 +178,14 @@ BUG_MODAL = """
     var h=p.querySelector('.viewTitle'); if(h) return h.textContent.trim();
     return 'Summary';
   }
+  function parseMrns(p){
+    var raw=p.getAttribute('data-mrns')||''; if(!raw) return [];
+    return raw.split(';').map(function(e){ var i=e.indexOf(':'); var aa=e.slice(0,i);
+      var mrn=e.slice(i+1); var pr=aa.split('|');
+      return {qe:pr[0]||'', source:pr[1]||'', mrn:mrn}; });
+  }
+  function mrnsDisplay(a){ return a.map(function(m){
+    return m.mrn+' ('+m.qe+(m.source?'|'+m.source:'')+')'; }).join(', '); }
   var curP=null, curScr='';
   function steps(id){
     ['step0','stepA','stepB','bugDone'].forEach(function(s){ g(s).style.display=(s===id?'':'none'); });
@@ -185,19 +202,24 @@ BUG_MODAL = """
     g('aLast').value=curP.getAttribute('data-last')||'';
     g('aDob').value=curP.getAttribute('data-dob')||'';
     g('aScreen').value=curScr;
-    g('aQe').value=curP.getAttribute('data-qe')||'';
-    g('aSource').value=curP.getAttribute('data-source')||'';
-    g('aMrn').value=curP.getAttribute('data-mrn')||'';
+    // QE has it / PDR doesn't: do NOT prefill QE/Source/MRN (likely not this screen's source)
+    g('aQe').value=''; g('aSource').value=''; g('aMrn').value='';
     g('aItemLbl').textContent=m.noun; g('aResultLbl').textContent=m.res;
     g('aItem').placeholder=m.item; g('aResult').placeholder=m.re;
     g('aItem').value=''; g('aDate').value=''; g('aResult').value=''; g('aNotes').value='';
     g('aNotesLbl').textContent='Describe what '+m.noun.toLowerCase()+' you see in the QE we don\\'t show here';
-    // step B fields
+    // step B (PDR has it / QE doesn't): the patient's own QE IS the one missing it -> prefill
     g('bFirst').value=g('aFirst').value; g('bLast').value=g('aLast').value;
     g('bDob').value=g('aDob').value; g('bScreen').value=curScr;
-    g('bQe').value=g('aQe').value; g('bSource').value=g('aSource').value; g('bMrn').value=g('aMrn').value;
-    g('bQeInline').textContent=g('aQe').value||'QE';
+    g('bQe').value=curP.getAttribute('data-qe')||''; g('bSource').value=curP.getAttribute('data-source')||'';
+    g('bMrn').value=curP.getAttribute('data-mrn')||'';
+    g('bQeInline').textContent=(curP.getAttribute('data-qe')||'QE');
     g('bPaste').value=''; g('bNotes').value='';
+    // auto-captured metadata for every ticket, regardless of direction
+    var _mrns=parseMrns(curP); var _disp=mrnsDisplay(_mrns); var _today=new Date().toLocaleDateString();
+    window.__mrnArr=_mrns; window.__today=_today;
+    g('aRptDate').value=_today; g('aMrnArr').value=_disp;
+    g('bRptDate').value=_today; g('bMrnArr').value=_disp;
     steps('step0');
     modal.style.display='flex';
   });
@@ -227,17 +249,21 @@ BUG_MODAL = """
   g('bugGoA').addEventListener('click',function(){
     done({ ticket:tid(), direction:'QE_HAS__PDR_MISSING',
       patient:{first:g('aFirst').value,last:g('aLast').value,dob:g('aDob').value},
-      qe:g('aQe').value, source:g('aSource').value, mrn:g('aMrn').value,
+      qeThatHasIt:g('aQe').value, source:g('aSource').value, mrn:g('aMrn').value,
       screen:g('aScreen').value, dataType:g('aItemLbl').textContent,
       item:g('aItem').value, date:g('aDate').value, result:g('aResult').value,
-      notes:g('aNotes').value, createdAt:new Date().toISOString() });
+      notes:g('aNotes').value,
+      reportDate:window.__today, mrnArray:window.__mrnArr,
+      createdAt:new Date().toISOString() });
   });
   g('bugGoB').addEventListener('click',function(){
     done({ ticket:tid(), direction:'PDR_HAS__QE_MISSING',
       patient:{first:g('bFirst').value,last:g('bLast').value,dob:g('bDob').value},
-      qe:g('bQe').value, source:g('bSource').value, mrn:g('bMrn').value,
+      qeMissingIt:g('bQe').value, source:g('bSource').value, mrn:g('bMrn').value,
       screen:g('bScreen').value, dataId:g('bPaste').value,
-      notes:g('bNotes').value, createdAt:new Date().toISOString() });
+      notes:g('bNotes').value,
+      reportDate:window.__today, mrnArray:window.__mrnArr,
+      createdAt:new Date().toISOString() });
   });
 
   // ---- per-row copy affordance (for "PDR has it" direction) ----
