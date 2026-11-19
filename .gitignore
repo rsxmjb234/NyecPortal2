@@ -31,6 +31,9 @@ aws_credentials*
 patient_chart.html
 patient_chart_smart.html
 marcus_portal.html
+marcus_fhir.html
+marcus_fusion.html
+index.html
 *.png
 *.pdf
 _guide_assets/

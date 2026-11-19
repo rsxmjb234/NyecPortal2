@@ -10,10 +10,13 @@ import xml.etree.ElementTree as ET
 from datetime import datetime, date
 import html
 
+from ccda_parse import load_oru_hl7   # shared HL7 ORU loader + dedup rules
+
 V3 = 'urn:hl7-org:v3'
 ns = {'v3': V3}
-CCD_DIR = 'ccds'
-OUT = 'patient_chart.html'
+CCD_DIR = os.environ.get('CHART_CCD_DIR', 'ccds')
+OUT = os.environ.get('CHART_OUT', 'patient_chart.html')
+ORU_HL7_DIR = os.environ.get('CHART_ORU_HL7', '')
 E = html.escape
 
 
@@ -114,10 +117,14 @@ def parse_ccd(path):
     mrn = mrn_aa = mpiid = ''
     for idel in pr.findall('v3:id', ns):
         aa = idel.get('assigningAuthorityName', '')
-        if aa and 'synthea' not in aa.lower():
-            mrn, mrn_aa = idel.get('extension', ''), aa
+        idroot = idel.get('root', '')
         if 'synthea' in aa.lower():
             mpiid = idel.get('extension', '')
+            continue
+        if idroot.endswith('.eid') or idroot.endswith('.mpid'):
+            continue
+        if aa and not mrn:
+            mrn, mrn_aa = idel.get('extension', ''), aa
     if not mpiid:
         mpiid = pr.findall('v3:id', ns)[0].get('root', '')
 
@@ -317,11 +324,13 @@ def render_tables(P):
         for o in sorted(P['oru'], key=lambda x: x['test']):
             note = ('<span class="dupnote">preferred &middot; duplicate of CCD</span>'
                     if o['dup'] else '<span class="newnote">new result</span>')
+            oflag = o.get('flag', '')
+            oabn = oflag in ('Low', 'High', 'Abnormal', 'Critical High', 'Critical Low')
             rows += (f'<tr class="oru-row">'
                      f'<td class="flagcell">{oru_badge} <span class="lnk strong">{E(o["test"])}</span> {note}</td>'
-                     f'<td class="strong">{E(str(o["value"]))}</td>'
-                     f'<td>{E(o["unit"])}</td><td>&mdash;</td>'
-                     f'<td>&mdash;</td><td>{E(o["date"])}</td></tr>')
+                     f'<td class="strong {"abnval" if oabn else ""}">{E(str(o["value"]))}</td>'
+                     f'<td>{E(o["unit"])}</td><td>{E(oflag) or "&mdash;"}</td>'
+                     f'<td>{E(o.get("range", "")) or "&mdash;"}</td><td>{E(o["date"])}</td></tr>')
 
     # CCD panels
     for p in P['labs']:
@@ -520,7 +529,9 @@ files = sorted(glob.glob(os.path.join(CCD_DIR, '*.xml')))
 patients = [parse_ccd(f) for f in files]
 for P in patients:
     P['oru'] = []
-load_oru(patients)
+load_oru(patients)                                   # FHIR Observation ndjson (if any)
+if ORU_HL7_DIR:
+    load_oru_hl7(patients, os.path.join(ORU_HL7_DIR, '*.hl7'))   # genuine HL7 ORU
 
 options = ''
 for i, P in enumerate(patients):
