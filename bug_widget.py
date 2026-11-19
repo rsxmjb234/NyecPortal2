@@ -121,8 +121,11 @@ BUG_MODAL = """
         <div class="bug-row"><span>Last</span><input id="bLast" readonly></div>
         <div class="bug-row"><span>DOB</span><input id="bDob" readonly></div>
         <div class="bug-row"><span>Screen</span><input id="bScreen" readonly></div>
+        <div class="bug-row"><span>QE</span><input id="bQe" readonly></div>
+        <div class="bug-row"><span>Source</span><input id="bSource" readonly></div>
+        <div class="bug-row"><span>MRN</span><input id="bMrn" readonly></div>
       </div>
-      <div class="bug-sep">Which PDR element is the QE missing?</div>
+      <div class="bug-sep">Which PDR element is the QE (<span id="bQeInline"></span>) missing?</div>
       <label class="bug-label">Data ID (copied from a row on the screen)</label>
       <textarea id="bPaste" class="edit" placeholder="Hover a row on the screen, click the copy icon, then paste here..."></textarea>
       <button type="button" class="bug-secondary" id="bUseLast" style="margin-top:8px">Use last copied Data ID</button>
@@ -192,6 +195,8 @@ BUG_MODAL = """
     // step B fields
     g('bFirst').value=g('aFirst').value; g('bLast').value=g('aLast').value;
     g('bDob').value=g('aDob').value; g('bScreen').value=curScr;
+    g('bQe').value=g('aQe').value; g('bSource').value=g('aSource').value; g('bMrn').value=g('aMrn').value;
+    g('bQeInline').textContent=g('aQe').value||'QE';
     g('bPaste').value=''; g('bNotes').value='';
     steps('step0');
     modal.style.display='flex';
@@ -230,6 +235,7 @@ BUG_MODAL = """
   g('bugGoB').addEventListener('click',function(){
     done({ ticket:tid(), direction:'PDR_HAS__QE_MISSING',
       patient:{first:g('bFirst').value,last:g('bLast').value,dob:g('bDob').value},
+      qe:g('bQe').value, source:g('bSource').value, mrn:g('bMrn').value,
       screen:g('bScreen').value, dataId:g('bPaste').value,
       notes:g('bNotes').value, createdAt:new Date().toISOString() });
   });
