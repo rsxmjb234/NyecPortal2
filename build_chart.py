@@ -530,6 +530,10 @@ def load_oru(patients):
 
 
 # ---------- build ----------
+# Use the shared parser/loaders as the single source of truth (this rebinds the
+# names over the inline copies above, so both views behave identically).
+from ccda_parse import parse_ccd, load_oru, load_oru_hl7, merge_by_person  # noqa: E402
+
 files = sorted(glob.glob(os.path.join(CCD_DIR, '*.xml')))
 patients = [parse_ccd(f) for f in files]
 for P in patients:
@@ -537,6 +541,7 @@ for P in patients:
 load_oru(patients)                                   # FHIR Observation ndjson (if any)
 if ORU_HL7_DIR:
     load_oru_hl7(patients, os.path.join(ORU_HL7_DIR, '*.hl7'))   # genuine HL7 ORU
+patients = merge_by_person(patients)                 # one virtual record per person
 
 options = ''
 for i, P in enumerate(patients):

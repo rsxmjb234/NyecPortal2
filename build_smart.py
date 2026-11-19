@@ -9,7 +9,7 @@ import os
 import html
 from datetime import datetime
 
-from ccda_parse import parse_ccd, load_oru, load_oru_hl7
+from ccda_parse import parse_ccd, load_oru, load_oru_hl7, merge_by_person
 from bug_widget import inject as inject_bug
 
 # Data source is configurable so the same renderer can build either the base
@@ -303,6 +303,7 @@ for P in patients:
 load_oru(patients)                                   # FHIR Observation ndjson (if any)
 if ORU_HL7_DIR:
     load_oru_hl7(patients, os.path.join(ORU_HL7_DIR, '*.hl7'))   # genuine HL7 ORU
+patients = merge_by_person(patients)                 # one virtual record per person
 
 options = ''
 for i, P in enumerate(patients):

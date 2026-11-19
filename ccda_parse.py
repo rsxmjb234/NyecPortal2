@@ -108,7 +108,7 @@ def parse_ccd(path):
         else:
             addr = ', '.join(p)
 
-    mrn = mrn_aa = mpiid = ''
+    mrn = mrn_aa = mpiid = person_mpid = ''
     mrn_list = []
     for idel in pr.findall('v3:id', ns):
         aa = idel.get('assigningAuthorityName', '')
@@ -116,8 +116,11 @@ def parse_ccd(path):
         if 'synthea' in aa.lower():
             mpiid = idel.get('extension', '')
             continue
-        # skip the synthetic EID / MPID ids we stamp for cross-source linkage
-        if idroot.endswith('.eid') or idroot.endswith('.mpid'):
+        # the shared MPID is the cross-source person key; EID is per-QE
+        if idroot.endswith('.mpid'):
+            person_mpid = idel.get('extension', '')
+            continue
+        if idroot.endswith('.eid'):
             continue
         if aa:
             mrn_list.append({'qe': aa.split('|')[0],
@@ -255,11 +258,12 @@ def parse_ccd(path):
         'Encounters': len(encs),
     }
 
+    person_key = person_mpid or f'{family}|{given}|{dob}'
     return dict(given=given, family=family, gender=gender, dob=dob, age=age, addr=addr,
-                mrn=mrn, mrn_aa=mrn_aa, mrn_list=mrn_list, mpiid=mpiid, race=race, eth=eth,
-                lang=lang, doc_date=doc_date, mpid_tag=mpid_tag, problems=problems, meds=meds,
-                labs=labs, imms=imms, vitals=vitals, procs=procs, encs=encs,
-                allergies=allergies, has=has)
+                mrn=mrn, mrn_aa=mrn_aa, mrn_list=mrn_list, mpiid=mpiid, person_key=person_key,
+                race=race, eth=eth, lang=lang, doc_date=doc_date, mpid_tag=mpid_tag,
+                problems=problems, meds=meds, labs=labs, imms=imms, vitals=vitals,
+                procs=procs, encs=encs, allergies=allergies, has=has)
 
 
 def load_oru(patients, pattern='*oru*.ndjson'):
@@ -323,17 +327,23 @@ def load_oru_hl7(patients, pattern):
 
     Appends to any ORU already attached (e.g. from a FHIR feed)."""
     by_mrn = {}
+    idents = {}
     for fn in glob.glob(pattern):
         with open(fn, encoding='utf-8') as fh:
             raw = fh.read()
         segments = [s for s in raw.replace('\n', '\r').split('\r') if s.strip()]
         mrn = ''
+        pid_qe = pid_src = ''
         obs = []
         for s in segments:
             f = s.split('|')
             if f[0] == 'PID' and len(f) > 3:
                 # PID-3: mrn^^^QE&Source^MR~eid^^^QE^PI~...
-                mrn = f[3].split('~')[0].split('^')[0]
+                rep0 = f[3].split('~')[0].split('^')
+                mrn = rep0[0] if rep0 else ''
+                aa = rep0[3] if len(rep0) > 3 else ''
+                if '&' in aa:
+                    pid_qe, pid_src = aa.split('&')[0], aa.split('&')[1]
             elif f[0] == 'OBX' and len(f) > 5:
                 code = f[3].split('^') if len(f) > 3 else ['']
                 loinc = code[0]
@@ -348,9 +358,86 @@ def load_oru_hl7(patients, pattern):
                             'range': rng, 'dup': False})
         if mrn:
             by_mrn.setdefault(mrn, []).extend(obs)
+            idents.setdefault(mrn, {'qe': pid_qe, 'source': pid_src, 'mrn': mrn})
 
     for P in patients:
         extra = by_mrn.get(P.get('mrn', ''), [])
         if extra:
             P['oru'] = P.get('oru', []) + extra
             _reconcile_oru(P)
+        # the source|MRN pairs define the person: merge ORU-derived identity
+        # into the patient's MRN list (deduped), alongside the CCD-derived ones
+        idn = idents.get(P.get('mrn', ''))
+        if idn and idn.get('qe'):
+            lst = P.setdefault('mrn_list', [])
+            if not any(m.get('qe') == idn['qe'] and m.get('source') == idn['source']
+                       and m.get('mrn') == idn['mrn'] for m in lst):
+                lst.append(idn)
+
+
+def _dedup(seq, keyfn):
+    seen, out = set(), []
+    for x in seq:
+        k = keyfn(x)
+        if k in seen:
+            continue
+        seen.add(k)
+        out.append(x)
+    return out
+
+
+def _dedup_person(P):
+    """Collapse duplicate clinical items that arrive from multiple source
+    documents for the SAME person (a virtual-health-record style merge)."""
+    P['mrn_list'] = _dedup(P.get('mrn_list', []),
+                           lambda m: (m.get('qe'), m.get('source'), m.get('mrn')))
+    P['problems'] = _dedup(P.get('problems', []), lambda x: (x['name'], x['onset']))
+    P['meds'] = _dedup(P.get('meds', []), lambda x: (x['name'], x['start']))
+    P['imms'] = _dedup(P.get('imms', []), lambda x: (x['name'], x['date']))
+    P['vitals'] = _dedup(P.get('vitals', []), lambda x: (x['test'], str(x['value']), x['date']))
+    P['procs'] = _dedup(P.get('procs', []), lambda x: (x['name'], x['date']))
+    P['encs'] = _dedup(P.get('encs', []), lambda x: (x['name'], x['start']))
+    P['allergies'] = _dedup(P.get('allergies', []), lambda x: x['name'])
+    P['oru'] = _dedup(P.get('oru', []), lambda o: (o['loinc'], o['date'], str(o['value'])))
+    # labs: collapse identical panels (same panel+date), dedup components within
+    seen, newlabs = set(), []
+    for pl in P.get('labs', []):
+        key = (pl['panel'], pl['date'])
+        if key in seen:
+            continue
+        seen.add(key)
+        pl['comps'] = _dedup(pl['comps'], lambda c: (c['loinc'], c['date'], str(c['value'])))
+        newlabs.append(pl)
+    P['labs'] = newlabs
+
+
+def merge_by_person(patients):
+    """Group parsed documents by person_key into one virtual record each:
+    union the source MRNs, concatenate then de-duplicate clinical items, and
+    re-reconcile ORU vs CCD. People who appear once pass through unchanged."""
+    groups, order = {}, []
+    for P in patients:
+        k = P.get('person_key') or f"{P['family']}|{P['given']}|{P['dob']}"
+        g = groups.get(k)
+        if g is None:
+            groups[k] = P
+            order.append(k)
+        else:
+            g['mrn_list'] = (g.get('mrn_list') or []) + (P.get('mrn_list') or [])
+            g['oru'] = (g.get('oru') or []) + (P.get('oru') or [])
+            for fld in ('problems', 'meds', 'labs', 'imms', 'vitals', 'procs', 'encs', 'allergies'):
+                g[fld] = (g.get(fld) or []) + (P.get(fld) or [])
+    out = []
+    for k in order:
+        P = groups[k]
+        _dedup_person(P)
+        _reconcile_oru(P)
+        P['has'] = {
+            'Conditions': len(P['problems']), 'Allergies': len(P['allergies']),
+            'Medications': len(P['meds']), 'Immunizations': len(P['imms']),
+            'Vital Signs': len(P['vitals']),
+            'Lab Results': sum(len(pl['comps']) for pl in P['labs']),
+            'Procedures': len(P['procs']), 'Encounters': len(P['encs']),
+        }
+        out.append(P)
+    return out

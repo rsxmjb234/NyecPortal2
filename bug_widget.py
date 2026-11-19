@@ -46,6 +46,11 @@ BUG_CSS = """<style>
   .bug-row input { flex:1; padding:7px 10px; border:1px solid #e5e9ee; border-radius:7px;
     background:#f1f5f9; color:#1f2a37; font-size:13px; min-width:0; }
   .bug-row input.edit { background:#fff; border-color:#cfd8dc; }
+  .bug-row.mrnrow { align-items:flex-start; }
+  .bug-row.mrnrow span { margin-top:7px; }
+  .mrnbox { flex:1; min-width:0; font-family:ui-monospace,Menlo,Consolas,monospace; font-size:12px;
+    line-height:1.5; background:#f1f5f9; border:1px solid #e5e9ee; border-radius:7px; padding:7px 9px;
+    color:#1f2a37; resize:vertical; min-height:92px; }
   .bug-sep { margin:16px 0 10px; font-weight:700; font-size:12px; color:#0b7c7b;
     text-transform:uppercase; letter-spacing:.5px; border-top:1px solid #eef1f4; padding-top:12px; }
   .bug-label { display:block; margin:12px 0 6px; font-weight:600; font-size:13px; }
@@ -116,7 +121,7 @@ BUG_MODAL = """
       <textarea id="aNotes" placeholder="Optional extra detail..."></textarea>
       <div class="bug-sep">Auto-captured on every ticket</div>
       <div class="bug-row"><span>Date</span><input id="aRptDate" readonly></div>
-      <div class="bug-row" style="margin-top:8px"><span>MRN array</span><input id="aMrnArr" readonly></div>
+      <div class="bug-row mrnrow"><span>MRN array</span><textarea id="aMrnArr" class="mrnbox" readonly></textarea></div>
       <div class="bug-foot">
         <button type="button" class="bug-secondary md-back">&larr; Back</button>
         <button type="button" class="bug-primary" id="bugGoA">Go</button>
@@ -141,7 +146,7 @@ BUG_MODAL = """
       <textarea id="bNotes" placeholder="Anything else the QE should pull in..."></textarea>
       <div class="bug-sep">Auto-captured on every ticket</div>
       <div class="bug-row"><span>Date</span><input id="bRptDate" readonly></div>
-      <div class="bug-row" style="margin-top:8px"><span>MRN array</span><input id="bMrnArr" readonly></div>
+      <div class="bug-row mrnrow"><span>MRN array</span><textarea id="bMrnArr" class="mrnbox" readonly></textarea></div>
       <div class="bug-foot">
         <button type="button" class="bug-secondary md-back">&larr; Back</button>
         <button type="button" class="bug-primary" id="bugGoB">Go</button>
@@ -187,7 +192,7 @@ BUG_MODAL = """
       return {qe:pr[0]||'', source:pr[1]||'', mrn:mrn}; });
   }
   function mrnsDisplay(a){ return a.map(function(m){
-    return m.mrn+' ('+m.qe+(m.source?'|'+m.source:'')+')'; }).join(', '); }
+    return m.qe+(m.source?'|'+m.source:'')+'|'+m.mrn; }).join('\\n'); }
   var curP=null, curScr='';
   function steps(id){
     ['step0','stepA','stepB','bugDone'].forEach(function(s){ g(s).style.display=(s===id?'':'none'); });
