@@ -10,6 +10,7 @@ import html
 from datetime import datetime
 
 from ccda_parse import parse_ccd, load_oru, load_oru_hl7
+from bug_widget import inject as inject_bug
 
 # Data source is configurable so the same renderer can build either the base
 # demo (ccds/ + FHIR ORU) or the Marcus cohort (marcus_bundle + HL7 ORU).
@@ -269,7 +270,7 @@ def render_patient(P, idx):
                     else chip('No known allergies', 'good'))
     style = '' if idx == 0 else ' style="display:none"'
     return f"""
-    <div class="patient" data-idx="{idx}"{style}>
+    <div class="patient" data-idx="{idx}" data-first="{E(P['given'])}" data-last="{E(P['family'])}" data-dob="{E(P['dob'])}"{style}>
       <div class="pt-banner">
         <div class="avatar">{E(initials)}</div>
         <div class="pt-id">
@@ -312,7 +313,7 @@ HTML = f"""<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{E(TITLE)} &mdash; SMART on FHIR</title>
+<title>{E(TITLE)} &mdash; HIXNY</title>
 <style>
   :root {{
     --brand:#0ea5a4; --brand-d:#0b7c7b; --brand-2:#0e7490; --accent:#f97316;
@@ -457,7 +458,7 @@ HTML = f"""<!DOCTYPE html>
       <div class="mark">{icon('pulse')}</div>
       <div>
         <div class="name">{E(TITLE)}</div>
-        <div class="sub">SMART on FHIR &middot; demonstration</div>
+        <div class="sub">HIXNY &middot; demonstration</div>
       </div>
     </div>
     <div class="spacer"></div>
@@ -503,6 +504,7 @@ HTML = f"""<!DOCTYPE html>
 </body>
 </html>"""
 
+HTML = inject_bug(HTML)
 with open(OUT, 'w', encoding='utf-8') as f:
     f.write(HTML)
 

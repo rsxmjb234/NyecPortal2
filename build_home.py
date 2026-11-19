@@ -85,12 +85,12 @@ INDEX = f"""<!DOCTYPE html>
   <div class="wrap">
     <div class="cards">
       <a class="card fhir" href="marcus_fhir.html">
-        <span class="badge">FHIR style</span>
-        <h2>SMART on FHIR view</h2>
+        <span class="badge">HIXNY style</span>
+        <h2>HIXNY view</h2>
         <div class="sub">A modern app-style dashboard: patient banner, resource cards
           (Condition, MedicationRequest, Observation&hellip;), and tabbed sections. Feels like
           an app launched from an EHR.</div>
-        <div class="open">Open the FHIR view &rarr;</div>
+        <div class="open">Open the HIXNY view &rarr;</div>
       </a>
       <a class="card fusion" href="marcus_fusion.html">
         <span class="badge">HEALTHeLINK style</span>

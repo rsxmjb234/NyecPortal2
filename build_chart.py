@@ -11,6 +11,7 @@ from datetime import datetime, date
 import html
 
 from ccda_parse import load_oru_hl7   # shared HL7 ORU loader + dedup rules
+from bug_widget import inject as inject_bug
 
 V3 = 'urn:hl7-org:v3'
 ns = {'v3': V3}
@@ -451,7 +452,7 @@ def render_patient(P, idx):
     initials = (P['given'][:1] + P['family'][:1]).upper()
     style = '' if idx == 0 else ' style="display:none"'
     return f"""
-    <div class="patient" data-idx="{idx}"{style}>
+    <div class="patient" data-idx="{idx}" data-first="{E(P['given'])}" data-last="{E(P['family'])}" data-dob="{E(P['dob'])}"{style}>
       <div class="banner">
         <h1>{E(P['family'].upper())}, {E(P['given'])}</h1>
         <div class="sub"><b>{E(P['gender'])}</b> &nbsp; {P['age']}y &nbsp; {E(P['dob'])}
@@ -734,6 +735,7 @@ HTML = f"""<!DOCTYPE html>
 </body>
 </html>"""
 
+HTML = inject_bug(HTML)
 with open(OUT, 'w', encoding='utf-8') as f:
     f.write(HTML)
 
