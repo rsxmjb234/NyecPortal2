@@ -74,7 +74,7 @@ BUG_CSS = """<style>
   /* per-row copy affordance */
   .pdr-copy { display:inline-block; width:14px; color:#94a3b8; cursor:pointer; margin-right:6px;
     opacity:0; transition:opacity .1s; user-select:none; font-size:12px; }
-  tr:hover .pdr-copy { opacity:1; }
+  tr:hover .pdr-copy, ul.mini li:hover .pdr-copy { opacity:1; }
   .pdr-copy:hover { color:#0ea5a4; }
   .pdr-toast { position:fixed; left:50%; bottom:26px; transform:translateX(-50%);
     background:#0f172a; color:#e2f5f1; padding:9px 16px; border-radius:999px; font-size:12.5px;
@@ -300,25 +300,42 @@ BUG_MODAL = """
   // ---- per-row copy affordance (for "PDR has it" direction) ----
   function toast(msg){ var t=g('pdrToast'); t.textContent=msg; t.style.opacity='1';
     clearTimeout(window.__pt); window.__pt=setTimeout(function(){ t.style.opacity='0'; },2600); }
-  function rowToken(tr){
-    var p=tr.closest('.patient');
-    var cells=Array.prototype.slice.call(tr.cells).map(function(c){
-      return c.innerText.replace(/\\u29C9/g,'').trim(); }).filter(Boolean);
-    return 'PDR|mrn='+(p?p.getAttribute('data-mrn'):'')+'|qe='+(p?p.getAttribute('data-qe'):'')+
-           '|src='+(p?p.getAttribute('data-source'):'')+'|'+cells.join(' | ');
+  function elToken(host){
+    var p=host.closest('.patient');
+    var base='PDR|mrn='+(p?p.getAttribute('data-mrn'):'')+'|qe='+(p?p.getAttribute('data-qe'):'')+
+             '|src='+(p?p.getAttribute('data-source'):'');
+    var txt;
+    if(host.tagName==='TR'){
+      txt=Array.prototype.slice.call(host.cells).map(function(c){
+        return c.innerText.replace(/\\u29C9/g,'').trim(); }).filter(Boolean).join(' | ');
+    } else {
+      txt=host.innerText.replace(/\\u29C9/g,'').replace(/\\s+/g,' ').trim();
+    }
+    return base+'|'+txt;
   }
+  function addCopy(container){
+    var s=document.createElement('span');
+    s.className='pdr-copy'; s.title='Copy Data ID (for \u201cPDR has it, QE does not\u201d)';
+    s.textContent='\\u29C9';
+    container.insertBefore(s, container.firstChild);
+  }
+  // table rows (both views' detail tables)
   Array.prototype.forEach.call(document.querySelectorAll('.patient table tbody tr'),function(tr){
     if(!tr.cells || !tr.cells.length) return;
     if(tr.querySelector('td[colspan]')) return;          // skip group-header rows
-    var s=document.createElement('span');
-    s.className='pdr-copy'; s.title='Copy Data ID'; s.textContent='\\u29C9';
-    tr.cells[0].insertBefore(s, tr.cells[0].firstChild);
+    addCopy(tr.cells[0]);
+  });
+  // summary-card list items (Hixny/SMART landing cards show data as lists, not tables)
+  Array.prototype.forEach.call(document.querySelectorAll('.patient ul.mini li'),function(li){
+    addCopy(li);
   });
   document.addEventListener('click',function(e){
     var s=e.target.closest ? e.target.closest('.pdr-copy') : null;
     if(!s) return;
     e.stopPropagation(); e.preventDefault();
-    var tok=rowToken(s.closest('tr'));
+    var host=s.closest('tr') || s.closest('li');
+    if(!host) return;
+    var tok=elToken(host);
     window.__pdrLastId=tok;
     try { if(navigator.clipboard) navigator.clipboard.writeText(tok); } catch(err){}
     toast('Data ID copied \\u2014 open \u201cMissing data\u201d \u2192 PDR has it, then paste');
