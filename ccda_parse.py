@@ -111,10 +111,15 @@ def parse_ccd(path):
     mrn = mrn_aa = mpiid = ''
     for idel in pr.findall('v3:id', ns):
         aa = idel.get('assigningAuthorityName', '')
-        if aa and 'synthea' not in aa.lower():
-            mrn, mrn_aa = idel.get('extension', ''), aa
+        idroot = idel.get('root', '')
         if 'synthea' in aa.lower():
             mpiid = idel.get('extension', '')
+            continue
+        # skip the synthetic EID / MPID ids we stamp for cross-source linkage
+        if idroot.endswith('.eid') or idroot.endswith('.mpid'):
+            continue
+        if aa and not mrn:          # first real source id (QE|Source) is the MRN
+            mrn, mrn_aa = idel.get('extension', ''), aa
     if not mpiid:
         mpiid = pr.findall('v3:id', ns)[0].get('root', '')
 
@@ -284,14 +289,63 @@ def load_oru(patients, pattern='*oru*.ndjson'):
     for P in patients:
         oru = by_mpid.get(P['mpid_tag'], [])
         P['oru'] = oru
-        ccd_keys = set()
-        for panel in P['labs']:
-            for c in panel['comps']:
-                ccd_keys.add((c['loinc'], c['date']))
-        oru_keys = set((o['loinc'], o['date']) for o in oru)
-        for o in oru:
-            o['dup'] = (o['loinc'], o['date']) in ccd_keys
-        for panel in P['labs']:
-            for c in panel['comps']:
-                if (c['loinc'], c['date']) in oru_keys:
-                    c['superseded'] = True
+        _reconcile_oru(P)
+
+
+def _reconcile_oru(P):
+    """Flag each ORU result as a duplicate of a CCD lab (same LOINC + date), and
+    mark the matching CCD lab component as superseded (crossed off, not deleted)."""
+    ccd_keys = set()
+    for panel in P['labs']:
+        for c in panel['comps']:
+            ccd_keys.add((c['loinc'], c['date']))
+    oru_keys = set((o['loinc'], o['date']) for o in P.get('oru', []))
+    for o in P.get('oru', []):
+        o['dup'] = (o['loinc'], o['date']) in ccd_keys
+    for panel in P['labs']:
+        for c in panel['comps']:
+            if (c['loinc'], c['date']) in oru_keys:
+                c['superseded'] = True
+
+
+_HL7_FLAG = {'N': 'Normal', 'H': 'High', 'L': 'Low', 'A': 'Abnormal',
+             'HH': 'Critical High', 'LL': 'Critical Low', '': ''}
+
+
+def load_oru_hl7(patients, pattern):
+    """Load genuine HL7 v2 ORU^R01 lab messages (NOT FHIR), match to patients by
+    MRN from PID-3, and reconcile against CCD labs for de-duplication.
+
+    Appends to any ORU already attached (e.g. from a FHIR feed)."""
+    by_mrn = {}
+    for fn in glob.glob(pattern):
+        with open(fn, encoding='utf-8') as fh:
+            raw = fh.read()
+        segments = [s for s in raw.replace('\n', '\r').split('\r') if s.strip()]
+        mrn = ''
+        obs = []
+        for s in segments:
+            f = s.split('|')
+            if f[0] == 'PID' and len(f) > 3:
+                # PID-3: mrn^^^QE&Source^MR~eid^^^QE^PI~...
+                mrn = f[3].split('~')[0].split('^')[0]
+            elif f[0] == 'OBX' and len(f) > 5:
+                code = f[3].split('^') if len(f) > 3 else ['']
+                loinc = code[0]
+                name = code[1] if len(code) > 1 else loinc
+                value = f[5] if len(f) > 5 else ''
+                unit = f[6] if len(f) > 6 else ''
+                rng = f[7] if len(f) > 7 else ''
+                flag = f[8] if len(f) > 8 else ''
+                dt = f[14] if len(f) > 14 else ''
+                obs.append({'test': name, 'loinc': loinc, 'value': value, 'unit': unit,
+                            'date': fmt_date(dt), 'flag': _HL7_FLAG.get(flag, flag),
+                            'range': rng, 'dup': False})
+        if mrn:
+            by_mrn.setdefault(mrn, []).extend(obs)
+
+    for P in patients:
+        extra = by_mrn.get(P.get('mrn', ''), [])
+        if extra:
+            P['oru'] = P.get('oru', []) + extra
+            _reconcile_oru(P)

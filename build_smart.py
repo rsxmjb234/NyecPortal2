@@ -9,10 +9,14 @@ import os
 import html
 from datetime import datetime
 
-from ccda_parse import parse_ccd, load_oru
+from ccda_parse import parse_ccd, load_oru, load_oru_hl7
 
-CCD_DIR = 'ccds'
-OUT = 'patient_chart_smart.html'
+# Data source is configurable so the same renderer can build either the base
+# demo (ccds/ + FHIR ORU) or the Marcus cohort (marcus_bundle + HL7 ORU).
+CCD_DIR = os.environ.get('CHART_CCD_DIR', 'ccds')
+OUT = os.environ.get('CHART_OUT', 'patient_chart_smart.html')
+ORU_HL7_DIR = os.environ.get('CHART_ORU_HL7', '')   # if set, load HL7 ORU from here
+TITLE = os.environ.get('CHART_TITLE', 'Community Health Record')
 E = html.escape
 
 
@@ -79,9 +83,12 @@ def labs_section(P):
                  f'(Health Information Exchange) &mdash; {len(P["oru"])} results</td></tr>')
         for o in sorted(P['oru'], key=lambda x: x['test']):
             tag = (chip('preferred', 'oru') if o['dup'] else chip('new', 'ok'))
+            oflag = o.get('flag', '')
+            oabn = oflag in ('Low', 'High', 'Abnormal', 'Critical High', 'Critical Low')
             rows += (f'<tr class="oru-row"><td>{oru_badge} <span class="strong blue">{E(o["test"])}</span> {tag}</td>'
-                     f'<td class="strong blue">{E(str(o["value"]))}</td><td>{E(o["unit"])}</td>'
-                     f'<td>&ndash;</td><td>&ndash;</td><td>{E(o["date"])}</td></tr>')
+                     f'<td class="strong {"abnval" if oabn else "blue"}">{E(str(o["value"]))}</td><td>{E(o["unit"])}</td>'
+                     f'<td>{E(oflag) or "&ndash;"}</td><td>{E(o.get("range", "")) or "&ndash;"}</td>'
+                     f'<td>{E(o["date"])}</td></tr>')
     for p in P['labs']:
         rows += (f'<tr class="grp"><td colspan="6">{E(p["panel"])}'
                  f'<span class="grpdate">{E(p["date"])}</span></td></tr>')
@@ -288,7 +295,9 @@ files = sorted(glob.glob(os.path.join(CCD_DIR, '*.xml')))
 patients = [parse_ccd(f) for f in files]
 for P in patients:
     P['oru'] = []
-load_oru(patients)
+load_oru(patients)                                   # FHIR Observation ndjson (if any)
+if ORU_HL7_DIR:
+    load_oru_hl7(patients, os.path.join(ORU_HL7_DIR, '*.hl7'))   # genuine HL7 ORU
 
 options = ''
 for i, P in enumerate(patients):
@@ -303,7 +312,7 @@ HTML = f"""<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Community Health Record &mdash; SMART on FHIR</title>
+<title>{E(TITLE)} &mdash; SMART on FHIR</title>
 <style>
   :root {{
     --brand:#0ea5a4; --brand-d:#0b7c7b; --brand-2:#0e7490; --accent:#f97316;
@@ -447,7 +456,7 @@ HTML = f"""<!DOCTYPE html>
     <div class="brand">
       <div class="mark">{icon('pulse')}</div>
       <div>
-        <div class="name">Community Health Record</div>
+        <div class="name">{E(TITLE)}</div>
         <div class="sub">SMART on FHIR &middot; demonstration</div>
       </div>
     </div>

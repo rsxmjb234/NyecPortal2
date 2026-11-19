@@ -30,6 +30,7 @@ aws_credentials*
 # --- Generated outputs (regenerable from the scripts) ---
 patient_chart.html
 patient_chart_smart.html
+marcus_portal.html
 *.png
 *.pdf
 _guide_assets/
