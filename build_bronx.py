@@ -14,6 +14,7 @@ from datetime import datetime
 
 from ccda_parse import parse_ccd, load_oru, load_oru_hl7, merge_by_person
 from bug_widget import inject as inject_bug
+from ccda_parse import med_extra, lab_extra, oru_extra
 
 CCD_DIR = os.environ.get('CHART_CCD_DIR', 'ccds')
 OUT = os.environ.get('CHART_OUT', 'patient_chart_bronx.html')
@@ -62,7 +63,7 @@ def meds_tbl(P):
     r = ''
     for m in P['meds']:
         status = 'Active' if not m['stop'] else 'Completed'
-        r += row([E(m['name']), E(m['start']), E(m['stop']) or '&ndash;', status])
+        r += row([E(m['name']), E(m['start']), E(m['stop']) or '&ndash;', status], extra=med_extra(m))
     return tbl(['Medication', 'Start', 'Stop', 'Status'], r) if r else empty('No medications on file.')
 
 
@@ -106,7 +107,7 @@ def labs_tbl(P):
             r += row([f'{oru} <b>{E(o["test"])}</b> {tag}', f'<b>{E(str(o["value"]))}</b>', E(o['unit']),
                       E(o.get('range', '')) or '&ndash;',
                       (f'<span class="abn">{E(o.get("flag",""))}</span>' if abn else E(o.get('flag', '')) or '&ndash;'),
-                      E(o['date'])], 'oru-row')
+                      E(o['date'])], 'oru-row', extra=oru_extra(o))
     for p in P['labs']:
         r += (f'<tr class="grp"><td class="ic"></td><td colspan="6">{E(p["panel"])}'
               f'<span class="gdate">{E(p["date"])}</span></td></tr>')
@@ -117,7 +118,7 @@ def labs_tbl(P):
             r += row([f'{ccd} <span>{E(c["test"])}</span> {note}',
                       f'<span class="{"abnval" if abn else ""}">{E(c["value"])}</span>', E(c['unit']),
                       E(c['range']) or '&ndash;', (f'<span class="abn">{E(c["flag"])}</span>' if abn else E(c['flag']) or '&ndash;'),
-                      E(c['date'])], 'sup' if sup else '')
+                      E(c['date'])], 'sup' if sup else '', extra=lab_extra(c))
     legend = (f'<div class="bx-legend">{ccd} C-CDA &nbsp; {oru} ORU feed (HIE) &nbsp; '
               '<span class="sup-ex">strikethrough</span> = CCD result superseded by a duplicate ORU result</div>'
               if P.get('oru') else '')

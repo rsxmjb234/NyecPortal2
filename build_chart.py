@@ -13,6 +13,7 @@ import html
 
 from ccda_parse import load_oru_hl7   # shared HL7 ORU loader + dedup rules
 from bug_widget import inject as inject_bug
+from ccda_parse import med_extra, lab_extra, oru_extra, extra_attr
 
 V3 = 'urn:hl7-org:v3'
 ns = {'v3': V3}
@@ -309,7 +310,7 @@ def render_tables(P):
     rows = ''
     for m in P['meds']:
         active = not m['stop']
-        rows += (f'<tr><td class="lnk">{E(m["name"])}</td><td>{E(m["start"])}</td>'
+        rows += (f'<tr{extra_attr(med_extra(m))}><td class="lnk">{E(m["name"])}</td><td>{E(m["start"])}</td>'
                  f'<td>{E(m["stop"]) or "&mdash;"}</td>'
                  f'<td><span class="status {"active" if active else "resolved"}">'
                  f'{"Active" if active else "Completed"}</span></td></tr>')
@@ -329,7 +330,7 @@ def render_tables(P):
                     if o['dup'] else '<span class="newnote">new result</span>')
             oflag = o.get('flag', '')
             oabn = oflag in ('Low', 'High', 'Abnormal', 'Critical High', 'Critical Low')
-            rows += (f'<tr class="oru-row">'
+            rows += (f'<tr class="oru-row"{extra_attr(oru_extra(o))}>'
                      f'<td class="flagcell">{oru_badge} <span class="lnk strong">{E(o["test"])}</span> {note}</td>'
                      f'<td class="strong {"abnval" if oabn else ""}">{E(str(o["value"]))}</td>'
                      f'<td>{E(o["unit"])}</td><td>{E(oflag) or "&mdash;"}</td>'
@@ -344,7 +345,7 @@ def render_tables(P):
             sup = c.get('superseded')
             cls = ' '.join(x for x in [('abn' if abn else ''), ('superseded' if sup else '')] if x)
             supnote = '<span class="supnote">superseded by ORU</span>' if sup else ''
-            rows += (f'<tr class="{cls}">'
+            rows += (f'<tr class="{cls}"{extra_attr(lab_extra(c))}>'
                      f'<td class="flagcell">{"<span class=bar></span>" if abn else ""}'
                      f'{ccd_badge} <span class="lnk">{E(c["test"])}</span> {supnote}</td>'
                      f'<td class="{"abnval" if abn else ""}">{E(c["value"])}</td>'

@@ -28,6 +28,28 @@ def fmt_date(v):
     return v
 
 
+def med_extra(m):
+    return [('RxNorm code', m.get('code', '')), ('Dose', m.get('dose', '')),
+            ('Record status', m.get('status_code', ''))]
+
+
+def lab_extra(c):
+    return [('LOINC code', c.get('loinc', '')), ('Panel', c.get('panel', '')),
+            ('Result status', c.get('status_code', '')), ('Source document', c.get('source', ''))]
+
+
+def oru_extra(o):
+    return [('LOINC code', o.get('loinc', '')), ('Source feed', 'HL7 v2 ORU^R01'),
+            ('Duplicate of CCD lab', 'Yes' if o.get('dup') else 'No')]
+
+
+def extra_attr(pairs):
+    """data-extra attribute (HTML-escaped JSON of [label, value] pairs) for drill-in."""
+    import html as _h
+    p = [[k, v] for k, v in pairs if v]
+    return ' data-extra="%s"' % _h.escape(json.dumps(p)) if p else ''
+
+
 def parse_ccd(path):
     tree = ET.parse(path)
     root = tree.getroot()
@@ -167,7 +189,16 @@ def parse_ccd(path):
             if mat is not None:
                 name = code_name(mat.find('v3:code', ns)) or mat.findtext('v3:name', default='', namespaces=ns)
             low, high = eff_low_high(sa)
-            meds.append({'name': name, 'start': fmt_date(low), 'stop': fmt_date(high)})
+            mcode = mat.find('v3:code', ns) if mat is not None else None
+            st = sa.find('v3:statusCode', ns)
+            dq = sa.find('v3:doseQuantity', ns)
+            dose = ''
+            if dq is not None and dq.get('value'):
+                dose = (dq.get('value') + ' ' + (dq.get('unit') or '')).strip()
+            meds.append({'name': name, 'start': fmt_date(low), 'stop': fmt_date(high),
+                         'code': mcode.get('code', '') if mcode is not None else '',
+                         'status_code': st.get('code', '') if st is not None else '',
+                         'dose': dose})
 
     labs = []
     if 'Diagnostic Results' in SEC:
@@ -197,6 +228,9 @@ def parse_ccd(path):
                               'unit': unit, 'flag': flag, 'range': rr,
                               'date': fmt_date(olow or plow),
                               'loinc': ccode.get('code', '') if ccode is not None else '',
+                              'status_code': (obs.find('v3:statusCode', ns).get('code', '')
+                                              if obs.find('v3:statusCode', ns) is not None else ''),
+                              'panel': pname,
                               'source': 'CCD', 'superseded': False})
             labs.append({'panel': pname, 'date': fmt_date(plow), 'comps': comps})
 

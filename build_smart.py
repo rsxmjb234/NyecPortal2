@@ -12,6 +12,7 @@ from datetime import datetime
 
 from ccda_parse import parse_ccd, load_oru, load_oru_hl7, merge_by_person
 from bug_widget import inject as inject_bug
+from ccda_parse import med_extra, lab_extra, oru_extra, extra_attr
 
 
 def dextra(pairs):
@@ -77,7 +78,7 @@ def meds_rows(P):
     out = ''
     for m in P['meds']:
         active = not m['stop']
-        out += (f'<tr><td class="strong">{E(m["name"])}</td><td>{E(m["start"])}</td>'
+        out += (f'<tr{extra_attr(med_extra(m))}><td class="strong">{E(m["name"])}</td><td>{E(m["start"])}</td>'
                 f'<td>{E(m["stop"]) or "&ndash;"}</td>'
                 f'<td>{chip("Active" if active else "Completed", "ok" if active else "mut")}</td></tr>')
     return out
@@ -94,7 +95,7 @@ def labs_section(P):
             tag = (chip('preferred', 'oru') if o['dup'] else chip('new', 'ok'))
             oflag = o.get('flag', '')
             oabn = oflag in ('Low', 'High', 'Abnormal', 'Critical High', 'Critical Low')
-            rows += (f'<tr class="oru-row"><td>{oru_badge} <span class="strong blue">{E(o["test"])}</span> {tag}</td>'
+            rows += (f'<tr class="oru-row"{extra_attr(oru_extra(o))}><td>{oru_badge} <span class="strong blue">{E(o["test"])}</span> {tag}</td>'
                      f'<td class="strong {"abnval" if oabn else "blue"}">{E(str(o["value"]))}</td><td>{E(o["unit"])}</td>'
                      f'<td>{E(oflag) or "&ndash;"}</td><td>{E(o.get("range", "")) or "&ndash;"}</td>'
                      f'<td>{E(o["date"])}</td></tr>')
@@ -106,7 +107,7 @@ def labs_section(P):
             sup = c.get('superseded')
             cls = ' '.join(x for x in [('abn' if abn else ''), ('sup' if sup else '')] if x)
             supnote = chip('superseded by ORU', 'warn') if sup else ''
-            rows += (f'<tr class="{cls}"><td>{ccd_badge} <span>{E(c["test"])}</span> {supnote}</td>'
+            rows += (f'<tr class="{cls}"{extra_attr(lab_extra(c))}><td>{ccd_badge} <span>{E(c["test"])}</span> {supnote}</td>'
                      f'<td class="{"abnval" if abn else ""}">{E(c["value"])}</td><td>{E(c["unit"])}</td>'
                      f'<td>{E(c["flag"]) or "&ndash;"}</td><td>{E(c["range"]) or "&ndash;"}</td>'
                      f'<td>{E(c["date"])}</td></tr>')
