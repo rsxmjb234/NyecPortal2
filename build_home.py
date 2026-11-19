@@ -25,6 +25,11 @@ os.environ['CHART_OUT'] = 'marcus_fusion.html'
 os.environ['CHART_QE'] = 'HEALTHELINK'     # this view represents the HEALTHeLINK portal
 import build_chart  # noqa: E402,F401
 
+# ---- Bronx RHIO / IMAT Solutions style ----
+os.environ['CHART_OUT'] = 'marcus_bronx.html'
+os.environ['CHART_QE'] = 'BRONX'           # this view represents the Bronx RHIO (IMAT) portal
+import build_bronx  # noqa: E402,F401
+
 n_people = len(build_smart.patients)
 
 # ---- home screen: one view per NY Qualified Entity (QE); some live, rest coming soon ----
@@ -39,8 +44,8 @@ QES = [
      'site': 'https://www.healtheconnections.org', 'href': '', 'live': False},
     {'name': 'Rochester RHIO', 'region': 'Finger Lakes & Southern Tier', 'color': '#7c3aed',
      'site': 'https://rochesterrhio.org', 'href': '', 'live': False},
-    {'name': 'Bronx RHIO', 'region': 'The Bronx', 'color': '#b91c1c',
-     'site': 'https://bronxrhio.org', 'href': '', 'live': False},
+    {'name': 'Bronx RHIO', 'region': 'The Bronx (IMAT Solutions)', 'color': '#b91c1c',
+     'site': 'https://bronxrhio.org', 'href': 'marcus_bronx.html', 'live': True},
 ]
 
 
