@@ -17,10 +17,12 @@ os.environ['CHART_CCD_DIR'] = CCD
 os.environ['CHART_ORU_HL7'] = ORU
 os.environ['CHART_OUT'] = 'marcus_fhir.html'
 os.environ['CHART_TITLE'] = 'SHIN-NY Community Health Record'
+os.environ['CHART_QE'] = 'HIXNY'          # this view represents the Hixny portal
 import build_smart  # noqa: E402,F401  (runs the build with the env above)
 
 # ---- HEALTHeLINK / Fusion style ----
 os.environ['CHART_OUT'] = 'marcus_fusion.html'
+os.environ['CHART_QE'] = 'HEALTHELINK'     # this view represents the HEALTHeLINK portal
 import build_chart  # noqa: E402,F401
 
 n_people = len(build_smart.patients)

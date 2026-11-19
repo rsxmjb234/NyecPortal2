@@ -228,8 +228,11 @@ BUG_MODAL = """
     g('aLast').value=curP.getAttribute('data-last')||'';
     g('aDob').value=curP.getAttribute('data-dob')||'';
     g('aScreen').value=curScr;
-    // QE has it / PDR doesn't: do NOT prefill QE/Source/MRN (likely not this screen's source)
-    g('aQe').value=''; g('aSource').value=''; g('aMrn').value='';
+    // QE defaults to the QE whose portal/view you are in; Source/MRN from the matching identifier
+    var viewQe=document.body.getAttribute('data-view-qe')||'';
+    var _vm=null, _ml=parseMrns(curP);
+    for(var _j=0;_j<_ml.length;_j++){ if(_ml[_j].qe===viewQe){ _vm=_ml[_j]; break; } }
+    g('aQe').value=viewQe; g('aSource').value=_vm?_vm.source:''; g('aMrn').value=_vm?_vm.mrn:'';
     g('aItemLbl').textContent=m.noun; g('aResultLbl').textContent=m.res;
     g('aItem').placeholder=m.item; g('aResult').placeholder=m.re;
     g('aItem').value=''; g('aDate').value=''; g('aResult').value=''; g('aNotes').value='';
@@ -237,9 +240,9 @@ BUG_MODAL = """
     // step B (PDR has it / QE doesn't): the patient's own QE IS the one missing it -> prefill
     g('bFirst').value=g('aFirst').value; g('bLast').value=g('aLast').value;
     g('bDob').value=g('aDob').value; g('bScreen').value=curScr;
-    g('bQe').value=curP.getAttribute('data-qe')||''; g('bSource').value=curP.getAttribute('data-source')||'';
-    g('bMrn').value=curP.getAttribute('data-mrn')||'';
-    g('bQeInline').textContent=(curP.getAttribute('data-qe')||'QE');
+    g('bQe').value=viewQe||(curP.getAttribute('data-qe')||''); g('bSource').value=_vm?_vm.source:(curP.getAttribute('data-source')||'');
+    g('bMrn').value=_vm?_vm.mrn:(curP.getAttribute('data-mrn')||'');
+    g('bQeInline').textContent=(viewQe||curP.getAttribute('data-qe')||'QE');
     g('bPaste').value=''; g('bNotes').value='';
     // auto-captured metadata for every ticket, regardless of direction
     var _mrns=parseMrns(curP); var _disp=mrnsDisplay(_mrns); var _today=new Date().toLocaleDateString();

@@ -18,6 +18,7 @@ CCD_DIR = os.environ.get('CHART_CCD_DIR', 'ccds')
 OUT = os.environ.get('CHART_OUT', 'patient_chart_smart.html')
 ORU_HL7_DIR = os.environ.get('CHART_ORU_HL7', '')   # if set, load HL7 ORU from here
 TITLE = os.environ.get('CHART_TITLE', 'Community Health Record')
+VIEW_QE = os.environ.get('CHART_QE', '')            # the QE whose portal this view represents
 E = html.escape
 
 
@@ -456,7 +457,7 @@ HTML = f"""<!DOCTYPE html>
   .foot {{ color:var(--muted); font-size:11.5px; text-align:center; margin-top:22px; }}
 </style>
 </head>
-<body>
+<body data-view-qe="{E(VIEW_QE)}">
 
   <div class="appbar">
     <div class="brand">

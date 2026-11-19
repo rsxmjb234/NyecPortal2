@@ -18,6 +18,7 @@ ns = {'v3': V3}
 CCD_DIR = os.environ.get('CHART_CCD_DIR', 'ccds')
 OUT = os.environ.get('CHART_OUT', 'patient_chart.html')
 ORU_HL7_DIR = os.environ.get('CHART_ORU_HL7', '')
+VIEW_QE = os.environ.get('CHART_QE', '')            # the QE whose portal this view represents
 E = html.escape
 
 
@@ -685,7 +686,7 @@ HTML = f"""<!DOCTYPE html>
   .footer {{ color:var(--muted); font-size:11px; padding:14px 20px; }}
 </style>
 </head>
-<body>
+<body data-view-qe="{E(VIEW_QE)}">
 
   <div class="appbar">
     <div class="logo">f</div>
