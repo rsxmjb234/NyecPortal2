@@ -1,0 +1,59 @@
+# ============================================================
+#  NyecPortal2 — selective sync (keep the repo lean)
+# ============================================================
+
+# --- Synthetic / generated data: do NOT sync ---
+*.xml
+*.csv
+*.ndjson
+ccds/
+
+# --- Security: never commit credentials or secrets ---
+*.pem
+*.key
+*.pfx
+*.p12
+*.ppk
+id_rsa*
+.env
+.env.*
+*.env
+credentials
+aws_credentials*
+*secret*
+*secrets*
+# ops / credential-handling helper scripts (e.g. updatesandbox.bat)
+*.bat
+
+# --- Generated outputs (regenerable from the scripts) ---
+patient_chart.html
+patient_chart_smart.html
+*.png
+*.pdf
+_guide_assets/
+# HEL training-guide reference screenshots (incl. extensionless ones)
+HELScreenShot*
+HEL screen shot*
+
+# --- Python tooling ---
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# --- Editors / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- Node / SAM build artifacts (from sub-projects) ---
+node_modules/
+.aws-sam/
+dist/
+build/
+
+# --- Nested project repos (they have their own git remotes) ---
+PublicHealthPortal/
+PublicHealthPortalDemo20/
