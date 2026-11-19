@@ -268,6 +268,93 @@ def encounter_entry(data):
     return entry
 
 
+# Curated, condition-appropriate medication pool for Marcus (replaces the random
+# Synthea meds, which are unrealistic for a 76-year-old man). Each source gets a
+# different subset; start dates are identical across sources so the merged
+# record de-duplicates cleanly.
+# (name, rxnorm, dose, unit, (route code, route name), period_hours, start, stop,
+#  prescriber (given, family), indication (snomed, name), refills)
+ORAL = ('C38288', 'Oral')
+SUBQ = ('C38299', 'Subcutaneous')
+MEDS = [
+    ('Metformin hydrochloride 500 MG Oral Tablet', '861007', '1', 'tablet', ORAL, 12,
+     '20120401', '', ('James', 'Okafor'), ('44054006', 'Diabetes mellitus type 2 (disorder)'), '5'),
+    ('Lisinopril 20 MG Oral Tablet', '314077', '1', 'tablet', ORAL, 24,
+     '20100701', '', ('James', 'Okafor'), ('59621000', 'Essential hypertension (disorder)'), '5'),
+    ('Atorvastatin 40 MG Oral Tablet', '617312', '1', 'tablet', ORAL, 24,
+     '20111001', '', ('James', 'Okafor'), ('55822004', 'Hyperlipidemia (disorder)'), '5'),
+    ('Amlodipine 5 MG Oral Tablet', '197361', '1', 'tablet', ORAL, 24,
+     '20150301', '', ('Robert', 'Feldman'), ('59621000', 'Essential hypertension (disorder)'), '3'),
+    ('Aspirin 81 MG Delayed Release Oral Tablet', '243670', '1', 'tablet', ORAL, 24,
+     '20130115', '', ('Robert', 'Feldman'), ('59621000', 'Essential hypertension (disorder)'), '11'),
+    ('Insulin glargine 100 UNT/ML Injectable Solution', '261551', '20', 'units', SUBQ, 24,
+     '20250314', '', ('Priya', 'Nair'), ('44054006', 'Diabetes mellitus type 2 (disorder)'), '2'),
+    ('Acetaminophen 500 MG Oral Tablet', '198440', '1', 'tablet', ORAL, 8,
+     '20160505', '', ('James', 'Okafor'), ('396275006', 'Osteoarthritis (disorder)'), '2'),
+    ('Furosemide 20 MG Oral Tablet', '313988', '1', 'tablet', ORAL, 24,
+     '20240721', '20240905', ('Elena', 'Marchetti'), ('433144002', 'Chronic kidney disease stage 3 (disorder)'), '0'),
+    ('Glipizide 5 MG Oral Tablet', '310488', '1', 'tablet', ORAL, 24,
+     '20120301', '20190630', ('James', 'Okafor'), ('44054006', 'Diabetes mellitus type 2 (disorder)'), '0'),
+    ('Metoprolol succinate 50 MG 24HR Extended Release Oral Tablet', '866924', '1', 'tablet', ORAL, 24,
+     '20241103', '', ('David', 'Rosenberg'), ('29857009', 'Chest pain (finding)'), '3'),
+]
+
+
+def med_entry(m, rng):
+    (name, rx, dose, unit, (rcode, rname), period, start, stop, pres, (icode, iname), refills) = m
+    uid = lambda: f'urn:uuid:{rng.getrandbits(122):032x}'
+    entry = el('entry', typeCode='DRIV')
+    sa = sub(entry, 'substanceAdministration', classCode='SBADM', moodCode='EVN')
+    sub(sa, 'templateId', root='2.16.840.1.113883.10.20.22.4.16')
+    sub(sa, 'id', root=uid())
+    sub(sa, 'statusCode', code='completed' if stop else 'active')
+    et = sub(sa, 'effectiveTime')
+    et.set(f'{{{XSI}}}type', 'IVL_TS')
+    sub(et, 'low', value=start + '090000')
+    if stop:
+        sub(et, 'high', value=stop + '090000')
+    fe = sub(sa, 'effectiveTime', operator='A')
+    fe.set(f'{{{XSI}}}type', 'PIVL_TS')
+    sub(fe, 'period', value=str(period), unit='h')
+    sub(sa, 'repeatNumber', value=refills)
+    sub(sa, 'routeCode', code=rcode, displayName=rname,
+        codeSystem='2.16.840.1.113883.3.26.1.1', codeSystemName='NCI Thesaurus')
+    sub(sa, 'doseQuantity', value=dose, unit=unit)
+    cons = sub(sa, 'consumable')
+    mp = sub(cons, 'manufacturedProduct', classCode='MANU')
+    sub(mp, 'templateId', root='2.16.840.1.113883.10.20.22.4.23')
+    mm = sub(mp, 'manufacturedMaterial')
+    sub(mm, 'code', code=rx, displayName=name,
+        codeSystem='2.16.840.1.113883.6.88', codeSystemName='RxNorm')
+    sub(mm, 'name', name)
+    au = sub(sa, 'author')
+    sub(au, 'time', value=start)
+    aa = sub(au, 'assignedAuthor')
+    sub(aa, 'id', root=uid())
+    ap = sub(aa, 'assignedPerson')
+    nm = sub(ap, 'name')
+    sub(nm, 'given', pres[0])
+    sub(nm, 'family', pres[1])
+    er = sub(sa, 'entryRelationship', typeCode='RSON')
+    obs = sub(er, 'observation', classCode='OBS', moodCode='EVN')
+    sub(obs, 'templateId', root='2.16.840.1.113883.10.20.22.4.19')
+    sub(obs, 'id', root=uid())
+    sub(obs, 'code', code='404684003', displayName='Clinical finding (finding)',
+        codeSystem='2.16.840.1.113883.6.96', codeSystemName='SNOMED-CT')
+    sub(obs, 'statusCode', code='completed')
+    iv = sub(obs, 'value', code=icode, displayName=iname,
+             codeSystem='2.16.840.1.113883.6.96', codeSystemName='SNOMED-CT')
+    iv.set(f'{{{XSI}}}type', 'CD')
+    return entry
+
+
+def pick_meds(qe, source):
+    rng = random.Random(f'meds|{qe}|{source}')      # separate RNG: leaves MRN/ID stream untouched
+    chosen = rng.sample(MEDS, rng.randint(7, 10))
+    chosen.sort(key=lambda m: MEDS.index(m))
+    return chosen, rng
+
+
 def append_narrative_row(sec, row):
     tbody = sec.find('v3:text//v3:tbody', ns)
     if tbody is None:
@@ -344,6 +431,18 @@ def build_ccd(base_path, qe, source, mrn, eid):
         s = secs['Diagnostic Results']
         s.append(bmp_organizer())
         append_narrative_row(s, (LAB_N, '', 'Basic metabolic panel - Blood', 'LOINC 51990-0'))
+
+    # replace random Synthea meds with this person's condition-appropriate regimen
+    # (a different subset per source), with route/frequency/prescriber/indication
+    if 'Medications' in secs:
+        s = secs['Medications']
+        clear_entries(s)
+        chosen, mrng = pick_meds(qe, source)
+        replace_text(s, narrative_table(
+            ['Start', 'Stop', 'Description', 'Code'],
+            [(fmt_narr(m[6]), fmt_narr(m[7]), m[0], f'RxNorm {m[1]}') for m in chosen]))
+        for m in chosen:
+            s.append(med_entry(m, mrng))
 
     # normalize Encounters to the shared rich ADT history (facility, attending,
     # PCP, disposition, reason) so drill-in detail shows more than the summary

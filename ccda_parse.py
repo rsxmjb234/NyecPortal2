@@ -28,8 +28,43 @@ def fmt_date(v):
     return v
 
 
+def _med_more(sa, dose):
+    """Route, frequency, prescriber, refills, indication and a readable sig."""
+    route_el = sa.find('v3:routeCode', ns)
+    route = route_el.get('displayName', '') if route_el is not None else ''
+    freq = ''
+    for et in sa.findall('v3:effectiveTime', ns):
+        per = et.find('v3:period', ns)
+        if per is not None and per.get('value'):
+            try:
+                h = float(per.get('value'))
+            except ValueError:
+                continue
+            if (per.get('unit') or 'h') == 'h':
+                freq = {24: 'once daily', 12: 'twice daily', 8: 'three times daily',
+                        6: 'four times daily'}.get(int(h), f'every {int(h)} hours')
+    pn = sa.find('v3:author/v3:assignedAuthor/v3:assignedPerson/v3:name', ns)
+    prescriber = ''
+    if pn is not None:
+        gv = ' '.join((x.text or '') for x in pn.findall('v3:given', ns)).strip()
+        prescriber = ('Dr. ' + (gv + ' ' + (pn.findtext('v3:family', default='', namespaces=ns) or '')).strip()).strip()
+    rn = sa.find('v3:repeatNumber', ns)
+    refills = rn.get('value', '') if rn is not None else ''
+    iv = sa.find('v3:entryRelationship/v3:observation/v3:value', ns)
+    indication = iv.get('displayName', '') if iv is not None else ''
+    sig = ''
+    if dose and route and freq:
+        way = {'Oral': 'by mouth', 'Subcutaneous': 'under the skin'}.get(route, route.lower())
+        sig = f'Take {dose} {way} {freq}'
+    return {'route': route, 'frequency': freq, 'prescriber': prescriber,
+            'refills': refills, 'indication': indication, 'sig': sig}
+
+
 def med_extra(m):
-    return [('RxNorm code', m.get('code', '')), ('Dose', m.get('dose', '')),
+    return [('Instructions', m.get('sig', '')), ('Indication', m.get('indication', '')),
+            ('Dose', m.get('dose', '')), ('Route', m.get('route', '')),
+            ('Frequency', m.get('frequency', '')), ('Prescriber', m.get('prescriber', '')),
+            ('Refills', m.get('refills', '')), ('RxNorm code', m.get('code', '')),
             ('Record status', m.get('status_code', ''))]
 
 
@@ -198,7 +233,7 @@ def parse_ccd(path):
             meds.append({'name': name, 'start': fmt_date(low), 'stop': fmt_date(high),
                          'code': mcode.get('code', '') if mcode is not None else '',
                          'status_code': st.get('code', '') if st is not None else '',
-                         'dose': dose})
+                         'dose': dose, **_med_more(sa, dose)})
 
     labs = []
     if 'Diagnostic Results' in SEC:
