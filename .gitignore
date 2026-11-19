@@ -34,8 +34,13 @@ marcus_portal.html
 marcus_fhir.html
 marcus_fusion.html
 index.html
+_*.html
 *.png
 *.pdf
+# deploy scratch
+_dep.json
+site.zip
+_site/
 _guide_assets/
 # HEL training-guide reference screenshots (incl. extensionless ones)
 HELScreenShot*
