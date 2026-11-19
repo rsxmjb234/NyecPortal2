@@ -236,12 +236,41 @@ def parse_ccd(path):
             procs.append({'name': name, 'date': fmt_date(low)})
         procs.sort(key=lambda r: r['date'], reverse=True)
 
+    def person_name(scope):
+        p = scope.find('.//v3:assignedPerson/v3:name', ns)
+        if p is None:
+            return ''
+        gv = ' '.join((x.text or '') for x in p.findall('v3:given', ns)).strip()
+        fm = p.findtext('v3:family', default='', namespaces=ns) or ''
+        nm = (gv + ' ' + fm).strip()
+        return ('Dr. ' + nm) if nm else ''
+
     encs = []
     if 'Encounters' in SEC:
         for enc in SEC['Encounters'].findall('.//v3:entry/v3:encounter', ns):
             name = code_name(enc.find('v3:code', ns)) or deref(enc.find('v3:text', ns))
             low, high = eff_low_high(enc)
-            encs.append({'name': name, 'start': fmt_date(low), 'stop': fmt_date(high)})
+            facility = ''
+            for part in enc.findall('v3:participant', ns):
+                if part.get('typeCode') == 'LOC':
+                    nmel = part.find('.//v3:playingEntity/v3:name', ns)
+                    if nmel is not None:
+                        facility = ' '.join(''.join(nmel.itertext()).split())
+            perfs = enc.findall('v3:performer', ns)
+            attending = person_name(perfs[0]) if perfs else ''
+            pcp = person_name(perfs[1]) if len(perfs) > 1 else ''
+            dd = enc.find('{urn:hl7-org:sdtc}dischargeDispositionCode')
+            disposition = dd.get('displayName', '') if dd is not None else ''
+            rv = enc.find('.//v3:entryRelationship//v3:observation/v3:value', ns)
+            reason = code_name(rv) if rv is not None else ''
+            etype = code_name(enc.find('v3:code', ns))
+            det = [('Encounter type', etype), ('Facility', facility), ('Admit date', fmt_date(low)),
+                   ('Discharge date', fmt_date(high)), ('Attending', attending), ('PCP', pcp),
+                   ('Discharge disposition', disposition), ('Reason', reason)]
+            encs.append({'name': name, 'start': fmt_date(low), 'stop': fmt_date(high),
+                         'facility': facility, 'attending': attending, 'pcp': pcp,
+                         'disposition': disposition, 'reason': reason, 'etype': etype,
+                         'details': [(k, v) for k, v in det if v]})
         encs.sort(key=lambda r: r['start'], reverse=True)
 
     allergies = []

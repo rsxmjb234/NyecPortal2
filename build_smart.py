@@ -7,10 +7,17 @@ Look & feel inspired by HIE portals (CRISP, Hixny) and SMART on FHIR apps.
 import glob
 import os
 import html
+import json
 from datetime import datetime
 
 from ccda_parse import parse_ccd, load_oru, load_oru_hl7, merge_by_person
 from bug_widget import inject as inject_bug
+
+
+def dextra(pairs):
+    """Render a data-extra attribute (JSON [label,value] pairs) for drill-in."""
+    p = [[k, v] for k, v in pairs if v]
+    return f' data-extra="{html.escape(json.dumps(p))}"' if p else ''
 
 # Data source is configurable so the same renderer can build either the base
 # demo (ccds/ + FHIR ORU) or the Marcus cohort (marcus_bundle + HL7 ORU).
@@ -126,7 +133,8 @@ def proc_rows(P):
 
 
 def enc_rows(P):
-    return ''.join(f'<tr><td class="strong">{E(e["name"])}</td><td>{E(e["start"])}</td>'
+    return ''.join(f'<tr{dextra([("Facility", e.get("facility", "")), ("Attending", e.get("attending", "")), ("PCP", e.get("pcp", "")), ("Discharge disposition", e.get("disposition", "")), ("Reason for visit", e.get("reason", "")), ("Encounter type", e.get("etype", ""))])}>'
+                   f'<td class="strong">{E(e["name"])}</td><td>{E(e["start"])}</td>'
                    f'<td>{E(e["stop"]) or "&ndash;"}</td></tr>' for e in P['encs'])
 
 

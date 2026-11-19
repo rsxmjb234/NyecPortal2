@@ -9,6 +9,7 @@ CHART_QE. Output default: patient_chart_bronx.html.
 import os
 import glob
 import html
+import json
 from datetime import datetime
 
 from ccda_parse import parse_ccd, load_oru, load_oru_hl7, merge_by_person
@@ -37,9 +38,13 @@ def tbl(headers, rows_html):
     return f'<table class="bx-tbl"><thead><tr>{head}</tr></thead><tbody>{rows_html}</tbody></table>'
 
 
-def row(cells, cls=''):
+def row(cells, cls='', extra=None):
     tds = '<td class="ic">&#128269;</td>' + ''.join(f'<td>{c}</td>' for c in cells)
-    return f'<tr class="{cls}">{tds}</tr>'
+    attr = ''
+    pairs = [[k, v] for k, v in (extra or []) if v]
+    if pairs:
+        attr = f' data-extra="{E(json.dumps(pairs))}"'
+    return f'<tr class="{cls}"{attr}>{tds}</tr>'
 
 
 def empty(msg):
@@ -77,10 +82,15 @@ def proc_tbl(P):
 
 
 def enc_tbl(P):
-    r = ''.join(row([E(e['name']), 'Bronx RHIO', E(e['start']), E(e['stop']) or '&ndash;'])
+    r = ''.join(row([E(e['name']), E(e.get('facility', '')) or 'Bronx RHIO', E(e['start']),
+                     E(e['stop']) or '&ndash;', E(e.get('attending', '')) or '&ndash;',
+                     E(e.get('pcp', '')) or '&ndash;'],
+                    extra=[('Discharge disposition', e.get('disposition', '')),
+                           ('Reason for visit', e.get('reason', '')),
+                           ('Encounter type', e.get('etype', ''))])
                 for e in P['encs'])
-    return tbl(['ADT / Encounter', 'Facility', 'Admit Date', 'Discharge Date'], r) if r \
-        else empty('No admits/discharges/registrations on file.')
+    return tbl(['ADT / Encounter', 'Facility', 'Admit Date', 'Discharge Date', 'Attending', 'PCP'], r) \
+        if r else empty('No admits/discharges/registrations on file.')
 
 
 def labs_tbl(P):

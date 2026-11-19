@@ -73,9 +73,48 @@ ORU_ROWS = [
     ('4548-4', 'Hemoglobin A1c', '6.1', '%', '4.0-5.6', 'H'),
 ]
 
+# Shared ADT / encounter history (normalized onto every document, then merged
+# into one virtual record). Each has rich fields so the drill-in detail shows
+# more than the summary row. (code, display), admit, discharge, facility,
+# attending (given, family), pcp (given, family), disposition (code, display),
+# reason (snomed, display). Discharge/disposition empty for outpatient visits.
+ENCOUNTERS = [
+    (('32485007', 'Hospital admission (inpatient)'), '20250310140000', '20250314110000',
+     'Montefiore Medical Center - Moses Campus',
+     ('Priya', 'Nair'), ('James', 'Okafor'),
+     ('01', 'Discharged to home'),
+     ('237602007', 'Hyperglycemia (disorder)')),
+    (('50849002', 'Emergency room admission'), '20241102193000', '20241103020000',
+     'Montefiore Medical Center - Emergency Department',
+     ('David', 'Rosenberg'), ('James', 'Okafor'),
+     ('01', 'Discharged to home'),
+     ('29857009', 'Chest pain (finding)')),
+    (('185349003', 'Encounter for check up (procedure)'), '20250115090000', '',
+     'Bronx Lebanon Internal Medicine Clinic',
+     ('James', 'Okafor'), ('James', 'Okafor'),
+     ('', ''),
+     ('44054006', 'Diabetes mellitus type 2 (disorder)')),
+    (('32485007', 'Hospital admission (inpatient)'), '20240721101500', '20240725133000',
+     'NewYork-Presbyterian / Weill Cornell',
+     ('Elena', 'Marchetti'), ('James', 'Okafor'),
+     ('06', 'Discharged to home health service'),
+     ('433144002', 'Chronic kidney disease stage 3 (disorder)')),
+    (('390906007', 'Follow-up encounter (procedure)'), '20240909133000', '',
+     'Hixny Cardiology Associates - Albany',
+     ('Robert', 'Feldman'), ('James', 'Okafor'),
+     ('', ''),
+     ('59621000', 'Essential hypertension (disorder)')),
+]
+
 
 def q(t):
     return f'{{{V3}}}{t}'
+
+
+def fmt_narr(v):
+    if not v or len(v) < 8:
+        return ''
+    return f'{v[:4]}-{v[4:6]}-{v[6:8]}'
 
 
 def el(tag, text=None, **attrs):
@@ -170,6 +209,65 @@ def bmp_organizer():
     return entry
 
 
+SDTC = 'urn:hl7-org:sdtc'
+
+
+def _performer(enc, given, family, role_code, role_name):
+    perf = sub(enc, 'performer')
+    ae = sub(perf, 'assignedEntity')
+    sub(ae, 'id', root=f'urn:uuid:{random.getrandbits(122):032x}')
+    sub(ae, 'code', code=role_code, displayName=role_name,
+        codeSystem='2.16.840.1.113883.6.101', codeSystemName='NUCC')
+    ap = sub(ae, 'assignedPerson')
+    nm = sub(ap, 'name')
+    sub(nm, 'given', given)
+    sub(nm, 'family', family)
+
+
+def encounter_entry(data):
+    (ecode, ename), low, high, facility, att, pcp, (dcode, dname), (rcode, rname) = data
+    entry = el('entry', typeCode='DRIV')
+    enc = sub(entry, 'encounter', classCode='ENC', moodCode='EVN')
+    sub(enc, 'templateId', root='2.16.840.1.113883.10.20.22.4.49')
+    sub(enc, 'id', root=f'urn:uuid:{random.getrandbits(122):032x}')
+    sub(enc, 'code', code=ecode, displayName=ename,
+        codeSystem='2.16.840.1.113883.6.96', codeSystemName='SNOMED-CT')
+    et = sub(enc, 'effectiveTime')
+    sub(et, 'low', value=low)
+    if high:
+        sub(et, 'high', value=high)
+    # attending first, then PCP (parser reads performer[0]=attending, [1]=pcp)
+    _performer(enc, att[0], att[1], '207R00000X', 'Attending physician')
+    _performer(enc, pcp[0], pcp[1], '208D00000X', 'Primary care provider')
+    # facility / service delivery location
+    part = sub(enc, 'participant', typeCode='LOC')
+    pr = sub(part, 'participantRole', classCode='SDLOC')
+    sub(pr, 'templateId', root='2.16.840.1.113883.10.20.22.4.32')
+    sub(pr, 'code', code='1160-1', displayName='Urgent Care Center',
+        codeSystem='2.16.840.1.113883.6.259', codeSystemName='HealthcareServiceLocation')
+    pe = sub(pr, 'playingEntity', classCode='PLC')
+    sub(pe, 'name', facility)
+    # reason / indication
+    er = sub(enc, 'entryRelationship', typeCode='RSON')
+    obs = sub(er, 'observation', classCode='OBS', moodCode='EVN')
+    sub(obs, 'templateId', root='2.16.840.1.113883.10.20.22.4.19')
+    sub(obs, 'id', root=f'urn:uuid:{random.getrandbits(122):032x}')
+    sub(obs, 'code', code='404684003', displayName='Clinical finding (finding)',
+        codeSystem='2.16.840.1.113883.6.96', codeSystemName='SNOMED-CT')
+    sub(obs, 'statusCode', code='completed')
+    rv = sub(obs, 'value', code=rcode, displayName=rname,
+             codeSystem='2.16.840.1.113883.6.96', codeSystemName='SNOMED-CT')
+    rv.set(f'{{{XSI}}}type', 'CD')
+    # discharge disposition (sdtc) - only for inpatient/ED with a discharge
+    if dcode:
+        dd = ET.SubElement(enc, f'{{{SDTC}}}dischargeDispositionCode')
+        dd.set('code', dcode)
+        dd.set('displayName', dname)
+        dd.set('codeSystem', '2.16.840.1.113883.12.112')
+        dd.set('codeSystemName', 'HL7 Discharge Disposition')
+    return entry
+
+
 def append_narrative_row(sec, row):
     tbody = sec.find('v3:text//v3:tbody', ns)
     if tbody is None:
@@ -246,6 +344,21 @@ def build_ccd(base_path, qe, source, mrn, eid):
         s = secs['Diagnostic Results']
         s.append(bmp_organizer())
         append_narrative_row(s, (LAB_N, '', 'Basic metabolic panel - Blood', 'LOINC 51990-0'))
+
+    # normalize Encounters to the shared rich ADT history (facility, attending,
+    # PCP, disposition, reason) so drill-in detail shows more than the summary
+    if 'Encounters' in secs:
+        s = secs['Encounters']
+        clear_entries(s)
+        rows = []
+        for (ec, en), low, high, fac, att, pcp, (dc, dn), (rc, rn) in ENCOUNTERS:
+            rows.append((fmt_narr(low), fmt_narr(high), en, fac,
+                         f'Dr. {att[0]} {att[1]}', dn or '-', rn))
+        replace_text(s, narrative_table(
+            ['Admit', 'Discharge', 'Type', 'Facility', 'Attending', 'Disposition', 'Reason'],
+            rows))
+        for data in ENCOUNTERS:
+            s.append(encounter_entry(data))
 
     return "<?xml version='1.0' encoding='UTF-8'?>\n" + ET.tostring(root, encoding='unicode')
 

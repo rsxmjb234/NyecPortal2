@@ -400,6 +400,17 @@ BUG_MODAL = """
       if(!lbl && !val) continue;
       out+='<tr><th>'+_esc(lbl||'Value')+'</th><td>'+(_esc(val)||'&ndash;')+'</td></tr>';
     }
+    // extra fields carried on the row but not shown as columns (data-extra JSON)
+    var ex=tr.getAttribute('data-extra');
+    if(ex){
+      try{ var pairs=JSON.parse(ex);
+        for(var k=0;k<pairs.length;k++){
+          var lb=pairs[k][0], vv=pairs[k][1];
+          if(vv===''||vv==null) continue;
+          out+='<tr><th>'+_esc(lb)+'</th><td>'+_esc(vv)+'</td></tr>';
+        }
+      }catch(err){}
+    }
     g('dtlBody').innerHTML=out;
     dtl.style.display='flex';
   }

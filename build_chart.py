@@ -6,6 +6,7 @@ section at a time.
 """
 import os
 import glob
+import json
 import xml.etree.ElementTree as ET
 from datetime import datetime, date
 import html
@@ -371,7 +372,13 @@ def render_tables(P):
     proc_tbl = f'<table><thead><tr>{th(["Procedure", "Date"])}</tr></thead><tbody>{rows}</tbody></table>'
 
     # Encounters
-    rows = ''.join(f'<tr><td class="lnk">{E(e["name"])}</td><td>{E(e["start"])}</td>'
+    def _ex(e):
+        p = [[k, v] for k, v in (
+            ('Facility', e.get('facility', '')), ('Attending', e.get('attending', '')),
+            ('PCP', e.get('pcp', '')), ('Discharge disposition', e.get('disposition', '')),
+            ('Reason for visit', e.get('reason', '')), ('Encounter type', e.get('etype', ''))) if v]
+        return f' data-extra="{E(json.dumps(p))}"' if p else ''
+    rows = ''.join(f'<tr{_ex(e)}><td class="lnk">{E(e["name"])}</td><td>{E(e["start"])}</td>'
                    f'<td>{E(e["stop"]) or "&mdash;"}</td></tr>' for e in P['encs'])
     enc_tbl = f'<table><thead><tr>{th(["Encounter", "Start Date", "End Date"])}</tr></thead><tbody>{rows}</tbody></table>'
 
