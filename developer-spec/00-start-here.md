@@ -1,4 +1,4 @@
-# 06 – Project Context, Status and Build Plan
+# 00 – Start Here: Project Context, Status and Build Plan
 
 Read this first if you are a model or developer joining cold. It explains what exists, why it looks the way it does, and what remains.
 

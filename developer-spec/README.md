@@ -6,7 +6,7 @@ All demo data is 100% synthetic.
 
 ## Start here
 
-1. Read [06-project-context.md](06-project-context.md) for what exists, what was decided, and the build order.
+1. Read [00-start-here.md](00-start-here.md) for what exists, what was decided, and the build order.
 2. Everything else is reference. Feed all the `.md` files to the model or developer; use `fixtures/` as test data and `images/` as visual reference.
 
 ## Data assumption
@@ -17,7 +17,7 @@ The viewer is built on data returned by **PDR**. These documents **assume PDR re
 
 | # | File | What it covers |
 |---|------|----------------|
-| 6 | [06-project-context.md](06-project-context.md) | Purpose, decisions made, status, gaps, build order, a starter prompt |
+| 6 | [00-start-here.md](00-start-here.md) | Purpose, decisions made, status, gaps, build order, a starter prompt |
 | 1 | [01-home-page.md](01-home-page.md) | Home page, one card per Qualified Entity (QE) |
 | 2 | [02-data-processing.md](02-data-processing.md) | Rules for **every** QE: identity, merge, de-duplication, lab reconciliation, drill-in |
 | 3 | [03-missing-data-logging.md](03-missing-data-logging.md) | "Missing data" tickets and MRN Array (full build spec) |
@@ -59,4 +59,4 @@ Each requirement is tagged where it matters:
 - Code: https://github.com/rsxmjb234/NyecPortal2
 - One synthetic patient, **Marcus Evans** (DOB 06/01/1950, M), appears in 10 sources across 5 QEs, rendered in three QE styles from the same merged data.
 
-The demo is static HTML generated at build time. The secure portal is dynamic. Treat the demo as the behavioral reference and these documents as the requirements. File map: [06-project-context.md](06-project-context.md), section 6.
+The demo is static HTML generated at build time. The secure portal is dynamic. Treat the demo as the behavioral reference and these documents as the requirements. File map: [00-start-here.md](00-start-here.md), section 6.

@@ -8,7 +8,7 @@ The home page is the entry point. A user chooses a **Qualified Entity (QE)**. Th
 
 ## Page layout [Demo]
 
-1. **Header band** (teal gradient): logo mark, title "SHIN-NY Community Health Record", subtitle "One patient record, rendered in each Qualified Entity's own style – N live, more coming soon", and a status pill ("N synthetic patients · C-CDA + genuine HL7 ORU").
+1. **Header band** (teal gradient): logo mark, title "SHIN-NY Community Health Record", subtitle line, and a status pill. **[Demo]** The demo subtitle reads "One patient record, rendered in each Qualified Entity's own style – N live, more coming soon" and the pill reads "N synthetic patients · C-CDA + genuine HL7 ORU". Replace both with production-appropriate wording (remove synthetic/C-CDA references).
 2. **Section label** "Choose a Qualified Entity (QE)".
 3. **QE card grid**: responsive, minimum card width 240 px, 18 px gap. One card per QE.
 4. **Explanatory note** describing that every QE renders the same record and the de-duplication rule (see doc 02).
@@ -56,6 +56,19 @@ These are common to all QEs. QE-specific differences are in the QE files.
 5. **Drill-in detail**: clicking any data row opens a detail panel with the full record. See doc 02, section 9.
 6. **Back to home** control.
 7. The view declares its QE (`data-view-qe` in the demo). The Missing data form uses it to auto-fill the QE field.
+
+## Patient search and navigation [Prod]
+
+The home page shows the QE choices. Once a user opens a QE view they need a patient. The demo uses a dropdown picker (a demo-only control — see [05-ui-design.md](05-ui-design.md) section 6). The production requirement is:
+
+- A user **must** search for a patient before data is shown. There is no browse or list.
+- Minimum required search fields (from HEALTHeLINK Fusion and standard HIE practice): **Last name**, **First name**, **Date of birth**. All three required.
+- Search results show: Name, Age, Sex, DOB, Address, MPID. A caret or expand control shows the per-source rows (MRN, Assigning Authority / QE|Source, data types available).
+- Selecting a patient opens that person's QE view.
+- **[Prod]** Search results are filtered by the signed-in user's entitlements. Consent gates what is shown. No result is returned for a patient the user is not authorized to view.
+- The per-source rows in search results draw from the same MRN array that feeds the MRN Array button.
+
+Confirm the exact search flow with each QE — it may differ (HEALTHeLINK has its own flow, Hixny launches from an EHR with the patient already in context).
 
 ## Acceptance criteria
 

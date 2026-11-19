@@ -7,6 +7,8 @@ Technology partner: **IMAT Solutions**. The product is a browser-based **Provide
 Reference: `QE-Example-Materials/BronxRHIO/` (two IMAT screenshots: ADT page and Labs page). The demo view was built from those two images, so other screens are extrapolated. Confirm them against the real IMAT viewer.
 Common rules (processing, drill-in, Missing data) are in docs 02 and 03.
 
+
+UI design tokens, colors, shared widget behavior and screenshots: [05-ui-design.md](../05-ui-design.md).
 ## Look and structure [Demo]
 
 | Element | Requirement |

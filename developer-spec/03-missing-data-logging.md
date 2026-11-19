@@ -10,17 +10,13 @@ reference implementation.
 > Bronx RHIO, HealtheConnections, …). A **view** of the portal represents one QE
 > (e.g. the "Hixny view").
 
-The portal renders a patient from **C-CDA documents** + genuine **HL7 v2 ORU**
-lab feeds, merging all documents for one person into a single virtual record and
-de-duplicating labs. This feature adds two top-bar tools: **MRN Array** and
-**Missing data**.
+The portal renders a merged patient record (data from PDR, one person across many QE sources). This feature adds two top-bar tools: **MRN Array** and **Missing data**. It is independent of how the data was obtained.
 
 ---
 
 ## 0. Screenshots
 
-Images live in [`images/`](https://github.com/rsxmjb234/NyecPortal2/tree/main/docs/missing-data)
-(raw: `https://raw.githubusercontent.com/rsxmjb234/NyecPortal2/main/images/<file>`).
+Images live in [`images/`](images/) (also in the repo at `developer-spec/images/`).
 
 | State | Image |
 |-------|-------|

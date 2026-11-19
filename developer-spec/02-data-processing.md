@@ -50,11 +50,11 @@ After grouping by person, concatenate each data type across documents, then coll
 | Immunizations | `Immunizations` | name, date | (name, date) |
 | Vital signs | `Vital Signs` | test, value, unit, date | (test, value, date) |
 | Procedures | `Surgeries`, else `Procedures` | name, date | (name, date) |
-| Encounters / ADT | `Encounters` | type, facility, admit, discharge, attending, PCP, disposition, reason | (type, admit date) |
+| Encounters / ADT | `Encounters` | type, facility, admit, discharge, attending, PCP, disposition, reason | (type, admit date, facility) |
 | Allergies | `Allergies` | substance | (substance) |
 
 Known gaps to fix in the production build:
-- **Encounter key** (type, admit date) can wrongly merge two same-day encounters at different facilities. **Should** add facility.
+- **Encounter key** is now `(type, admit date, facility)`. If facility is blank, two same-type, same-day encounters without a facility will still merge incorrectly — this is acceptable for the demo but should be monitored.
 - **Medication key** (name, start) can merge the same drug started the same day at two doses. **Should** add dose.
 - Sorting in the demo is done on the formatted `MM/DD/YYYY` string, which orders incorrectly across years. **Must** sort on real date values, newest first for encounters, immunizations and procedures.
 
@@ -82,31 +82,30 @@ Open item for product owner: the demo matches on LOINC + date only and does not 
 
 ## 5. Lab flags
 
-| Source | Value | Display |
-|--------|-------|---------|
-| CCD `interpretationCode` | N, L, H, A, HH, LL | Normal, Low, High, Abnormal, Critical High, Critical Low |
-| HL7 OBX-8 | same codes | same labels |
+PDR normalizes flags to one of these values: `Normal`, `Low`, `High`, `Abnormal`, `Critical High`, `Critical Low`, or empty (no flag).
 
-Low, High, Abnormal, Critical High and Critical Low are **abnormal**. Abnormal results **must** be visually distinct (red value; QE styles may add a left bar or tag).
+`Low`, `High`, `Abnormal`, `Critical High` and `Critical Low` are **abnormal**. Abnormal results **must** be visually distinct (red value; QE styles may add a left bar or tag). See Appendix A for the raw code values the demo read.
 
 ## 6. Dates
 
-- HL7/CDA timestamps arrive as `YYYYMMDD`, `YYYYMMDDHHMM` or `YYYYMMDDHHMMSS`. Accept all three.
-- Demo displays `MM/DD/YYYY`. **[Prod]** Store ISO-8601 with timezone, display per the QE's convention, and sort on the stored value.
-- An open-ended medication or problem (no stop/resolved date) is **Active**. A stop/resolved date makes it **Completed/Resolved**.
+- PDR supplies dates as `MM/DD/YYYY` strings per the model in doc 04. **[Prod]** Request ISO-8601 with timezone from PDR; store that, display per the QE convention, and sort on the stored value — not on the formatted string (see known gap in section 3).
+- An open-ended medication or problem (no `stop` / `resolved` date) is **Active**. A stop or resolved date makes it **Completed** / **Resolved**.
+- The raw HL7 and C-CDA timestamp formats (`YYYYMMDD`, `YYYYMMDDHHMM`, `YYYYMMDDHHMMSS`) are in Appendix A. The new build does not parse these.
 
 ## 7. Terminology
 
+PDR will carry code-system context for structured fields. The code systems used in the data are:
+
 | Domain | Code system |
 |--------|-------------|
-| Conditions, reasons, procedures | SNOMED CT (`2.16.840.1.113883.6.96`) |
-| Medications | RxNorm (`2.16.840.1.113883.6.88`) |
-| Labs, vitals | LOINC (`2.16.840.1.113883.6.1`) |
-| Discharge disposition | HL7 Discharge Disposition (`2.16.840.1.113883.12.112`) via `sdtc:dischargeDispositionCode` |
-| Provider type | NUCC taxonomy (`2.16.840.1.113883.6.101`) |
-| Route | NCI Thesaurus (`2.16.840.1.113883.3.26.1.1`) |
+| Conditions, reasons, procedures | SNOMED CT |
+| Medications | RxNorm |
+| Labs, vitals | LOINC |
+| Discharge disposition | HL7 Discharge Disposition |
+| Provider role | NUCC taxonomy |
+| Route of administration | NCI Thesaurus |
 
-Display text resolution order for any coded value: `displayName`, then `translation/displayName`, then the referenced narrative text (`originalText/reference`), then the raw code.
+Display rule: if a field has a human-readable name, show it. If it is blank or unknown, show the raw code rather than nothing. OIDs and C-CDA attribute names for these code systems are in Appendix A.
 
 ## 8. Encounters / ADT fields
 

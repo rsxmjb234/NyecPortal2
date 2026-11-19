@@ -11,6 +11,8 @@ Common rules (processing, drill-in, Missing data) are in docs 02 and 03. This fi
 - Parses clinical document data and surfaces insights, instead of showing CCDs as PDFs.
 - Strong data quality and security messaging.
 
+
+UI design tokens, colors, shared widget behavior and screenshots: [05-ui-design.md](../05-ui-design.md).
 ## Look and structure [Demo]
 
 Card dashboard with tabs, and a FHIR-flavored vocabulary.
