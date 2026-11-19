@@ -451,8 +451,11 @@ def render_patient(P, idx):
 
     initials = (P['given'][:1] + P['family'][:1]).upper()
     style = '' if idx == 0 else ' style="display:none"'
+    _aa = P.get('mrn_aa') or ''
+    _qe = _aa.split('|')[0] if _aa else ''
+    _src = _aa.split('|')[1] if '|' in _aa else ''
     return f"""
-    <div class="patient" data-idx="{idx}" data-first="{E(P['given'])}" data-last="{E(P['family'])}" data-dob="{E(P['dob'])}"{style}>
+    <div class="patient" data-idx="{idx}" data-first="{E(P['given'])}" data-last="{E(P['family'])}" data-dob="{E(P['dob'])}" data-qe="{E(_qe)}" data-source="{E(_src)}" data-mrn="{E(P['mrn'])}"{style}>
       <div class="banner">
         <h1>{E(P['family'].upper())}, {E(P['given'])}</h1>
         <div class="sub"><b>{E(P['gender'])}</b> &nbsp; {P['age']}y &nbsp; {E(P['dob'])}

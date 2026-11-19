@@ -15,7 +15,7 @@ Copy-Item index.html, marcus_fhir.html, marcus_fusion.html _site\
 Compress-Archive -Path _site\* -DestinationPath site.zip -Force
 
 $dep = aws amplify create-deployment --app-id $AppId --branch-name main --profile $ProfileName --output json | ConvertFrom-Json
-Invoke-WebRequest -Method Put -Uri $dep.zipUploadUrl -InFile site.zip -ContentType "application/zip" | Out-Null
+Invoke-WebRequest -Method Put -Uri $dep.zipUploadUrl -InFile site.zip -ContentType "application/zip" -UseBasicParsing | Out-Null
 aws amplify start-deployment --app-id $AppId --branch-name main --job-id $dep.jobId --profile $ProfileName | Out-Null
 
 do {
