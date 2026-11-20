@@ -122,7 +122,7 @@ EXTRA_CSS = """
 # "Understand Volume" section HTML — plain string
 # ============================================================
 VOLUME_SECTION = """
-    <div class="sec-h" style="margin-top:36px">Understand Volume</div>
+    <div class="sec-h" id="volume-reports" style="margin-top:36px">Understand Volume</div>
     <div class="report-grid">
 
       <!-- Report 1: Volume by QE \u2013 Highest Level (hardcoded from Athena run) -->
@@ -333,6 +333,16 @@ INDEX = f"""<!DOCTYPE html>
   .note b {{ color:var(--ink); }}
   .foot {{ text-align:center; color:var(--muted); font-size:11.5px; padding:0 0 26px; }}
   .mark svg {{ width:26px; height:26px; }}
+
+  /* ── Page nav ───────────────────────────────────────────────────── */
+  .page-nav {{ display:flex; justify-content:center; gap:8px; padding:0 20px 16px;
+    background:linear-gradient(90deg,var(--brand-2),var(--brand)); flex-wrap:wrap; }}
+  .page-nav a {{ color:rgba(255,255,255,.75); text-decoration:none; font-size:12.5px;
+    font-weight:600; padding:6px 18px; border-radius:999px;
+    border:1px solid rgba(255,255,255,.3);
+    transition:color .12s, background .12s, border-color .12s; }}
+  .page-nav a:hover {{ color:#fff; background:rgba(255,255,255,.18); border-color:rgba(255,255,255,.5); }}
+  .page-nav a.on {{ color:#fff; background:rgba(255,255,255,.22); border-color:rgba(255,255,255,.5); }}
 {EXTRA_CSS}
 </style>
 </head>
@@ -344,9 +354,13 @@ INDEX = f"""<!DOCTYPE html>
     <p>One patient record, rendered in each Qualified Entity's own style &mdash; {live_n} live, more coming soon.</p>
     <div class="conn"><span class="live"></span> {n_people} synthetic patients &middot; C-CDA + genuine HL7 ORU</div>
   </div>
+  <nav class="page-nav">
+    <a class="on" href="#qe-portals">QE Portals</a>
+    <a href="#volume-reports">Volume Reports</a>
+  </nav>
 
   <div class="wrap">
-    <div class="sec-h">Choose a Qualified Entity (QE)</div>
+    <div class="sec-h" id="qe-portals">Choose a Qualified Entity (QE)</div>
     <div class="qe-grid">
       {cards_html}
     </div>
