@@ -193,7 +193,7 @@ REPORT1_SCRIPT = """
     var rows = [
       { qe: "Healthix",           ccd: 6856187, trn: 3691902, lab: 5822179 },
       { qe: "HealtheConnections", ccd: 4064234, trn: 2946189, lab: 4940467 },
-      { qe: "TechBD",             ccd: 1001590, trn:  989702, lab: 1857966 },
+      { qe: "HEALTHeLINK",          ccd: 1001590, trn:  989702, lab: 1857966 },
       { qe: "Hixny",              ccd: 2497901, trn:   86968, lab: 1177507 },
       { qe: "Bronx RHIO",         ccd:  832486, trn: 1191999, lab: 1209660 },
       { qe: "Rochester RHIO",     ccd: 1159667, trn:  656012, lab:       0 }
