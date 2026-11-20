@@ -38,9 +38,9 @@ import build_chart  # noqa: E402,F401
 _set_env('healthix', 'marcus_healthix.html', 'HEALTHIX', 'SHIN-NY Community Health Record')
 importlib.reload(build_smart)
 
-# ---- HealtheConnections: SMART on FHIR style (reload) ----
-_set_env('healtheconn', 'marcus_healtheconn.html', 'HEALTHECONN', 'SHIN-NY Community Health Record')
-importlib.reload(build_smart)
+# ---- HealtheConnections: dedicated HEC renderer ----
+_set_env('healtheconn', 'marcus_healtheconn.html', 'HEALTHECONN')
+import build_healtheconn  # noqa: E402,F401
 
 # ---- Bronx RHIO: IMAT style ----
 _set_env('bronx', 'marcus_bronx.html', 'BRONX')
