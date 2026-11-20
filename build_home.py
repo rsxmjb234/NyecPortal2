@@ -154,7 +154,21 @@ EXTRA_CSS = """
   .hosp-tbl td.bar-cell { position:relative; }
   .hosp-tbl td.bar-cell .bar-bg { position:absolute; left:0; top:3px; bottom:3px;
     background:#e0f2fe; border-radius:2px; z-index:0; }
-  .hosp-tbl td.bar-cell span { position:relative; z-index:1; }"""
+  .hosp-tbl td.bar-cell span { position:relative; z-index:1; }
+
+  /* expand to fullscreen */
+  .expand-btn { position:absolute; top:16px; right:16px; width:30px; height:30px;
+    border-radius:8px; border:1px solid var(--line); background:#fff; color:var(--muted);
+    cursor:pointer; display:flex; align-items:center; justify-content:center;
+    font-size:16px; transition:background .12s, color .12s, box-shadow .12s; z-index:2; }
+  .expand-btn:hover { background:var(--brand); color:#fff; box-shadow:0 2px 8px rgba(14,122,144,.3); }
+  .report-card { position:relative; }
+  .report-card.fullscreen { position:fixed; top:0; left:0; right:0; bottom:0;
+    z-index:9999; border-radius:0; margin:0; max-width:none;
+    overflow-y:auto; border:none; box-shadow:none; }
+  .report-card.fullscreen .hosp-wrap { max-height:calc(100vh - 200px); }
+  .report-card.fullscreen .expand-btn { top:18px; right:24px; }
+  body.has-fullscreen { overflow:hidden; }"""
 
 # ============================================================
 # "Understand Volume" section HTML â€” plain string
@@ -566,6 +580,48 @@ REPORT4_SCRIPT = """
   </script>"""
 
 # ============================================================
+# Expand-to-fullscreen script
+# ============================================================
+EXPAND_SCRIPT = """
+  <script>
+  /* Expand any report card to fullscreen */
+  (function () {
+    document.querySelectorAll('.report-card').forEach(function(card) {
+      if (card.classList.contains('soon')) return;
+      var btn = document.createElement('button');
+      btn.className = 'expand-btn';
+      btn.setAttribute('aria-label', 'Toggle fullscreen');
+      btn.setAttribute('title', 'Expand / collapse');
+      btn.innerHTML = '&#x26F6;';
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var isFS = card.classList.toggle('fullscreen');
+        document.body.classList.toggle('has-fullscreen', isFS);
+        btn.innerHTML = isFS ? '&#x2716;' : '&#x26F6;';
+        if (isFS) {
+          card._scrollY = window.scrollY;
+          window.scrollTo(0, 0);
+        } else {
+          window.scrollTo(0, card._scrollY || 0);
+        }
+      });
+      card.appendChild(btn);
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        var fs = document.querySelector('.report-card.fullscreen');
+        if (fs) {
+          fs.classList.remove('fullscreen');
+          document.body.classList.remove('has-fullscreen');
+          fs.querySelector('.expand-btn').innerHTML = '&#x26F6;';
+          window.scrollTo(0, fs._scrollY || 0);
+        }
+      }
+    });
+  })();
+  </script>"""
+
+# ============================================================
 # Assemble index.html
 # ============================================================
 INDEX = f"""<!DOCTYPE html>
@@ -654,6 +710,7 @@ INDEX = f"""<!DOCTYPE html>
 {REPORT2_SCRIPT}
 {REPORT3_SCRIPT}
 {REPORT4_SCRIPT}
+{EXPAND_SCRIPT}
 </body>
 </html>"""
 
