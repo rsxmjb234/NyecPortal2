@@ -122,7 +122,13 @@ EXTRA_CSS = """
   .hosp-tbl tr.aa-grp .aa-count { font-size:11px; color:var(--muted); margin-left:8px; font-weight:400; }
   /* Sub-rows under a grouped AA */
   .hosp-tbl tr.aa-sub td { border-bottom:1px solid #f3f4f6; }
-  .hosp-tbl td.sub-name { padding-left:26px; color:var(--muted); font-size:12px; }"""
+  .hosp-tbl td.sub-name { padding-left:26px; color:var(--muted); font-size:12px; }
+
+  /* ── Non-hospital report (Report 3) ─────────────────────────────── */
+  .hosp-tbl td.typ { font-size:11.5px; color:var(--muted); }
+  .nosfdc { display:inline-block; background:#fff7ed; color:#c2410c; border:1px solid #fed7aa;
+    font-size:10.5px; font-weight:700; padding:1px 8px; border-radius:999px; }
+  .more { color:var(--muted); font-size:11.5px; }"""
 
 # ============================================================
 # "Understand Volume" section HTML â€” plain string
@@ -170,6 +176,30 @@ VOLUME_SECTION = """
           Source: <code>reportonhospitals.sql</code>
           &middot; 47.23&nbsp;GB scanned &middot; SFDC registry (Article&nbsp;28 only)
           &middot; hospitals with no recent activity shown at bottom
+        </div>
+      </div>
+
+      <!-- Report 3: Non-Hospital Sources - Last 10 Days -->
+      <div class="report-card full" id="nonhosp-report">
+        <div class="report-title">Non-Hospital Sources &mdash; Last 10 Days</div>
+        <div class="report-sub" style="margin:3px 0 16px">
+          Nov&nbsp;4&nbsp;&ndash;&nbsp;Nov&nbsp;13,&nbsp;2026 &middot; every non-hospital assigning authority with data in PDR &middot; CCD&nbsp;+&nbsp;TRN &middot; filter by QE
+        </div>
+        <div class="qe-tabs" id="nonhosp-tabs"></div>
+        <div id="nonhosp-badge"></div>
+        <div class="hosp-wrap">
+          <table class="hosp-tbl">
+            <thead><tr>
+              <th>Source</th><th>AA&nbsp;Code</th><th>Type</th>
+              <th class="r">CCD</th><th class="r">TRN</th><th class="r">Total</th>
+            </tr></thead>
+            <tbody id="nonhosp-tbody"></tbody>
+          </table>
+        </div>
+        <div class="report-meta" style="margin-top:14px">
+          Source: <code>reportonnonhospitals.sql</code>
+          &middot; 47.23&nbsp;GB scanned &middot; starts from data in PDR, name/type from the SFDC registry
+          &middot; hospitals excluded &middot; <b>Not in SFDC</b> = data in PDR with no SFDC record
         </div>
       </div>
 
@@ -323,6 +353,80 @@ REPORT2_SCRIPT = """
   </script>"""
 
 # ============================================================
+# Report 3 render script - non-hospital sources
+# ============================================================
+REPORT3_SCRIPT = """
+  <script src="./nonhosp_data.js"></script>
+  <script>
+  /* Report 3: Non-Hospital Sources render */
+  (function () {
+    if (!window.NONHOSP) return;
+    var D = window.NONHOSP;
+    var QE_COLORS = {
+      'HealtheConnections':'#ea580c', 'Healthix':'#059669', 'Bronx RHIO':'#b91c1c',
+      'HEALTHeLINK':'#1d4ed8', 'Rochester RHIO':'#7c3aed', 'Hixny':'#0e7490'
+    };
+    var current = D.qes[0];
+
+    function fmt(n) { return n > 0 ? n.toLocaleString() : '\\u2014'; }
+    function esc(s) {
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function render(qe) {
+      // row: [qe, name, aa, type, inSfdc, orgCount, ccd, trn]
+      var rows = D.rows.filter(function(r) { return r[0] === qe; });
+      rows.sort(function(a, b) {
+        var ta = a[6] + a[7], tb = b[6] + b[7];
+        return tb !== ta ? tb - ta : a[2].localeCompare(b[2]);
+      });
+      var notIn = rows.filter(function(r) { return !r[4]; }).length;
+      document.getElementById('nonhosp-badge').innerHTML =
+        '<span class="hosp-badge">' + rows.length.toLocaleString() + ' sources with data</span> ' +
+        '<span class="nosfdc" style="margin-left:6px">' + notIn.toLocaleString() + ' not in SFDC</span>';
+
+      var html = '';
+      rows.forEach(function(r) {
+        var tot = r[6] + r[7];
+        var name = r[4]
+          ? esc(r[1]) + (r[5] > 1 ? ' <span class="more">+' + (r[5] - 1) + ' more</span>' : '')
+          : '<span class="nosfdc">Not in SFDC</span>';
+        var typ = r[4] ? esc(r[3]) : '\\u2014';
+        html += '<tr>'
+          + '<td>' + name + '</td>'
+          + '<td class="code">' + esc(r[2]) + '</td>'
+          + '<td class="typ">' + typ + '</td>'
+          + '<td class="r">' + fmt(r[6]) + '</td>'
+          + '<td class="r">' + fmt(r[7]) + '</td>'
+          + '<td class="r tot">' + fmt(tot) + '</td>'
+          + '</tr>';
+      });
+      document.getElementById('nonhosp-tbody').innerHTML = html;
+
+      var color = QE_COLORS[qe] || 'var(--brand)';
+      document.querySelectorAll('#nonhosp-tabs .qe-tab').forEach(function(btn) {
+        var on = btn.dataset.qe === qe;
+        btn.classList.toggle('active', on);
+        btn.style.background  = on ? color : '';
+        btn.style.borderColor = on ? color : '';
+      });
+    }
+
+    var tabs = document.getElementById('nonhosp-tabs');
+    D.qes.forEach(function(qe) {
+      var btn = document.createElement('button');
+      btn.className = 'qe-tab';
+      btn.dataset.qe = qe;
+      btn.textContent = qe;
+      btn.addEventListener('click', function() { current = qe; render(qe); });
+      tabs.appendChild(btn);
+    });
+
+    render(current);
+  })();
+  </script>"""
+
+# ============================================================
 # Assemble index.html
 # ============================================================
 INDEX = f"""<!DOCTYPE html>
@@ -408,6 +512,7 @@ INDEX = f"""<!DOCTYPE html>
     FHIR&reg; is an HL7 trademark.</div>
 {REPORT1_SCRIPT}
 {REPORT2_SCRIPT}
+{REPORT3_SCRIPT}
 </body>
 </html>"""
 

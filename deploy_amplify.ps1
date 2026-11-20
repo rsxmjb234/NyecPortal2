@@ -11,7 +11,7 @@ $ProgressPreference = 'SilentlyContinue'   # quiet the Compress-Archive / web pr
 python build_home.py | Out-Null
 Remove-Item _site, site.zip -Recurse -Force -ErrorAction SilentlyContinue
 New-Item -ItemType Directory _site | Out-Null
-Copy-Item index.html, marcus_fhir.html, marcus_fusion.html, marcus_bronx.html, hosp_data.js _site\
+Copy-Item index.html, marcus_fhir.html, marcus_fusion.html, marcus_bronx.html, hosp_data.js, nonhosp_data.js _site\
 Compress-Archive -Path _site\* -DestinationPath site.zip -Force
 
 $dep = aws amplify create-deployment --app-id $AppId --branch-name main --profile $ProfileName --output json | ConvertFrom-Json
