@@ -298,16 +298,8 @@ INDEX = f"""<!DOCTYPE html>
     font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
     display:flex; flex-direction:column; }}
   .top {{ background:linear-gradient(90deg,var(--brand-2),var(--brand)); color:#fff;
-    padding:40px 24px 46px; text-align:center; }}
-  .top .mark {{ width:46px; height:46px; border-radius:12px; background:rgba(255,255,255,.18);
-    display:inline-flex; align-items:center; justify-content:center; margin-bottom:12px; }}
-  .top h1 {{ margin:0; font-size:26px; letter-spacing:.2px; }}
-  .top p {{ margin:8px 0 0; opacity:.9; font-size:14.5px; }}
-  .conn {{ display:inline-flex; align-items:center; gap:7px; margin-top:14px; font-size:12px;
-    background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.3);
-    padding:5px 12px; border-radius:999px; }}
-  .conn .live {{ width:7px; height:7px; border-radius:50%; background:#34d399;
-    box-shadow:0 0 0 3px rgba(52,211,153,.3); }}
+    padding:28px 24px 32px; text-align:center; }}
+  .top h1 {{ margin:0; font-size:24px; letter-spacing:.2px; font-weight:700; }}
 
   .wrap {{ max-width:1000px; margin:24px auto 0; padding:0 20px 30px; width:100%; }}
   .sec-h {{ font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:.6px;
@@ -348,11 +340,7 @@ INDEX = f"""<!DOCTYPE html>
 </head>
 <body>
   <div class="top">
-    <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"
-      stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2 6 4-14 2 8h6"/></svg></div>
-    <h1>SHIN-NY Community Health Record</h1>
-    <p>One patient record, rendered in each Qualified Entity's own style &mdash; {live_n} live, more coming soon.</p>
-    <div class="conn"><span class="live"></span> {n_people} synthetic patients &middot; C-CDA + genuine HL7 ORU</div>
+    <h1>QE PDR Viewer</h1>
   </div>
   <nav class="page-nav">
     <a class="on" href="#qe-portals">QE Portals</a>

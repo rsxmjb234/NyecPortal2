@@ -220,7 +220,6 @@ def render_patient(P, idx):
     <div class="patient" data-idx="{idx}" data-first="{E(P['given'])}" data-last="{E(P['family'])}" data-dob="{E(P['dob'])}" data-qe="{E(_qe)}" data-source="{E(_src)}" data-mrn="{E(P['mrn'])}" data-mrns="{E(_mrns)}"{style}>
       <div class="bx-cols">
         <nav class="bx-nav">
-          <div class="bx-lookup">&#128269; Patient Lookup</div>
           {navhtml}
         </nav>
         <div class="bx-main">
@@ -349,7 +348,6 @@ HTML = f"""<!DOCTYPE html>
 </head>
 <body data-view-qe="{E(VIEW_QE)}">
   <div class="appbar">
-    <div class="brand">IMAT Solutions</div>
     <div class="spacer"></div>
     <div class="picker"><select id="psel">{options}</select></div>
     <div class="user">SIR LANCELOT &#9662;</div>
