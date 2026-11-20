@@ -412,7 +412,7 @@
       "qe_name": "HEALTHeLINK",
       "organization_name": "UPMC Chautauqua at WCA",
       "assigning_authority": "UPMCEP",
-      "nys_facility_id": "103",
+      "nys_facility_id": "102",
       "ccd_count": "19717",
       "trn_count": "40271",
       "total_docs": "59988"
@@ -421,7 +421,7 @@
       "qe_name": "HEALTHeLINK",
       "organization_name": "UPMC Chautauqua at WCA",
       "assigning_authority": "UPMCEP",
-      "nys_facility_id": "102",
+      "nys_facility_id": "103",
       "ccd_count": "19717",
       "trn_count": "40271",
       "total_docs": "59988"
@@ -796,6 +796,60 @@
       "total_docs": "19615"
     },
     {
+      "qe_name": "Hixny",
+      "organization_name": "A.O. Fox Memorial Hospital",
+      "assigning_authority": "MIB",
+      "nys_facility_id": "739",
+      "ccd_count": "17054",
+      "trn_count": "2348",
+      "total_docs": "19402"
+    },
+    {
+      "qe_name": "Hixny",
+      "organization_name": "A.O. Fox Memorial Hospital - Tri-Town Campus",
+      "assigning_authority": "MIB",
+      "nys_facility_id": "8554",
+      "ccd_count": "17054",
+      "trn_count": "2348",
+      "total_docs": "19402"
+    },
+    {
+      "qe_name": "Hixny",
+      "organization_name": "Cobleskill Regional Hospital",
+      "assigning_authority": "MIB",
+      "nys_facility_id": "10216",
+      "ccd_count": "17054",
+      "trn_count": "2348",
+      "total_docs": "19402"
+    },
+    {
+      "qe_name": "Hixny",
+      "organization_name": "LITTLE FALLS HOSPITAL",
+      "assigning_authority": "MIB",
+      "nys_facility_id": "362",
+      "ccd_count": "17054",
+      "trn_count": "2348",
+      "total_docs": "19402"
+    },
+    {
+      "qe_name": "Hixny",
+      "organization_name": "MARY IMOGENE BASSETT HOSPITAL",
+      "assigning_authority": "MIB",
+      "nys_facility_id": "746",
+      "ccd_count": "17054",
+      "trn_count": "2348",
+      "total_docs": "19402"
+    },
+    {
+      "qe_name": "Hixny",
+      "organization_name": "O'CONNOR HOSPITAL",
+      "assigning_authority": "MIB",
+      "nys_facility_id": "165",
+      "ccd_count": "17054",
+      "trn_count": "2348",
+      "total_docs": "19402"
+    },
+    {
       "qe_name": "HealtheConnections",
       "organization_name": "WINIFRED MASTERSON BURKE REHABILITATION HOSPITAL",
       "assigning_authority": "BURKE-REHAB-HOSP",
@@ -976,6 +1030,24 @@
       "total_docs": "7697"
     },
     {
+      "qe_name": "Hixny",
+      "organization_name": "ALBANY MEDICAL CENTER - SOUTH CLINICAL CAMPUS",
+      "assigning_authority": "AMHSAMCH",
+      "nys_facility_id": "2",
+      "ccd_count": "3789",
+      "trn_count": "3010",
+      "total_docs": "6799"
+    },
+    {
+      "qe_name": "Hixny",
+      "organization_name": "ALBANY MEDICAL CENTER HOSPITAL",
+      "assigning_authority": "AMHSAMCH",
+      "nys_facility_id": "1",
+      "ccd_count": "3789",
+      "trn_count": "3010",
+      "total_docs": "6799"
+    },
+    {
       "qe_name": "HealtheConnections",
       "organization_name": "MONTEFIORE MOUNT VERNON HOSPITAL",
       "assigning_authority": "MHS-VERNON-EPIC",
@@ -983,6 +1055,24 @@
       "ccd_count": "2121",
       "trn_count": "4618",
       "total_docs": "6739"
+    },
+    {
+      "qe_name": "Hixny",
+      "organization_name": "ELLIS HOSPITAL",
+      "assigning_authority": "ELLS",
+      "nys_facility_id": "829",
+      "ccd_count": "2758",
+      "trn_count": "3636",
+      "total_docs": "6394"
+    },
+    {
+      "qe_name": "Hixny",
+      "organization_name": "ELLIS HOSPITAL - BELLEVUE WOMAN'S CARE CENTER DIVISION",
+      "assigning_authority": "ELLS",
+      "nys_facility_id": "848",
+      "ccd_count": "2758",
+      "trn_count": "3636",
+      "total_docs": "6394"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1037,6 +1127,15 @@
       "ccd_count": "0",
       "trn_count": "4756",
       "total_docs": "4756"
+    },
+    {
+      "qe_name": "Hixny",
+      "organization_name": "THE UNIVERSITY OF VERMONT HEALTH NETWORK - CHAMPLAIN VALLEY PHYSICIANS HOSPITAL",
+      "assigning_authority": "CVPHED",
+      "nys_facility_id": "135",
+      "ccd_count": "3602",
+      "trn_count": "1121",
+      "total_docs": "4723"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1111,6 +1210,24 @@
       "total_docs": "4335"
     },
     {
+      "qe_name": "Hixny",
+      "organization_name": "SARATOGA HOSPITAL",
+      "assigning_authority": "SHAMHS",
+      "nys_facility_id": "818",
+      "ccd_count": "2984",
+      "trn_count": "1274",
+      "total_docs": "4258"
+    },
+    {
+      "qe_name": "Hixny",
+      "organization_name": "GLENS FALLS HOSPITAL",
+      "assigning_authority": "GFHAMHS",
+      "nys_facility_id": "1005",
+      "ccd_count": "3009",
+      "trn_count": "1136",
+      "total_docs": "4145"
+    },
+    {
       "qe_name": "Healthix",
       "organization_name": "Stony Brook Southampton Hospital",
       "assigning_authority": "SOUTHAMPTON",
@@ -1118,6 +1235,24 @@
       "ccd_count": "4107",
       "trn_count": "0",
       "total_docs": "4107"
+    },
+    {
+      "qe_name": "Hixny",
+      "organization_name": "SAMARITAN HOSPITAL",
+      "assigning_authority": "STPL",
+      "nys_facility_id": "756",
+      "ccd_count": "2570",
+      "trn_count": "1467",
+      "total_docs": "4037"
+    },
+    {
+      "qe_name": "Hixny",
+      "organization_name": "St. Peter's Hospital - SPARC",
+      "assigning_authority": "STPL",
+      "nys_facility_id": "15417",
+      "ccd_count": "2570",
+      "trn_count": "1467",
+      "total_docs": "4037"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1130,21 +1265,30 @@
     },
     {
       "qe_name": "Hixny",
-      "organization_name": "ELLIS HOSPITAL",
-      "assigning_authority": "ELLS",
-      "nys_facility_id": "829",
-      "ccd_count": "0",
-      "trn_count": "3636",
-      "total_docs": "3636"
+      "organization_name": "ST PETERS HOSPITAL",
+      "assigning_authority": "PAPL",
+      "nys_facility_id": "5",
+      "ccd_count": "1842",
+      "trn_count": "1871",
+      "total_docs": "3713"
     },
     {
       "qe_name": "Hixny",
-      "organization_name": "ELLIS HOSPITAL - BELLEVUE WOMAN'S CARE CENTER DIVISION",
-      "assigning_authority": "ELLS",
-      "nys_facility_id": "848",
-      "ccd_count": "0",
-      "trn_count": "3636",
-      "total_docs": "3636"
+      "organization_name": "WESTCHESTER MEDICAL CENTER",
+      "assigning_authority": "WMC",
+      "nys_facility_id": "1139",
+      "ccd_count": "3621",
+      "trn_count": "0",
+      "total_docs": "3621"
+    },
+    {
+      "qe_name": "Hixny",
+      "organization_name": "CANTON-POTSDAM HOSPITAL",
+      "assigning_authority": "RRHCPH",
+      "nys_facility_id": "815",
+      "ccd_count": "3560",
+      "trn_count": "0",
+      "total_docs": "3560"
     },
     {
       "qe_name": "Healthix",
@@ -1157,21 +1301,12 @@
     },
     {
       "qe_name": "Hixny",
-      "organization_name": "ALBANY MEDICAL CENTER - SOUTH CLINICAL CAMPUS",
-      "assigning_authority": "AMHSAMCH",
-      "nys_facility_id": "2",
-      "ccd_count": "0",
-      "trn_count": "3010",
-      "total_docs": "3010"
-    },
-    {
-      "qe_name": "Hixny",
-      "organization_name": "ALBANY MEDICAL CENTER HOSPITAL",
-      "assigning_authority": "AMHSAMCH",
-      "nys_facility_id": "1",
-      "ccd_count": "0",
-      "trn_count": "3010",
-      "total_docs": "3010"
+      "organization_name": "ST. MARY'S HEALTHCARE",
+      "assigning_authority": "SMHA",
+      "nys_facility_id": "484",
+      "ccd_count": "2480",
+      "trn_count": "704",
+      "total_docs": "3184"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1201,6 +1336,24 @@
       "total_docs": "2657"
     },
     {
+      "qe_name": "Hixny",
+      "organization_name": "COLUMBIA MEMORIAL HOSPITAL",
+      "assigning_authority": "CMHAMHS",
+      "nys_facility_id": "146",
+      "ccd_count": "1667",
+      "trn_count": "805",
+      "total_docs": "2472"
+    },
+    {
+      "qe_name": "Hixny",
+      "organization_name": "ST. PETER'S ADDICTION RECOVERY CENTER",
+      "assigning_authority": "SPHPSPARC",
+      "nys_facility_id": "9431",
+      "ccd_count": "2402",
+      "trn_count": "32",
+      "total_docs": "2434"
+    },
+    {
       "qe_name": "Rochester RHIO",
       "organization_name": "F F THOMPSON HOSPITAL",
       "assigning_authority": "UR0908",
@@ -1211,66 +1364,12 @@
     },
     {
       "qe_name": "Hixny",
-      "organization_name": "A.O. Fox Memorial Hospital",
-      "assigning_authority": "MIB",
-      "nys_facility_id": "739",
-      "ccd_count": "0",
-      "trn_count": "2348",
-      "total_docs": "2348"
-    },
-    {
-      "qe_name": "Hixny",
-      "organization_name": "A.O. Fox Memorial Hospital - Tri-Town Campus",
-      "assigning_authority": "MIB",
-      "nys_facility_id": "8554",
-      "ccd_count": "0",
-      "trn_count": "2348",
-      "total_docs": "2348"
-    },
-    {
-      "qe_name": "Hixny",
-      "organization_name": "Cobleskill Regional Hospital",
-      "assigning_authority": "MIB",
-      "nys_facility_id": "10216",
-      "ccd_count": "0",
-      "trn_count": "2348",
-      "total_docs": "2348"
-    },
-    {
-      "qe_name": "Hixny",
-      "organization_name": "LITTLE FALLS HOSPITAL",
-      "assigning_authority": "MIB",
-      "nys_facility_id": "362",
-      "ccd_count": "0",
-      "trn_count": "2348",
-      "total_docs": "2348"
-    },
-    {
-      "qe_name": "Hixny",
-      "organization_name": "MARY IMOGENE BASSETT HOSPITAL",
-      "assigning_authority": "MIB",
-      "nys_facility_id": "746",
-      "ccd_count": "0",
-      "trn_count": "2348",
-      "total_docs": "2348"
-    },
-    {
-      "qe_name": "Hixny",
-      "organization_name": "O'CONNOR HOSPITAL",
-      "assigning_authority": "MIB",
-      "nys_facility_id": "165",
-      "ccd_count": "0",
-      "trn_count": "2348",
-      "total_docs": "2348"
-    },
-    {
-      "qe_name": "Hixny",
-      "organization_name": "ST PETERS HOSPITAL",
-      "assigning_authority": "PAPL",
-      "nys_facility_id": "5",
-      "ccd_count": "0",
-      "trn_count": "1871",
-      "total_docs": "1871"
+      "organization_name": "Samaritan Hospital - Albany Memorial Campus",
+      "assigning_authority": "AMAL",
+      "nys_facility_id": "4",
+      "ccd_count": "1109",
+      "trn_count": "809",
+      "total_docs": "1918"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1280,6 +1379,15 @@
       "ccd_count": "0",
       "trn_count": "1804",
       "total_docs": "1804"
+    },
+    {
+      "qe_name": "Hixny",
+      "organization_name": "SUNNYVIEW HOSPITAL AND REHABILITATION CENTER",
+      "assigning_authority": "SRPL",
+      "nys_facility_id": "831",
+      "ccd_count": "1659",
+      "trn_count": "50",
+      "total_docs": "1709"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1301,21 +1409,39 @@
     },
     {
       "qe_name": "Hixny",
-      "organization_name": "SAMARITAN HOSPITAL",
-      "assigning_authority": "STPL",
-      "nys_facility_id": "756",
-      "ccd_count": "0",
-      "trn_count": "1467",
-      "total_docs": "1467"
+      "organization_name": "NATHAN LITTAUER HOSPITAL",
+      "assigning_authority": "NLI",
+      "nys_facility_id": "330",
+      "ccd_count": "1197",
+      "trn_count": "474",
+      "total_docs": "1671"
     },
     {
       "qe_name": "Hixny",
-      "organization_name": "St. Peter's Hospital - SPARC",
-      "assigning_authority": "STPL",
-      "nys_facility_id": "15417",
-      "ccd_count": "0",
-      "trn_count": "1467",
-      "total_docs": "1467"
+      "organization_name": "Good Samaritan Hospital, a member of WMCHealth",
+      "assigning_authority": "WMCBSMGGSH",
+      "nys_facility_id": "779",
+      "ccd_count": "1641",
+      "trn_count": "0",
+      "total_docs": "1641"
+    },
+    {
+      "qe_name": "Hixny",
+      "organization_name": "Massena Hospital",
+      "assigning_authority": "RRHMH",
+      "nys_facility_id": "804",
+      "ccd_count": "1628",
+      "trn_count": "0",
+      "total_docs": "1628"
+    },
+    {
+      "qe_name": "Hixny",
+      "organization_name": "ALBANY MEDICAL CENTER - SOUTH CLINICAL CAMPUS",
+      "assigning_authority": "AMHSSCC",
+      "nys_facility_id": "2",
+      "ccd_count": "1508",
+      "trn_count": "0",
+      "total_docs": "1508"
     },
     {
       "qe_name": "HEALTHeLINK",
@@ -1336,6 +1462,15 @@
       "total_docs": "1438"
     },
     {
+      "qe_name": "Hixny",
+      "organization_name": "The University of Vermont Health Network - Alice Hyde Medical Center",
+      "assigning_authority": "AHMCED",
+      "nys_facility_id": "15485",
+      "ccd_count": "1114",
+      "trn_count": "311",
+      "total_docs": "1425"
+    },
+    {
       "qe_name": "Healthix",
       "organization_name": "SYOSSET HOSPITAL",
       "assigning_authority": "SY",
@@ -1354,15 +1489,6 @@
       "total_docs": "1286"
     },
     {
-      "qe_name": "Hixny",
-      "organization_name": "SARATOGA HOSPITAL",
-      "assigning_authority": "SHAMHS",
-      "nys_facility_id": "818",
-      "ccd_count": "0",
-      "trn_count": "1274",
-      "total_docs": "1274"
-    },
-    {
       "qe_name": "Rochester RHIO",
       "organization_name": "NICHOLAS H NOYES MEMORIAL HOSPITAL",
       "assigning_authority": "UR1523",
@@ -1370,24 +1496,6 @@
       "ccd_count": "1187",
       "trn_count": "0",
       "total_docs": "1187"
-    },
-    {
-      "qe_name": "Hixny",
-      "organization_name": "GLENS FALLS HOSPITAL",
-      "assigning_authority": "GFHAMHS",
-      "nys_facility_id": "1005",
-      "ccd_count": "0",
-      "trn_count": "1136",
-      "total_docs": "1136"
-    },
-    {
-      "qe_name": "Hixny",
-      "organization_name": "THE UNIVERSITY OF VERMONT HEALTH NETWORK - CHAMPLAIN VALLEY PHYSICIANS HOSPITAL",
-      "assigning_authority": "CVPHED",
-      "nys_facility_id": "135",
-      "ccd_count": "0",
-      "trn_count": "1121",
-      "total_docs": "1121"
     },
     {
       "qe_name": "Healthix",
@@ -1444,6 +1552,15 @@
       "total_docs": "943"
     },
     {
+      "qe_name": "Hixny",
+      "organization_name": "MID-HUDSON VALLEY DIVISION OF WESTCHESTER MEDICAL CENTER",
+      "assigning_authority": "WMCMHRH",
+      "nys_facility_id": "180",
+      "ccd_count": "942",
+      "trn_count": "0",
+      "total_docs": "942"
+    },
+    {
       "qe_name": "Rochester RHIO",
       "organization_name": "CANTON-POTSDAM HOSPITAL",
       "assigning_authority": "RR422",
@@ -1451,6 +1568,15 @@
       "ccd_count": "920",
       "trn_count": "0",
       "total_docs": "920"
+    },
+    {
+      "qe_name": "Hixny",
+      "organization_name": "ELLENVILLE REGIONAL HOSPITAL",
+      "assigning_authority": "ELLENVILLE",
+      "nys_facility_id": "1002",
+      "ccd_count": "918",
+      "trn_count": "0",
+      "total_docs": "918"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1471,15 +1597,6 @@
       "total_docs": "816"
     },
     {
-      "qe_name": "Hixny",
-      "organization_name": "Samaritan Hospital - Albany Memorial Campus",
-      "assigning_authority": "AMAL",
-      "nys_facility_id": "4",
-      "ccd_count": "0",
-      "trn_count": "809",
-      "total_docs": "809"
-    },
-    {
       "qe_name": "Rochester RHIO",
       "organization_name": "ROCHESTER GENERAL HOSPITAL",
       "assigning_authority": "RRH262",
@@ -1490,21 +1607,21 @@
     },
     {
       "qe_name": "Hixny",
-      "organization_name": "COLUMBIA MEMORIAL HOSPITAL",
-      "assigning_authority": "CMHAMHS",
-      "nys_facility_id": "146",
-      "ccd_count": "0",
-      "trn_count": "805",
-      "total_docs": "805"
+      "organization_name": "ADIRONDACK MEDICAL CENTER-LAKE PLACID SITE",
+      "assigning_authority": "ADIRMED",
+      "nys_facility_id": "306",
+      "ccd_count": "377",
+      "trn_count": "402",
+      "total_docs": "779"
     },
     {
       "qe_name": "Hixny",
-      "organization_name": "ST. MARY'S HEALTHCARE",
-      "assigning_authority": "SMHA",
-      "nys_facility_id": "484",
-      "ccd_count": "0",
-      "trn_count": "704",
-      "total_docs": "704"
+      "organization_name": "ADIRONDACK MEDICAL CENTER-SARANAC LAKE SITE",
+      "assigning_authority": "ADIRMED",
+      "nys_facility_id": "324",
+      "ccd_count": "377",
+      "trn_count": "402",
+      "total_docs": "779"
     },
     {
       "qe_name": "Healthix",
@@ -1523,6 +1640,15 @@
       "ccd_count": "666",
       "trn_count": "0",
       "total_docs": "666"
+    },
+    {
+      "qe_name": "Hixny",
+      "organization_name": "GOUVERNEUR HOSPITAL",
+      "assigning_authority": "RRHGH",
+      "nys_facility_id": "812",
+      "ccd_count": "633",
+      "trn_count": "0",
+      "total_docs": "633"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1561,6 +1687,15 @@
       "total_docs": "569"
     },
     {
+      "qe_name": "Hixny",
+      "organization_name": "THE UNIVERSITY OF VERMONT HEALTH NETWORK - ELIZABETHTOWN COMMUNITY HOSPITAL",
+      "assigning_authority": "ECHOPED",
+      "nys_facility_id": "303",
+      "ccd_count": "402",
+      "trn_count": "149",
+      "total_docs": "551"
+    },
+    {
       "qe_name": "Rochester RHIO",
       "organization_name": "ROCHESTER GENERAL HOSPITAL",
       "assigning_authority": "RRH254",
@@ -1568,6 +1703,15 @@
       "ccd_count": "548",
       "trn_count": "0",
       "total_docs": "548"
+    },
+    {
+      "qe_name": "Hixny",
+      "organization_name": "Port Jervis Community Hospital, a member of WMCHealth",
+      "assigning_authority": "WMCBSCH",
+      "nys_facility_id": "708",
+      "ccd_count": "533",
+      "trn_count": "0",
+      "total_docs": "533"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -1583,6 +1727,15 @@
       "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
       "assigning_authority": "UR1723",
       "nys_facility_id": "39",
+      "ccd_count": "524",
+      "trn_count": "0",
+      "total_docs": "524"
+    },
+    {
+      "qe_name": "Hixny",
+      "organization_name": "St. Anthony Community Hospital, a member of WMCHealth",
+      "assigning_authority": "WMCBSSACH",
+      "nys_facility_id": "704",
       "ccd_count": "524",
       "trn_count": "0",
       "total_docs": "524"
@@ -1598,12 +1751,12 @@
     },
     {
       "qe_name": "Hixny",
-      "organization_name": "NATHAN LITTAUER HOSPITAL",
-      "assigning_authority": "NLI",
-      "nys_facility_id": "330",
-      "ccd_count": "0",
-      "trn_count": "474",
-      "total_docs": "474"
+      "organization_name": "The University of Vermont Health Network-Elizabethtown Community Hospital Moses Ludington",
+      "assigning_authority": "ECHTIOPED",
+      "nys_facility_id": "309",
+      "ccd_count": "349",
+      "trn_count": "127",
+      "total_docs": "476"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -1631,24 +1784,6 @@
       "ccd_count": "408",
       "trn_count": "0",
       "total_docs": "408"
-    },
-    {
-      "qe_name": "Hixny",
-      "organization_name": "ADIRONDACK MEDICAL CENTER-LAKE PLACID SITE",
-      "assigning_authority": "ADIRMED",
-      "nys_facility_id": "306",
-      "ccd_count": "0",
-      "trn_count": "402",
-      "total_docs": "402"
-    },
-    {
-      "qe_name": "Hixny",
-      "organization_name": "ADIRONDACK MEDICAL CENTER-SARANAC LAKE SITE",
-      "assigning_authority": "ADIRMED",
-      "nys_facility_id": "324",
-      "ccd_count": "0",
-      "trn_count": "402",
-      "total_docs": "402"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -1775,15 +1910,6 @@
       "ccd_count": "326",
       "trn_count": "0",
       "total_docs": "326"
-    },
-    {
-      "qe_name": "Hixny",
-      "organization_name": "The University of Vermont Health Network - Alice Hyde Medical Center",
-      "assigning_authority": "AHMCED",
-      "nys_facility_id": "15485",
-      "ccd_count": "0",
-      "trn_count": "311",
-      "total_docs": "311"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -2065,15 +2191,6 @@
       "total_docs": "156"
     },
     {
-      "qe_name": "Hixny",
-      "organization_name": "THE UNIVERSITY OF VERMONT HEALTH NETWORK - ELIZABETHTOWN COMMUNITY HOSPITAL",
-      "assigning_authority": "ECHOPED",
-      "nys_facility_id": "303",
-      "ccd_count": "0",
-      "trn_count": "149",
-      "total_docs": "149"
-    },
-    {
       "qe_name": "Rochester RHIO",
       "organization_name": "NICHOLAS H NOYES MEMORIAL HOSPITAL",
       "assigning_authority": "UR1744",
@@ -2189,15 +2306,6 @@
       "ccd_count": "128",
       "trn_count": "0",
       "total_docs": "128"
-    },
-    {
-      "qe_name": "Hixny",
-      "organization_name": "The University of Vermont Health Network-Elizabethtown Community Hospital Moses Ludington",
-      "assigning_authority": "ECHTIOPED",
-      "nys_facility_id": "309",
-      "ccd_count": "0",
-      "trn_count": "127",
-      "total_docs": "127"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -3046,15 +3154,6 @@
       "total_docs": "50"
     },
     {
-      "qe_name": "Hixny",
-      "organization_name": "SUNNYVIEW HOSPITAL AND REHABILITATION CENTER",
-      "assigning_authority": "SRPL",
-      "nys_facility_id": "831",
-      "ccd_count": "0",
-      "trn_count": "50",
-      "total_docs": "50"
-    },
-    {
       "qe_name": "Rochester RHIO",
       "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
       "assigning_authority": "UR1699",
@@ -3466,15 +3565,6 @@
       "nys_facility_id": "411",
       "ccd_count": "32",
       "trn_count": "0",
-      "total_docs": "32"
-    },
-    {
-      "qe_name": "Hixny",
-      "organization_name": "ST. PETER'S ADDICTION RECOVERY CENTER",
-      "assigning_authority": "SPHPSPARC",
-      "nys_facility_id": "9431",
-      "ccd_count": "0",
-      "trn_count": "32",
       "total_docs": "32"
     },
     {
@@ -5431,15 +5521,6 @@
       "total_docs": "0"
     },
     {
-      "qe_name": "Hixny",
-      "organization_name": "ALBANY MEDICAL CENTER - SOUTH CLINICAL CAMPUS",
-      "assigning_authority": "AMHSSCC",
-      "nys_facility_id": "2",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "total_docs": "0"
-    },
-    {
       "qe_name": "Rochester RHIO",
       "organization_name": "ARNOT OGDEN MEDICAL CENTER",
       "assigning_authority": "AOMC",
@@ -5552,15 +5633,6 @@
       "organization_name": "Stony Brook Eastern Long Island Hospital",
       "assigning_authority": "ELIH",
       "nys_facility_id": "891",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Hixny",
-      "organization_name": "ELLENVILLE REGIONAL HOSPITAL",
-      "assigning_authority": "ELLENVILLE",
-      "nys_facility_id": "1002",
       "ccd_count": "0",
       "trn_count": "0",
       "total_docs": "0"
@@ -9031,33 +9103,6 @@
       "total_docs": "0"
     },
     {
-      "qe_name": "Hixny",
-      "organization_name": "CANTON-POTSDAM HOSPITAL",
-      "assigning_authority": "RRHCPH",
-      "nys_facility_id": "815",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Hixny",
-      "organization_name": "GOUVERNEUR HOSPITAL",
-      "assigning_authority": "RRHGH",
-      "nys_facility_id": "812",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Hixny",
-      "organization_name": "Massena Hospital",
-      "assigning_authority": "RRHMH",
-      "nys_facility_id": "804",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "total_docs": "0"
-    },
-    {
       "qe_name": "Healthix",
       "organization_name": "ROCKEFELLER UNIVERSITY HOSPITAL",
       "assigning_authority": "RUH",
@@ -10817,51 +10862,6 @@
       "organization_name": "WHITE PLAINS HOSPITAL CENTER",
       "assigning_authority": "WHITE-PLAINS-SRV",
       "nys_facility_id": "1045",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Hixny",
-      "organization_name": "WESTCHESTER MEDICAL CENTER",
-      "assigning_authority": "WMC",
-      "nys_facility_id": "1139",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Hixny",
-      "organization_name": "Port Jervis Community Hospital, a member of WMCHealth",
-      "assigning_authority": "WMCBSCH",
-      "nys_facility_id": "708",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Hixny",
-      "organization_name": "Good Samaritan Hospital, a member of WMCHealth",
-      "assigning_authority": "WMCBSMGGSH",
-      "nys_facility_id": "779",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Hixny",
-      "organization_name": "St. Anthony Community Hospital, a member of WMCHealth",
-      "assigning_authority": "WMCBSSACH",
-      "nys_facility_id": "704",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Hixny",
-      "organization_name": "MID-HUDSON VALLEY DIVISION OF WESTCHESTER MEDICAL CENTER",
-      "assigning_authority": "WMCMHRH",
-      "nys_facility_id": "180",
       "ccd_count": "0",
       "trn_count": "0",
       "total_docs": "0"

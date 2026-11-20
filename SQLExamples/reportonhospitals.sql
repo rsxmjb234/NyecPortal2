@@ -44,10 +44,18 @@ hospitals AS (
       AND trim(code) <> ''
 ),
 
--- Count CCD and TRN from a single snapshot, using submission date from key path
+-- Count CCD and TRN from a single snapshot, using submission date from key path.
+-- HIXNY normalisation: CCD keys use <AA>DOC as the first path segment; strip the
+-- DOC suffix so HIXNY CCD counts join correctly to the hospital AA lookup.
 actual AS (
     SELECT
-        upper(trim(split_part(i.key, '/', 1))) AS aa_key,
+        CASE
+            WHEN lower(i.bucket) LIKE '%hixny%'
+             AND regexp_like(lower(i.key), '(^|/)ccd(/|$)')
+             AND upper(trim(split_part(i.key, '/', 1))) LIKE '%DOC'
+            THEN regexp_replace(upper(trim(split_part(i.key, '/', 1))), 'DOC$', '')
+            ELSE upper(trim(split_part(i.key, '/', 1)))
+        END AS aa_key,
         count_if(regexp_like(lower(i.key), '(^|/)ccd(/|$)')) AS ccd_count,
         count_if(regexp_like(lower(i.key), '(^|/)trn(/|$)')) AS trn_count
     FROM pdr_inventory.pdr_inventory_prod_data_all i
