@@ -28,20 +28,20 @@ WITH params AS (
         )                                   AS dt_partition
 ),
 
--- Full hospital AA list from SFDC lookup — every hospital appears in output
+-- Full hospital AA list from SFDC lookup.
+-- One row per hospital; multiple rows per AA when hospitals share the same code.
 hospitals AS (
     SELECT
         upper(trim(code))              AS aa_key,
-        min(trim(code))                AS assigning_authority,
-        min(trim(organization_name))   AS organization_name,
-        min(trim(qe_name))             AS qe_name,
-        min(trim(nys_facility_id))     AS nys_facility_id
+        trim(code)                     AS assigning_authority,
+        trim(organization_name)        AS organization_name,
+        trim(qe_name)                  AS qe_name,
+        trim(nys_facility_id)          AS nys_facility_id
     FROM pdr_inventory.lookup_hospital_assigning_authorities
     WHERE record_type      = 'Assigning Authority'
       AND organization_type = 'Article 28 - Hospital'
       AND code IS NOT NULL
       AND trim(code) <> ''
-    GROUP BY upper(trim(code))
 ),
 
 -- Count CCD and TRN from a single snapshot, using submission date from key path
@@ -89,4 +89,4 @@ SELECT
     coalesce(a.ccd_count, 0) + coalesce(a.trn_count, 0)         AS total_docs
 FROM hospitals h
 LEFT JOIN actual a ON h.aa_key = a.aa_key
-ORDER BY total_docs DESC, h.organization_name ASC;
+ORDER BY total_docs DESC, h.assigning_authority ASC, h.organization_name ASC;

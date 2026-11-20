@@ -116,7 +116,17 @@ EXTRA_CSS = """
   .hosp-tbl td.tot { font-weight:700; }
   .hosp-tbl tr.zero td { color:#c5cdd6; }
   .hosp-tbl tbody tr:hover td { background:#f8fafc; }
-  .hosp-tbl tr.zero:hover td { background:#fafbfc; }"""
+  .hosp-tbl tr.zero:hover td { background:#fafbfc; }
+  /* AA group header (multiple hospitals share one AA) */
+  .hosp-tbl tr.aa-grp td { background:#f1f5f9; border-top:2px solid var(--line); }
+  .hosp-tbl tr.aa-grp .aa-label { font-family:ui-monospace,monospace; font-size:11.5px;
+    font-weight:700; color:var(--brand-2); }
+  .hosp-tbl tr.aa-grp .aa-count { font-size:11px; color:var(--muted); margin-left:8px; font-weight:400; }
+  .hosp-tbl tr.aa-grp.zero td { background:#f8f9fa; }
+  .hosp-tbl tr.aa-grp.zero .aa-label { color:#c5cdd6; }
+  /* Sub-rows under a grouped AA */
+  .hosp-tbl tr.aa-sub td { border-bottom:1px solid #f3f4f6; }
+  .hosp-tbl td.sub-name { padding-left:26px; color:var(--muted); font-size:12px; }"""
 
 # ============================================================
 # "Understand Volume" section HTML — plain string
@@ -236,26 +246,60 @@ REPORT2_SCRIPT = """
 
     function render(qe) {
       var rows = HOSP.rows.filter(function(r) { return r[0] === qe; });
-      rows.sort(function(a, b) {
-        var ta = a[3]+a[4], tb = b[3]+b[4];
-        return tb !== ta ? tb - ta : a[1].localeCompare(b[1]);
-      });
-      var active = rows.filter(function(r) { return r[3]+r[4] > 0; }).length;
 
+      // Group by AA code, preserving SQL order (total DESC, aa ASC, org ASC)
+      var seen = {}, groups = [];
+      rows.forEach(function(r) {
+        var aa = r[2];
+        if (!seen[aa]) {
+          seen[aa] = { aa: aa, ccd: r[3], trn: r[4], names: [] };
+          groups.push(seen[aa]);
+        }
+        seen[aa].names.push(r[1]);
+      });
+
+      // Sort groups: AA total DESC, then AA name ASC
+      groups.sort(function(a, b) {
+        var ta = a.ccd + a.trn, tb = b.ccd + b.trn;
+        return tb !== ta ? tb - ta : a.aa.localeCompare(b.aa);
+      });
+
+      var active = groups.filter(function(g) { return g.ccd + g.trn > 0; }).length;
       document.getElementById('hosp-badge').innerHTML =
-        '<span class="hosp-badge">' + active + ' of ' + rows.length +
-        ' hospitals submitting</span>';
+        '<span class="hosp-badge">' + active + ' of ' + groups.length +
+        ' assigning authorities submitting</span>';
 
       var html = '';
-      rows.forEach(function(r) {
-        var tot = r[3] + r[4];
-        html += '<tr' + (tot === 0 ? ' class="zero"' : '') + '>'
-          + '<td>' + r[1] + '</td>'
-          + '<td class="code">' + r[2] + '</td>'
-          + '<td class="r">' + fmt(r[3]) + '</td>'
-          + '<td class="r">' + fmt(r[4]) + '</td>'
-          + '<td class="r tot">' + fmt(tot) + '</td>'
-          + '</tr>';
+      groups.forEach(function(g) {
+        var tot = g.ccd + g.trn;
+        var zero = tot === 0;
+        var zc = zero ? ' zero' : '';
+
+        if (g.names.length === 1) {
+          // Single hospital — clean flat row
+          html += '<tr' + (zero ? ' class="zero"' : '') + '>'
+            + '<td>' + g.names[0] + '</td>'
+            + '<td class="code">' + g.aa + '</td>'
+            + '<td class="r">' + fmt(g.ccd) + '</td>'
+            + '<td class="r">' + fmt(g.trn) + '</td>'
+            + '<td class="r tot">' + fmt(tot) + '</td>'
+            + '</tr>';
+        } else {
+          // Multiple hospitals share this AA — group header + sub-rows
+          html += '<tr class="aa-grp' + zc + '">'
+            + '<td colspan="2"><span class="aa-label">' + g.aa + '</span>'
+            + '<span class="aa-count">' + g.names.length + ' hospitals</span></td>'
+            + '<td class="r">' + fmt(g.ccd) + '</td>'
+            + '<td class="r">' + fmt(g.trn) + '</td>'
+            + '<td class="r tot">' + fmt(tot) + '</td>'
+            + '</tr>';
+          g.names.forEach(function(name) {
+            html += '<tr class="aa-sub' + zc + '">'
+              + '<td class="sub-name">' + name + '</td>'
+              + '<td colspan="4"></td>'
+              + '</tr>';
+          });
+        }
       });
       document.getElementById('hosp-tbody').innerHTML = html;
 
