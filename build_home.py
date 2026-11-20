@@ -142,7 +142,19 @@ EXTRA_CSS = """
   .hosp-tbl td.typ { font-size:11.5px; color:var(--muted); }
   .nosfdc { display:inline-block; background:#fff7ed; color:#c2410c; border:1px solid #fed7aa;
     font-size:10.5px; font-weight:700; padding:1px 8px; border-radius:999px; }
-  .more { color:var(--muted); font-size:11.5px; }"""
+  .more { color:var(--muted); font-size:11.5px; }
+  /* polish */
+  .hosp-tbl td.hname { font-size:11.5px; }
+  .hosp-tbl td.hname .fid { color:#98a2b3; font-size:10px; margin-left:6px; }
+  .hosp-tbl tr.aa-grp td.aa-head { font-size:11.5px; }
+  .hosp-tbl tr.aa-grp .aa-count { font-size:10.5px; color:var(--muted); margin-left:8px; font-weight:400; }
+  .hosp-tbl tr.aa-sub td.sub-name { padding-left:26px; color:var(--ink); font-size:11px;
+    border-left:3px solid var(--line); }
+  .hosp-tbl tr.aa-sub:nth-child(even) td { background:#fafbfc; }
+  .hosp-tbl td.bar-cell { position:relative; }
+  .hosp-tbl td.bar-cell .bar-bg { position:absolute; left:0; top:3px; bottom:3px;
+    background:#e0f2fe; border-radius:2px; z-index:0; }
+  .hosp-tbl td.bar-cell span { position:relative; z-index:1; }"""
 
 # ============================================================
 # "Understand Volume" section HTML â€” plain string
@@ -309,6 +321,20 @@ REPORT2_SCRIPT = """
 
     function fmt(n) { return n > 0 ? n.toLocaleString() : '\u2014'; }
 
+    function titleCase(s) {
+      return s.replace(/\w\S*/g, function(t) {
+        if (t.length <= 2 && t === t.toUpperCase()) return t; // keep "OF", "AT" etc short
+        return t.charAt(0).toUpperCase() + t.substr(1).toLowerCase();
+      });
+    }
+
+    function fmtC(n) {
+      if (n <= 0) return '\u2014';
+      if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
+      if (n >= 1000) return (n / 1000).toFixed(1) + 'K';
+      return n.toLocaleString();
+    }
+
     function render(qe) {
       var rows = HOSP.rows.filter(function(r) { return r[0] === qe; });
 
@@ -317,10 +343,10 @@ REPORT2_SCRIPT = """
       rows.forEach(function(r) {
         var aa = r[2];
         if (!seen[aa]) {
-          seen[aa] = { aa: aa, ccd: r[3], trn: r[4], lab: r[5], adt: r[6], names: [] };
+          seen[aa] = { aa: aa, ccd: r[3], trn: r[4], lab: r[5], adt: r[6], items: [] };
           groups.push(seen[aa]);
         }
-        seen[aa].names.push(r[1]);
+        seen[aa].items.push({ name: r[1], fid: r[7] || '' });
       });
 
       // Sort groups: AA total DESC, then AA name ASC
@@ -329,6 +355,7 @@ REPORT2_SCRIPT = """
         return tb !== ta ? tb - ta : a.aa.localeCompare(b.aa);
       });
 
+      var maxTot = Math.max.apply(null, groups.map(function(g) { return g.ccd + g.trn + g.lab + g.adt; }));
       var active = groups.filter(function(g) { return g.ccd + g.trn + g.lab + g.adt > 0; }).length;
       document.getElementById('hosp-badge').innerHTML =
         '<span class="hosp-badge">' + active + ' of ' + groups.length +
@@ -338,31 +365,34 @@ REPORT2_SCRIPT = """
       groups.forEach(function(g) {
         var tot = g.ccd + g.trn + g.lab + g.adt;
 
-        if (g.names.length === 1) {
+        if (g.items.length === 1) {
           // Single hospital â€” clean flat row
+          var it = g.items[0];
+          var pct = maxTot > 0 ? (tot / maxTot * 100).toFixed(1) : 0;
           html += '<tr>'
-            + '<td>' + g.names[0] + '</td>'
+            + '<td class="hname">' + titleCase(it.name) + (it.fid ? '<span class="fid">#' + it.fid + '</span>' : '') + '</td>'
             + '<td class="code">' + g.aa + '</td>'
-            + '<td class="r">' + fmt(g.ccd) + '</td>'
-            + '<td class="r">' + fmt(g.trn) + '</td>'
-            + '<td class="r">' + fmt(g.lab) + '</td>'
-            + '<td class="r">' + fmt(g.adt) + '</td>'
-            + '<td class="r tot">' + fmt(tot) + '</td>'
+            + '<td class="r">' + fmtC(g.ccd) + '</td>'
+            + '<td class="r">' + fmtC(g.trn) + '</td>'
+            + '<td class="r">' + fmtC(g.lab) + '</td>'
+            + '<td class="r">' + fmtC(g.adt) + '</td>'
+            + '<td class="r tot bar-cell"><div class="bar-bg" style="width:' + pct + '%"></div><span>' + fmt(tot) + '</span></td>'
             + '</tr>';
         } else {
           // Multiple hospitals share this AA â€” group header + sub-rows
+          var pctG = maxTot > 0 ? (tot / maxTot * 100).toFixed(1) : 0;
           html += '<tr class="aa-grp">'
-            + '<td colspan="2"><span class="aa-label">' + g.aa + '</span>'
-            + '<span class="aa-count">' + g.names.length + ' hospitals</span></td>'
-            + '<td class="r">' + fmt(g.ccd) + '</td>'
-            + '<td class="r">' + fmt(g.trn) + '</td>'
-            + '<td class="r">' + fmt(g.lab) + '</td>'
-            + '<td class="r">' + fmt(g.adt) + '</td>'
-            + '<td class="r tot">' + fmt(tot) + '</td>'
+            + '<td class="aa-head"><span class="aa-count">' + g.items.length + ' hospitals</span></td>'
+            + '<td class="code"><span class="aa-label">' + g.aa + '</span></td>'
+            + '<td class="r">' + fmtC(g.ccd) + '</td>'
+            + '<td class="r">' + fmtC(g.trn) + '</td>'
+            + '<td class="r">' + fmtC(g.lab) + '</td>'
+            + '<td class="r">' + fmtC(g.adt) + '</td>'
+            + '<td class="r tot bar-cell"><div class="bar-bg" style="width:' + pctG + '%"></div><span>' + fmt(tot) + '</span></td>'
             + '</tr>';
-          g.names.forEach(function(name) {
+          g.items.forEach(function(it, idx) {
             html += '<tr class="aa-sub">'
-              + '<td class="sub-name">' + name + '</td>'
+              + '<td class="sub-name">' + titleCase(it.name) + (it.fid ? '<span class="fid">#' + it.fid + '</span>' : '') + '</td>'
               + '<td colspan="6"></td>'
               + '</tr>';
           });

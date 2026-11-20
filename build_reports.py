@@ -28,7 +28,8 @@ EXCLUDE_QES = {'Rochester RHIO'}
 # ---------------- hospitals ----------------
 raw = load('SQLExamples/reportonhospitals.json')
 rows = [[r['qe_name'], r['organization_name'], r['assigning_authority'],
-         int(r['ccd_count']), int(r['trn_count']), int(r['lab_count']), int(r['adt_count'])]
+         int(r['ccd_count']), int(r['trn_count']), int(r['lab_count']), int(r['adt_count']),
+         r.get('nys_facility_id', '')]
         for r in raw['rows']
         if r['qe_name'] not in EXCLUDE_QES]
 tot = defaultdict(int)
