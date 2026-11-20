@@ -1,4 +1,4 @@
-"""
+﻿"""
 Build the demo home screen plus both renderings of the SAME Marcus cohort:
   - marcus_fhir.html    SMART on FHIR style (build_smart)
   - marcus_fusion.html  HEALTHeLINK / Fusion style (build_chart)
@@ -67,10 +67,10 @@ cards_html = '\n      '.join(_qe_card(q) for q in QES)
 live_n = sum(1 for q in QES if q['live'])
 
 # ============================================================
-# Extra CSS — plain string so CSS braces need no escaping
+# Extra CSS â€” plain string so CSS braces need no escaping
 # ============================================================
 EXTRA_CSS = """
-  /* ── Understand Volume section ──────────────────────────────────── */
+  /* â”€â”€ Understand Volume section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .report-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:18px; }
   .report-card { background:#fff; border:1px solid var(--line); border-radius:14px;
     padding:20px 22px; box-shadow:0 6px 20px rgba(16,24,40,.08); }
@@ -94,7 +94,7 @@ EXTRA_CSS = """
     font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.5px;
     padding:4px 10px; border-radius:999px; }
 
-  /* ── Hospital report (Report 2) ─────────────────────────────────── */
+  /* â”€â”€ Hospital report (Report 2) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .qe-tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
   .qe-tab { border:1px solid var(--line); background:#fff; color:var(--muted); font-size:12px;
     font-weight:600; padding:5px 14px; border-radius:999px; cursor:pointer;
@@ -114,22 +114,18 @@ EXTRA_CSS = """
   .hosp-tbl td.r { text-align:right; font-variant-numeric:tabular-nums; }
   .hosp-tbl td.code { font-family:ui-monospace,monospace; font-size:11px; color:var(--muted); }
   .hosp-tbl td.tot { font-weight:700; }
-  .hosp-tbl tr.zero td { color:#c5cdd6; }
   .hosp-tbl tbody tr:hover td { background:#f8fafc; }
-  .hosp-tbl tr.zero:hover td { background:#fafbfc; }
   /* AA group header (multiple hospitals share one AA) */
   .hosp-tbl tr.aa-grp td { background:#f1f5f9; border-top:2px solid var(--line); }
   .hosp-tbl tr.aa-grp .aa-label { font-family:ui-monospace,monospace; font-size:11.5px;
     font-weight:700; color:var(--brand-2); }
   .hosp-tbl tr.aa-grp .aa-count { font-size:11px; color:var(--muted); margin-left:8px; font-weight:400; }
-  .hosp-tbl tr.aa-grp.zero td { background:#f8f9fa; }
-  .hosp-tbl tr.aa-grp.zero .aa-label { color:#c5cdd6; }
   /* Sub-rows under a grouped AA */
   .hosp-tbl tr.aa-sub td { border-bottom:1px solid #f3f4f6; }
   .hosp-tbl td.sub-name { padding-left:26px; color:var(--muted); font-size:12px; }"""
 
 # ============================================================
-# "Understand Volume" section HTML — plain string
+# "Understand Volume" section HTML â€” plain string
 # ============================================================
 VOLUME_SECTION = """
     <div class="sec-h" id="volume-reports" style="margin-top:36px">Understand Volume</div>
@@ -189,7 +185,7 @@ VOLUME_SECTION = """
     </div><!-- /report-grid -->"""
 
 # ============================================================
-# Report 1 render script — plain string (JS braces safe here)
+# Report 1 render script â€” plain string (JS braces safe here)
 # ============================================================
 REPORT1_SCRIPT = """
   <script>
@@ -227,7 +223,7 @@ REPORT1_SCRIPT = """
   </script>"""
 
 # ============================================================
-# Report 2 render script — plain string
+# Report 2 render script â€” plain string
 # ============================================================
 REPORT2_SCRIPT = """
   <script src="./hosp_data.js"></script>
@@ -276,7 +272,7 @@ REPORT2_SCRIPT = """
         var zc = zero ? ' zero' : '';
 
         if (g.names.length === 1) {
-          // Single hospital — clean flat row
+          // Single hospital â€” clean flat row
           html += '<tr' + (zero ? ' class="zero"' : '') + '>'
             + '<td>' + g.names[0] + '</td>'
             + '<td class="code">' + g.aa + '</td>'
@@ -285,7 +281,7 @@ REPORT2_SCRIPT = """
             + '<td class="r tot">' + fmt(tot) + '</td>'
             + '</tr>';
         } else {
-          // Multiple hospitals share this AA — group header + sub-rows
+          // Multiple hospitals share this AA â€” group header + sub-rows
           html += '<tr class="aa-grp' + zc + '">'
             + '<td colspan="2"><span class="aa-label">' + g.aa + '</span>'
             + '<span class="aa-count">' + g.names.length + ' hospitals</span></td>'
@@ -370,7 +366,7 @@ INDEX = f"""<!DOCTYPE html>
   .foot {{ text-align:center; color:var(--muted); font-size:11.5px; padding:0 0 26px; }}
   .mark svg {{ width:26px; height:26px; }}
 
-  /* ── Page nav ───────────────────────────────────────────────────── */
+  /* â”€â”€ Page nav â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .page-nav {{ display:flex; justify-content:center; gap:8px; padding:0 20px 16px;
     background:linear-gradient(90deg,var(--brand-2),var(--brand)); flex-wrap:wrap; }}
   .page-nav a {{ color:rgba(255,255,255,.75); text-decoration:none; font-size:12.5px;
