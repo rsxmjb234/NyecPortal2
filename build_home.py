@@ -203,7 +203,7 @@ VOLUME_SECTION = """
           Nov&nbsp;4&nbsp;&ndash;&nbsp;Nov&nbsp;13,&nbsp;2026 &middot; Article&nbsp;28 hospitals &middot; CCD&nbsp;+&nbsp;TRN&nbsp;+&nbsp;LAB&nbsp;+&nbsp;ADT &middot; filter by QE
         </div>
         <div class="qe-tabs" id="hosp-tabs"></div>
-        <div id="hosp-badge"></div>
+        <div id="hosp-badge" style="margin-bottom:10px"></div>
         <div class="hosp-wrap">
           <table class="hosp-tbl">
             <thead><tr>
@@ -370,10 +370,17 @@ REPORT2_SCRIPT = """
       });
 
       var maxTot = Math.max.apply(null, groups.map(function(g) { return g.ccd + g.trn + g.lab + g.adt; }));
-      var active = groups.filter(function(g) { return g.ccd + g.trn + g.lab + g.adt > 0; }).length;
+      var n = groups.length;
+      var ccdN = groups.filter(function(g) { return g.ccd > 0; }).length;
+      var trnN = groups.filter(function(g) { return g.trn > 0; }).length;
+      var labN = groups.filter(function(g) { return g.lab > 0; }).length;
+      var adtN = groups.filter(function(g) { return g.adt > 0; }).length;
+      function pct(v) { return n > 0 ? Math.round(v / n * 100) + '%' : '0%'; }
       document.getElementById('hosp-badge').innerHTML =
-        '<span class="hosp-badge">' + active + ' of ' + groups.length +
-        ' assigning authorities submitting</span>';
+        '<span class="hosp-badge">CCD: ' + ccdN + '/' + n + ' (' + pct(ccdN) + ')</span> ' +
+        '<span class="hosp-badge">TRN: ' + trnN + '/' + n + ' (' + pct(trnN) + ')</span> ' +
+        '<span class="hosp-badge">LAB: ' + labN + '/' + n + ' (' + pct(labN) + ')</span> ' +
+        '<span class="hosp-badge">ADT: ' + adtN + '/' + n + ' (' + pct(adtN) + ')</span>';
 
       var html = '';
       groups.forEach(function(g) {
