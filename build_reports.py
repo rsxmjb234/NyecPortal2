@@ -28,11 +28,12 @@ EXCLUDE_QES = {'Rochester RHIO'}
 # ---------------- hospitals ----------------
 raw = load('SQLExamples/reportonhospitals.json')
 rows = [[r['qe_name'], r['organization_name'], r['assigning_authority'],
-         int(r['ccd_count']), int(r['trn_count'])] for r in raw['rows']
+         int(r['ccd_count']), int(r['trn_count']), int(r['lab_count']), int(r['adt_count'])]
+        for r in raw['rows']
         if r['qe_name'] not in EXCLUDE_QES]
 tot = defaultdict(int)
 for r in rows:
-    tot[r[0]] += r[3] + r[4]
+    tot[r[0]] += r[3] + r[4] + r[5] + r[6]
 qes = sorted(tot, key=lambda q: -tot[q])
 n = write_js('hosp_data.js', 'HOSP',
              {'qes': qes, 'rows': rows,
@@ -47,15 +48,16 @@ QE_LABEL = {
     'rochester': 'Rochester RHIO', 'healthelink': 'HEALTHeLINK', 'bronx': 'Bronx RHIO',
 }
 raw = load('SQLExamples/reportonnonhospitals.json')
-# [qe, name, aa, type, in_sfdc(1/0), sfdc_org_count, ccd, trn]
+# [qe, name, aa, type, in_sfdc(1/0), sfdc_org_count, ccd, trn, lab, adt]
 rows = [[QE_LABEL.get(r['qe'], r['qe']), r['organization_name'], r['assigning_authority'],
          r['organization_type'], 1 if r['sfdc_status'] == 'In SFDC' else 0,
-         int(r['sfdc_org_count']), int(r['ccd_count']), int(r['trn_count'])]
+         int(r['sfdc_org_count']), int(r['ccd_count']), int(r['trn_count']),
+         int(r['lab_count']), int(r['adt_count'])]
         for r in raw['rows']
         if QE_LABEL.get(r['qe'], r['qe']) not in EXCLUDE_QES]
 tot = defaultdict(int)
 for r in rows:
-    tot[r[0]] += r[6] + r[7]
+    tot[r[0]] += r[6] + r[7] + r[8] + r[9]
 qes = sorted(tot, key=lambda q: -tot[q])
 n = write_js('nonhosp_data.js', 'NONHOSP',
              {'qes': qes, 'rows': rows,

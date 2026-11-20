@@ -162,6 +162,7 @@ VOLUME_SECTION = """
           <div class="vol-legend-item"><div class="vol-legend-dot" style="background:#0ea5a4"></div>CCD</div>
           <div class="vol-legend-item"><div class="vol-legend-dot" style="background:#3b82f6"></div>TRN</div>
           <div class="vol-legend-item"><div class="vol-legend-dot" style="background:#94a3b8"></div>LAB</div>
+          <div class="vol-legend-item"><div class="vol-legend-dot" style="background:#f59e0b"></div>ADT</div>
         </div>
         <div class="report-meta">
           Source: <code>DailyVolumeByQE-28Day-SingleSnapshot-ExcludeOrphans.sql</code>
@@ -173,7 +174,7 @@ VOLUME_SECTION = """
       <div class="report-card full" id="hosp-report">
         <div class="report-title">Hospital Volume &mdash; Last 10 Days</div>
         <div class="report-sub" style="margin:3px 0 16px">
-          Nov&nbsp;4&nbsp;&ndash;&nbsp;Nov&nbsp;13,&nbsp;2026 &middot; Article&nbsp;28 hospitals &middot; CCD&nbsp;+&nbsp;TRN &middot; filter by QE
+          Nov&nbsp;4&nbsp;&ndash;&nbsp;Nov&nbsp;13,&nbsp;2026 &middot; Article&nbsp;28 hospitals &middot; CCD&nbsp;+&nbsp;TRN&nbsp;+&nbsp;LAB&nbsp;+&nbsp;ADT &middot; filter by QE
         </div>
         <div class="qe-tabs" id="hosp-tabs"></div>
         <div id="hosp-badge"></div>
@@ -181,7 +182,7 @@ VOLUME_SECTION = """
           <table class="hosp-tbl">
             <thead><tr>
               <th>Hospital</th><th>AA&nbsp;Code</th>
-              <th class="r">CCD</th><th class="r">TRN</th><th class="r">Total</th>
+              <th class="r">CCD</th><th class="r">TRN</th><th class="r">LAB</th><th class="r">ADT</th><th class="r">Total</th>
             </tr></thead>
             <tbody id="hosp-tbody"></tbody>
           </table>
@@ -197,7 +198,7 @@ VOLUME_SECTION = """
       <div class="report-card full" id="nonhosp-report">
         <div class="report-title">Non-Hospital Sources &mdash; Last 10 Days</div>
         <div class="report-sub" style="margin:3px 0 16px">
-          Nov&nbsp;4&nbsp;&ndash;&nbsp;Nov&nbsp;13,&nbsp;2026 &middot; every non-hospital assigning authority with data in PDR &middot; CCD&nbsp;+&nbsp;TRN &middot; filter by QE
+          Nov&nbsp;4&nbsp;&ndash;&nbsp;Nov&nbsp;13,&nbsp;2026 &middot; every non-hospital assigning authority with data in PDR &middot; CCD&nbsp;+&nbsp;TRN&nbsp;+&nbsp;LAB&nbsp;+&nbsp;ADT &middot; filter by QE
         </div>
         <div class="qe-tabs" id="nonhosp-tabs"></div>
         <div id="nonhosp-badge"></div>
@@ -205,7 +206,7 @@ VOLUME_SECTION = """
           <table class="hosp-tbl">
             <thead><tr>
               <th>Source</th><th>AA&nbsp;Code</th><th>Type</th>
-              <th class="r">CCD</th><th class="r">TRN</th><th class="r">Total</th>
+              <th class="r">CCD</th><th class="r">TRN</th><th class="r">LAB</th><th class="r">ADT</th><th class="r">Total</th>
             </tr></thead>
             <tbody id="nonhosp-tbody"></tbody>
           </table>
@@ -235,21 +236,21 @@ REPORT1_SCRIPT = """
   <script>
   (function () {
     var rows = [
-      { qe: "Healthix",           ccd: 6856187, trn: 3691902, lab: 5822179 },
-      { qe: "HealtheConnections", ccd: 4064234, trn: 2946189, lab: 4940467 },
-      { qe: "HEALTHeLINK",          ccd: 1001590, trn:  989702, lab: 1857966 },
-      { qe: "Hixny",              ccd: 2497901, trn:   86968, lab: 1177507 },
-      { qe: "Bronx RHIO",         ccd:  832486, trn: 1191999, lab: 1209660 }
+      { qe: "Healthix",           ccd: 6856187, trn: 3691902, lab: 5822179, adt: 0 },
+      { qe: "HealtheConnections", ccd: 4064234, trn: 2946189, lab: 4940467, adt: 0 },
+      { qe: "HEALTHeLINK",        ccd: 1001590, trn:  989702, lab: 1857966, adt: 0 },
+      { qe: "Hixny",              ccd: 2497901, trn:   86968, lab: 1177507, adt: 0 },
+      { qe: "Bronx RHIO",         ccd:  832486, trn: 1191999, lab: 1209660, adt: 0 }
     ];
     rows.sort(function(a, b) {
-      return (b.ccd + b.trn + b.lab) - (a.ccd + a.trn + a.lab);
+      return (b.ccd + b.trn + b.lab + b.adt) - (a.ccd + a.trn + a.lab + a.adt);
     });
-    var maxTotal = Math.max.apply(null, rows.map(function(r) { return r.ccd + r.trn + r.lab; }));
+    var maxTotal = Math.max.apply(null, rows.map(function(r) { return r.ccd + r.trn + r.lab + r.adt; }));
     function fmt(n) { return n.toLocaleString(); }
     function pct(v) { return (v / maxTotal * 100).toFixed(2) + '%'; }
     var container = document.getElementById('vol-chart');
     rows.forEach(function(r) {
-      var total = r.ccd + r.trn + r.lab;
+      var total = r.ccd + r.trn + r.lab + r.adt;
       var div = document.createElement('div');
       div.className = 'vol-row';
       div.innerHTML =
@@ -258,6 +259,7 @@ REPORT1_SCRIPT = """
           '<div class="vol-bar-seg" style="width:' + pct(r.ccd) + ';background:#0ea5a4" title="CCD: ' + fmt(r.ccd) + '"></div>' +
           '<div class="vol-bar-seg" style="width:' + pct(r.trn) + ';background:#3b82f6" title="TRN: ' + fmt(r.trn) + '"></div>' +
           '<div class="vol-bar-seg" style="width:' + pct(r.lab) + ';background:#94a3b8" title="LAB: ' + fmt(r.lab) + '"></div>' +
+          '<div class="vol-bar-seg" style="width:' + pct(r.adt) + ';background:#f59e0b" title="ADT: ' + fmt(r.adt) + '"></div>' +
         '</div>' +
         '<div class="vol-total">' + fmt(total) + '</div>';
       container.appendChild(div);
@@ -291,7 +293,7 @@ REPORT2_SCRIPT = """
       rows.forEach(function(r) {
         var aa = r[2];
         if (!seen[aa]) {
-          seen[aa] = { aa: aa, ccd: r[3], trn: r[4], names: [] };
+          seen[aa] = { aa: aa, ccd: r[3], trn: r[4], lab: r[5], adt: r[6], names: [] };
           groups.push(seen[aa]);
         }
         seen[aa].names.push(r[1]);
@@ -299,43 +301,45 @@ REPORT2_SCRIPT = """
 
       // Sort groups: AA total DESC, then AA name ASC
       groups.sort(function(a, b) {
-        var ta = a.ccd + a.trn, tb = b.ccd + b.trn;
+        var ta = a.ccd + a.trn + a.lab + a.adt, tb = b.ccd + b.trn + b.lab + b.adt;
         return tb !== ta ? tb - ta : a.aa.localeCompare(b.aa);
       });
 
-      var active = groups.filter(function(g) { return g.ccd + g.trn > 0; }).length;
+      var active = groups.filter(function(g) { return g.ccd + g.trn + g.lab + g.adt > 0; }).length;
       document.getElementById('hosp-badge').innerHTML =
         '<span class="hosp-badge">' + active + ' of ' + groups.length +
         ' assigning authorities submitting</span>';
 
       var html = '';
       groups.forEach(function(g) {
-        var tot = g.ccd + g.trn;
-        var zero = tot === 0;
-        var zc = zero ? ' zero' : '';
+        var tot = g.ccd + g.trn + g.lab + g.adt;
 
         if (g.names.length === 1) {
           // Single hospital â€” clean flat row
-          html += '<tr' + (zero ? ' class="zero"' : '') + '>'
+          html += '<tr>'
             + '<td>' + g.names[0] + '</td>'
             + '<td class="code">' + g.aa + '</td>'
             + '<td class="r">' + fmt(g.ccd) + '</td>'
             + '<td class="r">' + fmt(g.trn) + '</td>'
+            + '<td class="r">' + fmt(g.lab) + '</td>'
+            + '<td class="r">' + fmt(g.adt) + '</td>'
             + '<td class="r tot">' + fmt(tot) + '</td>'
             + '</tr>';
         } else {
           // Multiple hospitals share this AA â€” group header + sub-rows
-          html += '<tr class="aa-grp' + zc + '">'
+          html += '<tr class="aa-grp">'
             + '<td colspan="2"><span class="aa-label">' + g.aa + '</span>'
             + '<span class="aa-count">' + g.names.length + ' hospitals</span></td>'
             + '<td class="r">' + fmt(g.ccd) + '</td>'
             + '<td class="r">' + fmt(g.trn) + '</td>'
+            + '<td class="r">' + fmt(g.lab) + '</td>'
+            + '<td class="r">' + fmt(g.adt) + '</td>'
             + '<td class="r tot">' + fmt(tot) + '</td>'
             + '</tr>';
           g.names.forEach(function(name) {
-            html += '<tr class="aa-sub' + zc + '">'
+            html += '<tr class="aa-sub">'
               + '<td class="sub-name">' + name + '</td>'
-              + '<td colspan="4"></td>'
+              + '<td colspan="6"></td>'
               + '</tr>';
           });
         }
@@ -387,10 +391,10 @@ REPORT3_SCRIPT = """
     }
 
     function render(qe) {
-      // row: [qe, name, aa, type, inSfdc, orgCount, ccd, trn]
+      // row: [qe, name, aa, type, inSfdc, orgCount, ccd, trn, lab, adt]
       var rows = D.rows.filter(function(r) { return r[0] === qe; });
       rows.sort(function(a, b) {
-        var ta = a[6] + a[7], tb = b[6] + b[7];
+        var ta = a[6] + a[7] + a[8] + a[9], tb = b[6] + b[7] + b[8] + b[9];
         return tb !== ta ? tb - ta : a[2].localeCompare(b[2]);
       });
       var notIn = rows.filter(function(r) { return !r[4]; }).length;
@@ -400,7 +404,7 @@ REPORT3_SCRIPT = """
 
       var html = '';
       rows.forEach(function(r) {
-        var tot = r[6] + r[7];
+        var tot = r[6] + r[7] + r[8] + r[9];
         var name = r[4]
           ? esc(r[1]) + (r[5] > 1 ? ' <span class="more">+' + (r[5] - 1) + ' more</span>' : '')
           : '<span class="nosfdc">Not in SFDC</span>';
@@ -411,6 +415,8 @@ REPORT3_SCRIPT = """
           + '<td class="typ">' + typ + '</td>'
           + '<td class="r">' + fmt(r[6]) + '</td>'
           + '<td class="r">' + fmt(r[7]) + '</td>'
+          + '<td class="r">' + fmt(r[8]) + '</td>'
+          + '<td class="r">' + fmt(r[9]) + '</td>'
           + '<td class="r tot">' + fmt(tot) + '</td>'
           + '</tr>';
       });

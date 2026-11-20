@@ -4,7 +4,7 @@ Expected runtime: ~1-2 minutes
 
 Goal:
 - Report on every NON-hospital source in PDR for the last 10 complete days,
-  counting CCD and TRN per assigning authority (AA) per QE bucket.
+  counting CCD, TRN, LAB (ORU), and ADT per assigning authority (AA) per QE bucket.
 - This is the inverse of reportonhospitals.sql. Hospitals start from the
   Salesforce (SFDC) list and look right into PDR. This report starts from
   PDR ("all data that landed") and looks LEFT into SFDC for a name/type.
@@ -81,7 +81,9 @@ actual AS (
             ELSE upper(trim(split_part(i.key, '/', 1)))
         END AS aa_key,
         count_if(regexp_like(lower(i.key), '(^|/)ccd(/|$)')) AS ccd_count,
-        count_if(regexp_like(lower(i.key), '(^|/)trn(/|$)')) AS trn_count
+        count_if(regexp_like(lower(i.key), '(^|/)trn(/|$)')) AS trn_count,
+        count_if(regexp_like(lower(i.key), '(^|/)(lab|oru)(/|$)')) AS lab_count,
+        count_if(regexp_like(lower(i.key), '(^|/)adt(/|$)')) AS adt_count
     FROM pdr_inventory.pdr_inventory_prod_data_all i
     CROSS JOIN params p
     WHERE
@@ -98,14 +100,16 @@ actual AS (
         AND (
             regexp_like(lower(i.key), '(^|/)ccd(/|$)')
             OR regexp_like(lower(i.key), '(^|/)trn(/|$)')
+            OR regexp_like(lower(i.key), '(^|/)(lab|oru)(/|$)')
+            OR regexp_like(lower(i.key), '(^|/)adt(/|$)')
         )
         -- Submission date window (from key path, never changes on rewrite)
         AND TRY(date_parse(
-                regexp_extract(i.key, '(?i)(?:ccd|trn)/(\d{4}/[A-Za-z]{3}/\d{2})/', 1),
+                regexp_extract(i.key, '(?i)(?:ccd|trn|lab|oru|adt)/(\d{4}/[A-Za-z]{3}/\d{2})/', 1),
                 '%Y/%b/%d'
             )) >= p.window_start
         AND TRY(date_parse(
-                regexp_extract(i.key, '(?i)(?:ccd|trn)/(\d{4}/[A-Za-z]{3}/\d{2})/', 1),
+                regexp_extract(i.key, '(?i)(?:ccd|trn|lab|oru|adt)/(\d{4}/[A-Za-z]{3}/\d{2})/', 1),
                 '%Y/%b/%d'
             )) < p.snapshot_day
     GROUP BY 1, 2
@@ -120,7 +124,9 @@ SELECT
     coalesce(s.org_count, 0)                              AS sfdc_org_count,
     a.ccd_count,
     a.trn_count,
-    a.ccd_count + a.trn_count                             AS total_docs
+    a.lab_count,
+    a.adt_count,
+    a.ccd_count + a.trn_count + a.lab_count + a.adt_count AS total_docs
 FROM actual a
 LEFT JOIN sfdc s         ON a.aa_key = s.aa_key
 LEFT JOIN hospital_aas h ON a.aa_key = h.aa_key

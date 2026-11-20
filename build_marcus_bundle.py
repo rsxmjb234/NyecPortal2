@@ -412,8 +412,11 @@ def main():
     for old_dir in ('ccda', 'oru-hl7'):
         old_path = os.path.join(OUT, old_dir)
         if os.path.isdir(old_path):
-            shutil.rmtree(old_path)
-            print(f'  Removed old flat directory: {old_path}')
+            try:
+                shutil.rmtree(old_path)
+                print(f'  Removed old flat directory: {old_path}')
+            except PermissionError:
+                print(f'  Warning: could not remove {old_path} (locked by OneDrive?) - skipping')
 
     # Create per-QE subfolders
     qe_names = sorted(set(s['qe'].lower() for s in SOURCES))

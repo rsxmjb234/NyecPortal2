@@ -3,10 +3,10 @@ Expected cost/run: ~$0.30-0.60 (ONE inventory snapshot partition)
 Expected runtime: ~1-2 minutes
 
 Goal:
-- Daily count of PDR documents (CCD, TRN, LAB) by QE over the last 28 days
+- Daily count of PDR documents (CCD, TRN, LAB, ADT) by QE over the last 28 days
   (4 full weeks — captures weekly rhythm and holiday dips), for loading into
   Excel to forecast/project future volume.
-- Output columns: date, qe, ccd_in_pdr, trn_in_pdr, lab_in_pdr (one row per
+- Output columns: date, qe, ccd_in_pdr, trn_in_pdr, lab_in_pdr, adt_in_pdr (one row per
   day + QE).
 
 SINGLE-SNAPSHOT APPROACH (why this is cheap):
@@ -94,7 +94,7 @@ key_parts AS (
         split_part(i.key, '/', 2) AS seg2_raw,
         -- TRUE submission date from the key path (never changes on rewrite).
         TRY(date_parse(
-            regexp_extract(i.key, '(?i)(?:ccd|trn|lab|oru)/(\d{4}/[A-Za-z]{3}/\d{2})/', 1),
+            regexp_extract(i.key, '(?i)(?:ccd|trn|lab|oru|adt)/(\d{4}/[A-Za-z]{3}/\d{2})/', 1),
             '%Y/%b/%d'
         )) AS submission_date
     FROM pdr_inventory.pdr_inventory_prod_data_all i
@@ -120,7 +120,7 @@ pdr_docs AS (
         submission_date,
         qe,
         upper(trim(seg1_raw)) AS assigning_authority,
-        CASE seg2 WHEN 'ccd' THEN 'CCD' WHEN 'trn' THEN 'TRN' WHEN 'lab' THEN 'LAB' END AS data_type
+        CASE seg2 WHEN 'ccd' THEN 'CCD' WHEN 'trn' THEN 'TRN' WHEN 'lab' THEN 'LAB' WHEN 'adt' THEN 'ADT' END AS data_type
     FROM key_parts
     CROSS JOIN config c
     WHERE submission_date IS NOT NULL
@@ -146,7 +146,8 @@ SELECT
     qe,
     count_if(data_type = 'CCD') AS ccd_in_pdr,
     count_if(data_type = 'TRN') AS trn_in_pdr,
-    count_if(data_type = 'LAB') AS lab_in_pdr
+    count_if(data_type = 'LAB') AS lab_in_pdr,
+    count_if(data_type = 'ADT') AS adt_in_pdr
 FROM in_verato
 GROUP BY submission_date, qe
 ORDER BY date ASC, qe ASC;

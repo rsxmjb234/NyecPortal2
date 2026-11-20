@@ -1,10 +1,10 @@
 /*
-Expected cost/run: ~$0.60 (single snapshot partition, ~120 GB)
+Expected cost/run: ~$0.60 (single snapshot partition, ~47 GB)
 Expected runtime: ~1-2 minutes
 
 Goal:
 - Report ONLY on hospitals (Article 28 - Hospital) for the last 10 complete
-  days, counting CCD and TRN per assigning authority.
+  days, counting CCD, TRN, LAB (ORU), and ADT per assigning authority.
 - ALL hospital AAs in the SFDC lookup are shown, including those with zero
   submissions (shown as 0).
 - QE is sourced from lookup_hospital_assigning_authorities.qe_name (SFDC).
@@ -57,7 +57,9 @@ actual AS (
             ELSE upper(trim(split_part(i.key, '/', 1)))
         END AS aa_key,
         count_if(regexp_like(lower(i.key), '(^|/)ccd(/|$)')) AS ccd_count,
-        count_if(regexp_like(lower(i.key), '(^|/)trn(/|$)')) AS trn_count
+        count_if(regexp_like(lower(i.key), '(^|/)trn(/|$)')) AS trn_count,
+        count_if(regexp_like(lower(i.key), '(^|/)(lab|oru)(/|$)')) AS lab_count,
+        count_if(regexp_like(lower(i.key), '(^|/)adt(/|$)')) AS adt_count
     FROM pdr_inventory.pdr_inventory_prod_data_all i
     CROSS JOIN params p
     WHERE
@@ -74,14 +76,16 @@ actual AS (
         AND (
             regexp_like(lower(i.key), '(^|/)ccd(/|$)')
             OR regexp_like(lower(i.key), '(^|/)trn(/|$)')
+            OR regexp_like(lower(i.key), '(^|/)(lab|oru)(/|$)')
+            OR regexp_like(lower(i.key), '(^|/)adt(/|$)')
         )
         -- Submission date window (from key path, never changes on rewrite)
         AND TRY(date_parse(
-                regexp_extract(i.key, '(?i)(?:ccd|trn)/(\d{4}/[A-Za-z]{3}/\d{2})/', 1),
+                regexp_extract(i.key, '(?i)(?:ccd|trn|lab|oru|adt)/(\d{4}/[A-Za-z]{3}/\d{2})/', 1),
                 '%Y/%b/%d'
             )) >= p.window_start
         AND TRY(date_parse(
-                regexp_extract(i.key, '(?i)(?:ccd|trn)/(\d{4}/[A-Za-z]{3}/\d{2})/', 1),
+                regexp_extract(i.key, '(?i)(?:ccd|trn|lab|oru|adt)/(\d{4}/[A-Za-z]{3}/\d{2})/', 1),
                 '%Y/%b/%d'
             )) < p.snapshot_day
     GROUP BY 1
@@ -94,7 +98,10 @@ SELECT
     h.nys_facility_id,
     coalesce(a.ccd_count, 0)                                     AS ccd_count,
     coalesce(a.trn_count, 0)                                     AS trn_count,
-    coalesce(a.ccd_count, 0) + coalesce(a.trn_count, 0)         AS total_docs
+    coalesce(a.lab_count, 0)                                     AS lab_count,
+    coalesce(a.adt_count, 0)                                     AS adt_count,
+    coalesce(a.ccd_count, 0) + coalesce(a.trn_count, 0)
+        + coalesce(a.lab_count, 0) + coalesce(a.adt_count, 0)   AS total_docs
 FROM hospitals h
 LEFT JOIN actual a ON h.aa_key = a.aa_key
 ORDER BY total_docs DESC, h.assigning_authority ASC, h.organization_name ASC;
