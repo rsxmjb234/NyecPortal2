@@ -39,8 +39,8 @@
       "ccd_count": "0",
       "trn_count": "264547",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "264547"
+      "adt_count": "3965797",
+      "total_docs": "4230344"
     },
     {
       "qe": "healtheconnections",
@@ -52,8 +52,8 @@
       "ccd_count": "90163",
       "trn_count": "68839",
       "lab_count": "87510",
-      "adt_count": "0",
-      "total_docs": "246512"
+      "adt_count": "551973",
+      "total_docs": "798485"
     },
     {
       "qe": "healthix",
@@ -117,8 +117,8 @@
       "ccd_count": "32348",
       "trn_count": "20621",
       "lab_count": "46325",
-      "adt_count": "0",
-      "total_docs": "99294"
+      "adt_count": "372487",
+      "total_docs": "471781"
     },
     {
       "qe": "healtheconnections",
@@ -195,8 +195,8 @@
       "ccd_count": "5911",
       "trn_count": "14939",
       "lab_count": "30381",
-      "adt_count": "0",
-      "total_docs": "51231"
+      "adt_count": "190811",
+      "total_docs": "242042"
     },
     {
       "qe": "hixny",
@@ -520,8 +520,8 @@
       "ccd_count": "0",
       "trn_count": "6068",
       "lab_count": "12705",
-      "adt_count": "0",
-      "total_docs": "18773"
+      "adt_count": "89398",
+      "total_docs": "108171"
     },
     {
       "qe": "hixny",
@@ -689,8 +689,8 @@
       "ccd_count": "3922",
       "trn_count": "1053",
       "lab_count": "11282",
-      "adt_count": "0",
-      "total_docs": "16257"
+      "adt_count": "72171",
+      "total_docs": "88428"
     },
     {
       "qe": "healthelink",
@@ -871,8 +871,8 @@
       "ccd_count": "283",
       "trn_count": "6240",
       "lab_count": "6447",
-      "adt_count": "0",
-      "total_docs": "12970"
+      "adt_count": "15799",
+      "total_docs": "28769"
     },
     {
       "qe": "bronx",
@@ -1183,8 +1183,8 @@
       "ccd_count": "524",
       "trn_count": "2557",
       "lab_count": "6416",
-      "adt_count": "0",
-      "total_docs": "9497"
+      "adt_count": "33230",
+      "total_docs": "42727"
     },
     {
       "qe": "healthix",
@@ -2080,8 +2080,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "3904",
-      "adt_count": "0",
-      "total_docs": "3904"
+      "adt_count": "551973",
+      "total_docs": "555877"
     },
     {
       "qe": "hixny",
@@ -3926,8 +3926,8 @@
       "ccd_count": "0",
       "trn_count": "292",
       "lab_count": "1352",
-      "adt_count": "0",
-      "total_docs": "1644"
+      "adt_count": "37845",
+      "total_docs": "39489"
     },
     {
       "qe": "hixny",
@@ -4862,8 +4862,8 @@
       "ccd_count": "162",
       "trn_count": "453",
       "lab_count": "569",
-      "adt_count": "0",
-      "total_docs": "1184"
+      "adt_count": "8803",
+      "total_docs": "9987"
     },
     {
       "qe": "rochester",
@@ -12987,8 +12987,8 @@
       "ccd_count": "54",
       "trn_count": "52",
       "lab_count": "240",
-      "adt_count": "0",
-      "total_docs": "346"
+      "adt_count": "3029",
+      "total_docs": "3375"
     },
     {
       "qe": "rochester",

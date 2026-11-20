@@ -11,8 +11,8 @@
       "ccd_count": "205693",
       "trn_count": "223251",
       "lab_count": "380408",
-      "adt_count": "0",
-      "total_docs": "809352"
+      "adt_count": "597658",
+      "total_docs": "1407010"
     },
     {
       "qe_name": "Bronx RHIO",
@@ -22,8 +22,8 @@
       "ccd_count": "205693",
       "trn_count": "223251",
       "lab_count": "380408",
-      "adt_count": "0",
-      "total_docs": "809352"
+      "adt_count": "1503079",
+      "total_docs": "2312431"
     },
     {
       "qe_name": "Bronx RHIO",
@@ -33,8 +33,8 @@
       "ccd_count": "205693",
       "trn_count": "223251",
       "lab_count": "380408",
-      "adt_count": "0",
-      "total_docs": "809352"
+      "adt_count": "1503079",
+      "total_docs": "2312431"
     },
     {
       "qe_name": "Bronx RHIO",
@@ -44,8 +44,8 @@
       "ccd_count": "205693",
       "trn_count": "223251",
       "lab_count": "380408",
-      "adt_count": "0",
-      "total_docs": "809352"
+      "adt_count": "1503079",
+      "total_docs": "2312431"
     },
     {
       "qe_name": "Bronx RHIO",
@@ -55,8 +55,8 @@
       "ccd_count": "205693",
       "trn_count": "223251",
       "lab_count": "380408",
-      "adt_count": "0",
-      "total_docs": "809352"
+      "adt_count": "1503079",
+      "total_docs": "2312431"
     },
     {
       "qe_name": "HealtheConnections",
@@ -66,8 +66,8 @@
       "ccd_count": "241659",
       "trn_count": "213861",
       "lab_count": "125901",
-      "adt_count": "0",
-      "total_docs": "581421"
+      "adt_count": "382326",
+      "total_docs": "963747"
     },
     {
       "qe_name": "HealtheConnections",
@@ -77,8 +77,8 @@
       "ccd_count": "241659",
       "trn_count": "213861",
       "lab_count": "125901",
-      "adt_count": "0",
-      "total_docs": "581421"
+      "adt_count": "382326",
+      "total_docs": "963747"
     },
     {
       "qe_name": "HealtheConnections",
@@ -88,8 +88,8 @@
       "ccd_count": "241659",
       "trn_count": "213861",
       "lab_count": "125901",
-      "adt_count": "0",
-      "total_docs": "581421"
+      "adt_count": "382326",
+      "total_docs": "963747"
     },
     {
       "qe_name": "HealtheConnections",
@@ -132,8 +132,8 @@
       "ccd_count": "62954",
       "trn_count": "213991",
       "lab_count": "176215",
-      "adt_count": "0",
-      "total_docs": "453160"
+      "adt_count": "1303689",
+      "total_docs": "1756849"
     },
     {
       "qe_name": "HEALTHeLINK",
@@ -143,8 +143,8 @@
       "ccd_count": "62954",
       "trn_count": "213991",
       "lab_count": "176215",
-      "adt_count": "0",
-      "total_docs": "453160"
+      "adt_count": "1303689",
+      "total_docs": "1756849"
     },
     {
       "qe_name": "HEALTHeLINK",
@@ -154,8 +154,8 @@
       "ccd_count": "62954",
       "trn_count": "213991",
       "lab_count": "176215",
-      "adt_count": "0",
-      "total_docs": "453160"
+      "adt_count": "1303689",
+      "total_docs": "1756849"
     },
     {
       "qe_name": "HEALTHeLINK",
@@ -165,8 +165,8 @@
       "ccd_count": "62954",
       "trn_count": "213991",
       "lab_count": "176215",
-      "adt_count": "0",
-      "total_docs": "453160"
+      "adt_count": "1303689",
+      "total_docs": "1756849"
     },
     {
       "qe_name": "HEALTHeLINK",
@@ -176,8 +176,8 @@
       "ccd_count": "62954",
       "trn_count": "213991",
       "lab_count": "176215",
-      "adt_count": "0",
-      "total_docs": "453160"
+      "adt_count": "1303689",
+      "total_docs": "1756849"
     },
     {
       "qe_name": "HEALTHeLINK",
@@ -187,8 +187,8 @@
       "ccd_count": "62954",
       "trn_count": "213991",
       "lab_count": "176215",
-      "adt_count": "0",
-      "total_docs": "453160"
+      "adt_count": "1303689",
+      "total_docs": "1756849"
     },
     {
       "qe_name": "HealtheConnections",
@@ -198,8 +198,8 @@
       "ccd_count": "80555",
       "trn_count": "72667",
       "lab_count": "105214",
-      "adt_count": "0",
-      "total_docs": "258436"
+      "adt_count": "357340",
+      "total_docs": "615776"
     },
     {
       "qe_name": "HEALTHeLINK",
@@ -209,8 +209,8 @@
       "ccd_count": "42509",
       "trn_count": "34886",
       "lab_count": "138959",
-      "adt_count": "0",
-      "total_docs": "216354"
+      "adt_count": "1531468",
+      "total_docs": "1747822"
     },
     {
       "qe_name": "HEALTHeLINK",
@@ -220,8 +220,8 @@
       "ccd_count": "42509",
       "trn_count": "34886",
       "lab_count": "138959",
-      "adt_count": "0",
-      "total_docs": "216354"
+      "adt_count": "1531468",
+      "total_docs": "1747822"
     },
     {
       "qe_name": "HEALTHeLINK",
@@ -231,8 +231,8 @@
       "ccd_count": "42509",
       "trn_count": "34886",
       "lab_count": "138959",
-      "adt_count": "0",
-      "total_docs": "216354"
+      "adt_count": "1531468",
+      "total_docs": "1747822"
     },
     {
       "qe_name": "HEALTHeLINK",
@@ -242,8 +242,8 @@
       "ccd_count": "42509",
       "trn_count": "34886",
       "lab_count": "138959",
-      "adt_count": "0",
-      "total_docs": "216354"
+      "adt_count": "1531468",
+      "total_docs": "1747822"
     },
     {
       "qe_name": "HEALTHeLINK",
@@ -253,8 +253,8 @@
       "ccd_count": "42509",
       "trn_count": "34886",
       "lab_count": "138959",
-      "adt_count": "0",
-      "total_docs": "216354"
+      "adt_count": "1531468",
+      "total_docs": "1747822"
     },
     {
       "qe_name": "HEALTHeLINK",
@@ -264,8 +264,8 @@
       "ccd_count": "42509",
       "trn_count": "34886",
       "lab_count": "138959",
-      "adt_count": "0",
-      "total_docs": "216354"
+      "adt_count": "1531468",
+      "total_docs": "1747822"
     },
     {
       "qe_name": "HEALTHeLINK",
@@ -275,8 +275,8 @@
       "ccd_count": "42509",
       "trn_count": "34886",
       "lab_count": "138959",
-      "adt_count": "0",
-      "total_docs": "216354"
+      "adt_count": "1531468",
+      "total_docs": "1747822"
     },
     {
       "qe_name": "Healthix",
@@ -286,8 +286,8 @@
       "ccd_count": "0",
       "trn_count": "95223",
       "lab_count": "117297",
-      "adt_count": "0",
-      "total_docs": "212520"
+      "adt_count": "203992",
+      "total_docs": "416512"
     },
     {
       "qe_name": "HealtheConnections",
@@ -297,8 +297,8 @@
       "ccd_count": "34333",
       "trn_count": "57477",
       "lab_count": "101993",
-      "adt_count": "0",
-      "total_docs": "193803"
+      "adt_count": "241744",
+      "total_docs": "435547"
     },
     {
       "qe_name": "HealtheConnections",
@@ -308,8 +308,8 @@
       "ccd_count": "34333",
       "trn_count": "57477",
       "lab_count": "101993",
-      "adt_count": "0",
-      "total_docs": "193803"
+      "adt_count": "241744",
+      "total_docs": "435547"
     },
     {
       "qe_name": "HealtheConnections",
@@ -319,8 +319,8 @@
       "ccd_count": "19409",
       "trn_count": "99561",
       "lab_count": "60281",
-      "adt_count": "0",
-      "total_docs": "179251"
+      "adt_count": "293223",
+      "total_docs": "472474"
     },
     {
       "qe_name": "HealtheConnections",
@@ -330,8 +330,8 @@
       "ccd_count": "19409",
       "trn_count": "99561",
       "lab_count": "60281",
-      "adt_count": "0",
-      "total_docs": "179251"
+      "adt_count": "293223",
+      "total_docs": "472474"
     },
     {
       "qe_name": "Healthix",
@@ -341,8 +341,8 @@
       "ccd_count": "0",
       "trn_count": "85687",
       "lab_count": "90942",
-      "adt_count": "0",
-      "total_docs": "176629"
+      "adt_count": "200675",
+      "total_docs": "377304"
     },
     {
       "qe_name": "Healthix",
@@ -352,8 +352,8 @@
       "ccd_count": "0",
       "trn_count": "89427",
       "lab_count": "79014",
-      "adt_count": "0",
-      "total_docs": "168441"
+      "adt_count": "218446",
+      "total_docs": "386887"
     },
     {
       "qe_name": "HealtheConnections",
@@ -363,8 +363,8 @@
       "ccd_count": "35974",
       "trn_count": "82407",
       "lab_count": "46691",
-      "adt_count": "0",
-      "total_docs": "165072"
+      "adt_count": "153303",
+      "total_docs": "318375"
     },
     {
       "qe_name": "Healthix",
@@ -374,8 +374,8 @@
       "ccd_count": "0",
       "trn_count": "82588",
       "lab_count": "81223",
-      "adt_count": "0",
-      "total_docs": "163811"
+      "adt_count": "178866",
+      "total_docs": "342677"
     },
     {
       "qe_name": "HealtheConnections",
@@ -385,8 +385,8 @@
       "ccd_count": "14312",
       "trn_count": "100485",
       "lab_count": "48746",
-      "adt_count": "0",
-      "total_docs": "163543"
+      "adt_count": "304826",
+      "total_docs": "468369"
     },
     {
       "qe_name": "HealtheConnections",
@@ -396,8 +396,8 @@
       "ccd_count": "14312",
       "trn_count": "100485",
       "lab_count": "48746",
-      "adt_count": "0",
-      "total_docs": "163543"
+      "adt_count": "304826",
+      "total_docs": "468369"
     },
     {
       "qe_name": "HealtheConnections",
@@ -407,8 +407,8 @@
       "ccd_count": "14312",
       "trn_count": "100485",
       "lab_count": "48746",
-      "adt_count": "0",
-      "total_docs": "163543"
+      "adt_count": "304826",
+      "total_docs": "468369"
     },
     {
       "qe_name": "Bronx RHIO",
@@ -418,8 +418,8 @@
       "ccd_count": "0",
       "trn_count": "88413",
       "lab_count": "70810",
-      "adt_count": "0",
-      "total_docs": "159223"
+      "adt_count": "230075",
+      "total_docs": "389298"
     },
     {
       "qe_name": "Bronx RHIO",
@@ -429,8 +429,8 @@
       "ccd_count": "0",
       "trn_count": "88413",
       "lab_count": "70810",
-      "adt_count": "0",
-      "total_docs": "159223"
+      "adt_count": "230075",
+      "total_docs": "389298"
     },
     {
       "qe_name": "Healthix",
@@ -440,8 +440,8 @@
       "ccd_count": "0",
       "trn_count": "73660",
       "lab_count": "75515",
-      "adt_count": "0",
-      "total_docs": "149175"
+      "adt_count": "208539",
+      "total_docs": "357714"
     },
     {
       "qe_name": "Bronx RHIO",
@@ -451,8 +451,8 @@
       "ccd_count": "0",
       "trn_count": "107481",
       "lab_count": "34278",
-      "adt_count": "0",
-      "total_docs": "141759"
+      "adt_count": "149225",
+      "total_docs": "290984"
     },
     {
       "qe_name": "Healthix",
@@ -462,8 +462,8 @@
       "ccd_count": "130105",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "130105"
+      "adt_count": "480431",
+      "total_docs": "610536"
     },
     {
       "qe_name": "HealtheConnections",
@@ -473,8 +473,8 @@
       "ccd_count": "6035",
       "trn_count": "33521",
       "lab_count": "85375",
-      "adt_count": "0",
-      "total_docs": "124931"
+      "adt_count": "200409",
+      "total_docs": "325340"
     },
     {
       "qe_name": "Healthix",
@@ -484,8 +484,8 @@
       "ccd_count": "0",
       "trn_count": "55625",
       "lab_count": "69267",
-      "adt_count": "0",
-      "total_docs": "124892"
+      "adt_count": "160261",
+      "total_docs": "285153"
     },
     {
       "qe_name": "Healthix",
@@ -495,8 +495,8 @@
       "ccd_count": "0",
       "trn_count": "55380",
       "lab_count": "68755",
-      "adt_count": "0",
-      "total_docs": "124135"
+      "adt_count": "157632",
+      "total_docs": "281767"
     },
     {
       "qe_name": "Healthix",
@@ -506,8 +506,8 @@
       "ccd_count": "0",
       "trn_count": "9474",
       "lab_count": "112966",
-      "adt_count": "0",
-      "total_docs": "122440"
+      "adt_count": "232929",
+      "total_docs": "355369"
     },
     {
       "qe_name": "Healthix",
@@ -550,8 +550,8 @@
       "ccd_count": "54705",
       "trn_count": "579",
       "lab_count": "66402",
-      "adt_count": "0",
-      "total_docs": "121686"
+      "adt_count": "389012",
+      "total_docs": "510698"
     },
     {
       "qe_name": "HealtheConnections",
@@ -561,8 +561,8 @@
       "ccd_count": "54705",
       "trn_count": "579",
       "lab_count": "66402",
-      "adt_count": "0",
-      "total_docs": "121686"
+      "adt_count": "389012",
+      "total_docs": "510698"
     },
     {
       "qe_name": "HealtheConnections",
@@ -572,8 +572,8 @@
       "ccd_count": "54705",
       "trn_count": "579",
       "lab_count": "66402",
-      "adt_count": "0",
-      "total_docs": "121686"
+      "adt_count": "389012",
+      "total_docs": "510698"
     },
     {
       "qe_name": "HealtheConnections",
@@ -583,8 +583,8 @@
       "ccd_count": "54705",
       "trn_count": "579",
       "lab_count": "66402",
-      "adt_count": "0",
-      "total_docs": "121686"
+      "adt_count": "389012",
+      "total_docs": "510698"
     },
     {
       "qe_name": "HealtheConnections",
@@ -594,8 +594,8 @@
       "ccd_count": "10804",
       "trn_count": "28255",
       "lab_count": "81148",
-      "adt_count": "0",
-      "total_docs": "120207"
+      "adt_count": "199727",
+      "total_docs": "319934"
     },
     {
       "qe_name": "Healthix",
@@ -605,8 +605,8 @@
       "ccd_count": "0",
       "trn_count": "51356",
       "lab_count": "44841",
-      "adt_count": "0",
-      "total_docs": "96197"
+      "adt_count": "135025",
+      "total_docs": "231222"
     },
     {
       "qe_name": "Healthix",
@@ -616,8 +616,8 @@
       "ccd_count": "0",
       "trn_count": "43933",
       "lab_count": "42966",
-      "adt_count": "0",
-      "total_docs": "86899"
+      "adt_count": "137366",
+      "total_docs": "224265"
     },
     {
       "qe_name": "HEALTHeLINK",
@@ -627,8 +627,8 @@
       "ccd_count": "19717",
       "trn_count": "40271",
       "lab_count": "20469",
-      "adt_count": "0",
-      "total_docs": "80457"
+      "adt_count": "232687",
+      "total_docs": "313144"
     },
     {
       "qe_name": "HEALTHeLINK",
@@ -638,8 +638,8 @@
       "ccd_count": "19717",
       "trn_count": "40271",
       "lab_count": "20469",
-      "adt_count": "0",
-      "total_docs": "80457"
+      "adt_count": "232687",
+      "total_docs": "313144"
     },
     {
       "qe_name": "Healthix",
@@ -649,8 +649,8 @@
       "ccd_count": "0",
       "trn_count": "41189",
       "lab_count": "35366",
-      "adt_count": "0",
-      "total_docs": "76555"
+      "adt_count": "81959",
+      "total_docs": "158514"
     },
     {
       "qe_name": "HealtheConnections",
@@ -660,8 +660,8 @@
       "ccd_count": "3403",
       "trn_count": "25384",
       "lab_count": "40298",
-      "adt_count": "0",
-      "total_docs": "69085"
+      "adt_count": "101394",
+      "total_docs": "170479"
     },
     {
       "qe_name": "HealtheConnections",
@@ -671,8 +671,8 @@
       "ccd_count": "3403",
       "trn_count": "25384",
       "lab_count": "40298",
-      "adt_count": "0",
-      "total_docs": "69085"
+      "adt_count": "101394",
+      "total_docs": "170479"
     },
     {
       "qe_name": "HealtheConnections",
@@ -682,8 +682,8 @@
       "ccd_count": "3403",
       "trn_count": "25384",
       "lab_count": "40298",
-      "adt_count": "0",
-      "total_docs": "69085"
+      "adt_count": "101394",
+      "total_docs": "170479"
     },
     {
       "qe_name": "Healthix",
@@ -693,8 +693,8 @@
       "ccd_count": "0",
       "trn_count": "15069",
       "lab_count": "53300",
-      "adt_count": "0",
-      "total_docs": "68369"
+      "adt_count": "112315",
+      "total_docs": "180684"
     },
     {
       "qe_name": "Hixny",
@@ -704,8 +704,8 @@
       "ccd_count": "3789",
       "trn_count": "3010",
       "lab_count": "57103",
-      "adt_count": "0",
-      "total_docs": "63902"
+      "adt_count": "244741",
+      "total_docs": "308643"
     },
     {
       "qe_name": "Hixny",
@@ -715,8 +715,8 @@
       "ccd_count": "3789",
       "trn_count": "3010",
       "lab_count": "57103",
-      "adt_count": "0",
-      "total_docs": "63902"
+      "adt_count": "244741",
+      "total_docs": "308643"
     },
     {
       "qe_name": "HEALTHeLINK",
@@ -726,8 +726,8 @@
       "ccd_count": "10161",
       "trn_count": "8640",
       "lab_count": "44595",
-      "adt_count": "0",
-      "total_docs": "63396"
+      "adt_count": "1161179",
+      "total_docs": "1224575"
     },
     {
       "qe_name": "Hixny",
@@ -803,8 +803,8 @@
       "ccd_count": "10149",
       "trn_count": "14203",
       "lab_count": "26561",
-      "adt_count": "0",
-      "total_docs": "50913"
+      "adt_count": "184390",
+      "total_docs": "235303"
     },
     {
       "qe_name": "Healthix",
@@ -814,8 +814,8 @@
       "ccd_count": "40350",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "40350"
+      "adt_count": "172402",
+      "total_docs": "212752"
     },
     {
       "qe_name": "Healthix",
@@ -825,8 +825,8 @@
       "ccd_count": "40350",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "40350"
+      "adt_count": "172402",
+      "total_docs": "212752"
     },
     {
       "qe_name": "HealtheConnections",
@@ -836,8 +836,8 @@
       "ccd_count": "2449",
       "trn_count": "17166",
       "lab_count": "20586",
-      "adt_count": "0",
-      "total_docs": "40201"
+      "adt_count": "108244",
+      "total_docs": "148445"
     },
     {
       "qe_name": "HealtheConnections",
@@ -847,8 +847,8 @@
       "ccd_count": "5102",
       "trn_count": "12206",
       "lab_count": "15259",
-      "adt_count": "0",
-      "total_docs": "32567"
+      "adt_count": "101312",
+      "total_docs": "133879"
     },
     {
       "qe_name": "Healthix",
@@ -858,8 +858,8 @@
       "ccd_count": "0",
       "trn_count": "4756",
       "lab_count": "27538",
-      "adt_count": "0",
-      "total_docs": "32294"
+      "adt_count": "77914",
+      "total_docs": "110208"
     },
     {
       "qe_name": "HealtheConnections",
@@ -869,8 +869,8 @@
       "ccd_count": "6055",
       "trn_count": "6795",
       "lab_count": "18301",
-      "adt_count": "0",
-      "total_docs": "31151"
+      "adt_count": "57633",
+      "total_docs": "88784"
     },
     {
       "qe_name": "Hixny",
@@ -880,8 +880,8 @@
       "ccd_count": "2758",
       "trn_count": "3636",
       "lab_count": "24557",
-      "adt_count": "0",
-      "total_docs": "30951"
+      "adt_count": "153217",
+      "total_docs": "184168"
     },
     {
       "qe_name": "Hixny",
@@ -891,8 +891,8 @@
       "ccd_count": "2758",
       "trn_count": "3636",
       "lab_count": "24557",
-      "adt_count": "0",
-      "total_docs": "30951"
+      "adt_count": "153217",
+      "total_docs": "184168"
     },
     {
       "qe_name": "Healthix",
@@ -902,8 +902,8 @@
       "ccd_count": "30896",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "30896"
+      "adt_count": "178774",
+      "total_docs": "209670"
     },
     {
       "qe_name": "Hixny",
@@ -913,8 +913,8 @@
       "ccd_count": "3009",
       "trn_count": "1136",
       "lab_count": "26210",
-      "adt_count": "0",
-      "total_docs": "30355"
+      "adt_count": "109162",
+      "total_docs": "139517"
     },
     {
       "qe_name": "HEALTHeLINK",
@@ -946,8 +946,8 @@
       "ccd_count": "6215",
       "trn_count": "0",
       "lab_count": "23204",
-      "adt_count": "0",
-      "total_docs": "29419"
+      "adt_count": "91992",
+      "total_docs": "121411"
     },
     {
       "qe_name": "Healthix",
@@ -957,8 +957,8 @@
       "ccd_count": "28103",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "28103"
+      "adt_count": "155175",
+      "total_docs": "183278"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -968,8 +968,8 @@
       "ccd_count": "0",
       "trn_count": "27853",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "27853"
+      "adt_count": "1308160",
+      "total_docs": "1336013"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -979,8 +979,8 @@
       "ccd_count": "0",
       "trn_count": "27853",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "27853"
+      "adt_count": "1308160",
+      "total_docs": "1336013"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -990,8 +990,8 @@
       "ccd_count": "0",
       "trn_count": "27853",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "27853"
+      "adt_count": "1308160",
+      "total_docs": "1336013"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -1001,8 +1001,8 @@
       "ccd_count": "0",
       "trn_count": "27853",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "27853"
+      "adt_count": "1308160",
+      "total_docs": "1336013"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -1012,8 +1012,8 @@
       "ccd_count": "0",
       "trn_count": "27853",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "27853"
+      "adt_count": "1308160",
+      "total_docs": "1336013"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -1023,8 +1023,8 @@
       "ccd_count": "0",
       "trn_count": "27853",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "27853"
+      "adt_count": "1308160",
+      "total_docs": "1336013"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -1034,8 +1034,8 @@
       "ccd_count": "0",
       "trn_count": "27853",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "27853"
+      "adt_count": "1308160",
+      "total_docs": "1336013"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -1045,8 +1045,8 @@
       "ccd_count": "0",
       "trn_count": "27853",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "27853"
+      "adt_count": "1308160",
+      "total_docs": "1336013"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -1056,8 +1056,8 @@
       "ccd_count": "0",
       "trn_count": "27853",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "27853"
+      "adt_count": "1308160",
+      "total_docs": "1336013"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -1067,8 +1067,8 @@
       "ccd_count": "0",
       "trn_count": "27853",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "27853"
+      "adt_count": "1308160",
+      "total_docs": "1336013"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -1078,8 +1078,8 @@
       "ccd_count": "0",
       "trn_count": "27853",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "27853"
+      "adt_count": "1308160",
+      "total_docs": "1336013"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -1089,8 +1089,8 @@
       "ccd_count": "0",
       "trn_count": "27853",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "27853"
+      "adt_count": "1308160",
+      "total_docs": "1336013"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -1100,8 +1100,8 @@
       "ccd_count": "0",
       "trn_count": "27853",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "27853"
+      "adt_count": "1308160",
+      "total_docs": "1336013"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -1111,8 +1111,8 @@
       "ccd_count": "0",
       "trn_count": "27853",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "27853"
+      "adt_count": "1308160",
+      "total_docs": "1336013"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -1122,8 +1122,8 @@
       "ccd_count": "0",
       "trn_count": "27853",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "27853"
+      "adt_count": "1308160",
+      "total_docs": "1336013"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -1133,8 +1133,8 @@
       "ccd_count": "0",
       "trn_count": "27853",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "27853"
+      "adt_count": "1308160",
+      "total_docs": "1336013"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -1144,8 +1144,8 @@
       "ccd_count": "0",
       "trn_count": "27853",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "27853"
+      "adt_count": "1308160",
+      "total_docs": "1336013"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -1155,8 +1155,8 @@
       "ccd_count": "0",
       "trn_count": "27853",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "27853"
+      "adt_count": "1308160",
+      "total_docs": "1336013"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -1166,8 +1166,8 @@
       "ccd_count": "0",
       "trn_count": "27853",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "27853"
+      "adt_count": "1308160",
+      "total_docs": "1336013"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -1177,8 +1177,8 @@
       "ccd_count": "0",
       "trn_count": "27853",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "27853"
+      "adt_count": "1308160",
+      "total_docs": "1336013"
     },
     {
       "qe_name": "Healthix",
@@ -1188,8 +1188,8 @@
       "ccd_count": "27481",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "27481"
+      "adt_count": "217641",
+      "total_docs": "245122"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1199,8 +1199,8 @@
       "ccd_count": "1657",
       "trn_count": "9008",
       "lab_count": "15733",
-      "adt_count": "0",
-      "total_docs": "26398"
+      "adt_count": "79539",
+      "total_docs": "105937"
     },
     {
       "qe_name": "Hixny",
@@ -1210,8 +1210,8 @@
       "ccd_count": "2984",
       "trn_count": "1274",
       "lab_count": "21972",
-      "adt_count": "0",
-      "total_docs": "26230"
+      "adt_count": "104870",
+      "total_docs": "131100"
     },
     {
       "qe_name": "Healthix",
@@ -1221,8 +1221,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "25168",
-      "adt_count": "0",
-      "total_docs": "25168"
+      "adt_count": "72899",
+      "total_docs": "98067"
     },
     {
       "qe_name": "HEALTHeLINK",
@@ -1232,8 +1232,8 @@
       "ccd_count": "1893",
       "trn_count": "11666",
       "lab_count": "11075",
-      "adt_count": "0",
-      "total_docs": "24634"
+      "adt_count": "92665",
+      "total_docs": "117299"
     },
     {
       "qe_name": "Healthix",
@@ -1243,8 +1243,8 @@
       "ccd_count": "4439",
       "trn_count": "0",
       "lab_count": "20130",
-      "adt_count": "0",
-      "total_docs": "24569"
+      "adt_count": "175424",
+      "total_docs": "199993"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1254,8 +1254,8 @@
       "ccd_count": "3812",
       "trn_count": "7567",
       "lab_count": "13130",
-      "adt_count": "0",
-      "total_docs": "24509"
+      "adt_count": "94499",
+      "total_docs": "119008"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1265,8 +1265,8 @@
       "ccd_count": "4670",
       "trn_count": "3027",
       "lab_count": "16098",
-      "adt_count": "0",
-      "total_docs": "23795"
+      "adt_count": "73478",
+      "total_docs": "97273"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1276,8 +1276,8 @@
       "ccd_count": "4670",
       "trn_count": "3027",
       "lab_count": "16098",
-      "adt_count": "0",
-      "total_docs": "23795"
+      "adt_count": "73478",
+      "total_docs": "97273"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1287,8 +1287,8 @@
       "ccd_count": "7981",
       "trn_count": "11305",
       "lab_count": "3663",
-      "adt_count": "0",
-      "total_docs": "22949"
+      "adt_count": "250232",
+      "total_docs": "273181"
     },
     {
       "qe_name": "Healthix",
@@ -1298,8 +1298,8 @@
       "ccd_count": "0",
       "trn_count": "9741",
       "lab_count": "13133",
-      "adt_count": "0",
-      "total_docs": "22874"
+      "adt_count": "46314",
+      "total_docs": "69188"
     },
     {
       "qe_name": "Healthix",
@@ -1309,8 +1309,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "21959",
-      "adt_count": "0",
-      "total_docs": "21959"
+      "adt_count": "29841",
+      "total_docs": "51800"
     },
     {
       "qe_name": "Healthix",
@@ -1320,8 +1320,8 @@
       "ccd_count": "0",
       "trn_count": "1082",
       "lab_count": "20875",
-      "adt_count": "0",
-      "total_docs": "21957"
+      "adt_count": "65277",
+      "total_docs": "87234"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1331,8 +1331,8 @@
       "ccd_count": "647",
       "trn_count": "3987",
       "lab_count": "17295",
-      "adt_count": "0",
-      "total_docs": "21929"
+      "adt_count": "94874",
+      "total_docs": "116803"
     },
     {
       "qe_name": "Hixny",
@@ -1342,8 +1342,8 @@
       "ccd_count": "1842",
       "trn_count": "1871",
       "lab_count": "17416",
-      "adt_count": "0",
-      "total_docs": "21129"
+      "adt_count": "140593",
+      "total_docs": "161722"
     },
     {
       "qe_name": "Hixny",
@@ -1353,8 +1353,8 @@
       "ccd_count": "3602",
       "trn_count": "1121",
       "lab_count": "15699",
-      "adt_count": "0",
-      "total_docs": "20422"
+      "adt_count": "81275",
+      "total_docs": "101697"
     },
     {
       "qe_name": "Healthix",
@@ -1364,8 +1364,8 @@
       "ccd_count": "0",
       "trn_count": "1031",
       "lab_count": "18330",
-      "adt_count": "0",
-      "total_docs": "19361"
+      "adt_count": "69215",
+      "total_docs": "88576"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1375,8 +1375,8 @@
       "ccd_count": "2148",
       "trn_count": "2331",
       "lab_count": "13779",
-      "adt_count": "0",
-      "total_docs": "18258"
+      "adt_count": "65218",
+      "total_docs": "83476"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1386,8 +1386,8 @@
       "ccd_count": "2770",
       "trn_count": "5218",
       "lab_count": "8717",
-      "adt_count": "0",
-      "total_docs": "16705"
+      "adt_count": "63687",
+      "total_docs": "80392"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -1408,8 +1408,8 @@
       "ccd_count": "0",
       "trn_count": "1707",
       "lab_count": "14085",
-      "adt_count": "0",
-      "total_docs": "15792"
+      "adt_count": "84566",
+      "total_docs": "100358"
     },
     {
       "qe_name": "Hixny",
@@ -1419,8 +1419,8 @@
       "ccd_count": "1667",
       "trn_count": "805",
       "lab_count": "11776",
-      "adt_count": "0",
-      "total_docs": "14248"
+      "adt_count": "49698",
+      "total_docs": "63946"
     },
     {
       "qe_name": "Hixny",
@@ -1430,8 +1430,8 @@
       "ccd_count": "2570",
       "trn_count": "1467",
       "lab_count": "9472",
-      "adt_count": "0",
-      "total_docs": "13509"
+      "adt_count": "108174",
+      "total_docs": "121683"
     },
     {
       "qe_name": "Hixny",
@@ -1441,8 +1441,8 @@
       "ccd_count": "2570",
       "trn_count": "1467",
       "lab_count": "9472",
-      "adt_count": "0",
-      "total_docs": "13509"
+      "adt_count": "108174",
+      "total_docs": "121683"
     },
     {
       "qe_name": "Hixny",
@@ -1452,8 +1452,8 @@
       "ccd_count": "2480",
       "trn_count": "704",
       "lab_count": "9780",
-      "adt_count": "0",
-      "total_docs": "12964"
+      "adt_count": "68920",
+      "total_docs": "81884"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1463,8 +1463,8 @@
       "ccd_count": "2121",
       "trn_count": "4618",
       "lab_count": "6109",
-      "adt_count": "0",
-      "total_docs": "12848"
+      "adt_count": "54258",
+      "total_docs": "67106"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1474,8 +1474,8 @@
       "ccd_count": "2503",
       "trn_count": "3212",
       "lab_count": "7124",
-      "adt_count": "0",
-      "total_docs": "12839"
+      "adt_count": "28317",
+      "total_docs": "41156"
     },
     {
       "qe_name": "Healthix",
@@ -1485,8 +1485,8 @@
       "ccd_count": "85",
       "trn_count": "9094",
       "lab_count": "2758",
-      "adt_count": "0",
-      "total_docs": "11937"
+      "adt_count": "4178",
+      "total_docs": "16115"
     },
     {
       "qe_name": "Healthix",
@@ -1496,8 +1496,8 @@
       "ccd_count": "8846",
       "trn_count": "2976",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "11822"
+      "adt_count": "196269",
+      "total_docs": "208091"
     },
     {
       "qe_name": "Healthix",
@@ -1507,8 +1507,8 @@
       "ccd_count": "8846",
       "trn_count": "2976",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "11822"
+      "adt_count": "196269",
+      "total_docs": "208091"
     },
     {
       "qe_name": "Healthix",
@@ -1518,8 +1518,8 @@
       "ccd_count": "8846",
       "trn_count": "2976",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "11822"
+      "adt_count": "196269",
+      "total_docs": "208091"
     },
     {
       "qe_name": "Healthix",
@@ -1529,8 +1529,8 @@
       "ccd_count": "8846",
       "trn_count": "2976",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "11822"
+      "adt_count": "196269",
+      "total_docs": "208091"
     },
     {
       "qe_name": "Healthix",
@@ -1540,8 +1540,8 @@
       "ccd_count": "8846",
       "trn_count": "2976",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "11822"
+      "adt_count": "196269",
+      "total_docs": "208091"
     },
     {
       "qe_name": "HEALTHeLINK",
@@ -1551,8 +1551,8 @@
       "ccd_count": "1874",
       "trn_count": "2461",
       "lab_count": "6606",
-      "adt_count": "0",
-      "total_docs": "10941"
+      "adt_count": "69788",
+      "total_docs": "80729"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1562,8 +1562,8 @@
       "ccd_count": "902",
       "trn_count": "4369",
       "lab_count": "5220",
-      "adt_count": "0",
-      "total_docs": "10491"
+      "adt_count": "38920",
+      "total_docs": "49411"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1573,8 +1573,8 @@
       "ccd_count": "63",
       "trn_count": "4553",
       "lab_count": "4702",
-      "adt_count": "0",
-      "total_docs": "9318"
+      "adt_count": "36552",
+      "total_docs": "45870"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1584,8 +1584,8 @@
       "ccd_count": "825",
       "trn_count": "3184",
       "lab_count": "5219",
-      "adt_count": "0",
-      "total_docs": "9228"
+      "adt_count": "31735",
+      "total_docs": "40963"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -1595,8 +1595,8 @@
       "ccd_count": "2088",
       "trn_count": "569",
       "lab_count": "5346",
-      "adt_count": "0",
-      "total_docs": "8003"
+      "adt_count": "43744",
+      "total_docs": "51747"
     },
     {
       "qe_name": "HEALTHeLINK",
@@ -1606,8 +1606,8 @@
       "ccd_count": "2088",
       "trn_count": "569",
       "lab_count": "5346",
-      "adt_count": "0",
-      "total_docs": "8003"
+      "adt_count": "60603",
+      "total_docs": "68606"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1617,8 +1617,8 @@
       "ccd_count": "0",
       "trn_count": "1804",
       "lab_count": "5821",
-      "adt_count": "0",
-      "total_docs": "7625"
+      "adt_count": "20766",
+      "total_docs": "28391"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1628,8 +1628,8 @@
       "ccd_count": "0",
       "trn_count": "4406",
       "lab_count": "2723",
-      "adt_count": "0",
-      "total_docs": "7129"
+      "adt_count": "11171",
+      "total_docs": "18300"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1639,8 +1639,8 @@
       "ccd_count": "0",
       "trn_count": "4406",
       "lab_count": "2723",
-      "adt_count": "0",
-      "total_docs": "7129"
+      "adt_count": "11171",
+      "total_docs": "18300"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1650,8 +1650,8 @@
       "ccd_count": "0",
       "trn_count": "4406",
       "lab_count": "2723",
-      "adt_count": "0",
-      "total_docs": "7129"
+      "adt_count": "11171",
+      "total_docs": "18300"
     },
     {
       "qe_name": "Hixny",
@@ -1661,8 +1661,8 @@
       "ccd_count": "1197",
       "trn_count": "474",
       "lab_count": "5443",
-      "adt_count": "0",
-      "total_docs": "7114"
+      "adt_count": "39971",
+      "total_docs": "47085"
     },
     {
       "qe_name": "Hixny",
@@ -1672,8 +1672,8 @@
       "ccd_count": "1114",
       "trn_count": "311",
       "lab_count": "5164",
-      "adt_count": "0",
-      "total_docs": "6589"
+      "adt_count": "26251",
+      "total_docs": "32840"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1683,8 +1683,8 @@
       "ccd_count": "6312",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "6312"
+      "adt_count": "5339",
+      "total_docs": "11651"
     },
     {
       "qe_name": "Healthix",
@@ -1694,8 +1694,8 @@
       "ccd_count": "5816",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "5816"
+      "adt_count": "271596",
+      "total_docs": "277412"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1705,8 +1705,8 @@
       "ccd_count": "1460",
       "trn_count": "1302",
       "lab_count": "2132",
-      "adt_count": "0",
-      "total_docs": "4894"
+      "adt_count": "16587",
+      "total_docs": "21481"
     },
     {
       "qe_name": "Hixny",
@@ -1716,8 +1716,8 @@
       "ccd_count": "1109",
       "trn_count": "809",
       "lab_count": "2547",
-      "adt_count": "0",
-      "total_docs": "4465"
+      "adt_count": "79946",
+      "total_docs": "84411"
     },
     {
       "qe_name": "Healthix",
@@ -1727,8 +1727,8 @@
       "ccd_count": "0",
       "trn_count": "1410",
       "lab_count": "2941",
-      "adt_count": "0",
-      "total_docs": "4351"
+      "adt_count": "63861",
+      "total_docs": "68212"
     },
     {
       "qe_name": "Healthix",
@@ -1738,8 +1738,8 @@
       "ccd_count": "4107",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "4107"
+      "adt_count": "43842",
+      "total_docs": "47949"
     },
     {
       "qe_name": "Hixny",
@@ -1749,8 +1749,8 @@
       "ccd_count": "377",
       "trn_count": "402",
       "lab_count": "3075",
-      "adt_count": "0",
-      "total_docs": "3854"
+      "adt_count": "31042",
+      "total_docs": "34896"
     },
     {
       "qe_name": "Hixny",
@@ -1760,8 +1760,8 @@
       "ccd_count": "377",
       "trn_count": "402",
       "lab_count": "3075",
-      "adt_count": "0",
-      "total_docs": "3854"
+      "adt_count": "31042",
+      "total_docs": "34896"
     },
     {
       "qe_name": "HEALTHeLINK",
@@ -1771,8 +1771,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "3778",
-      "adt_count": "0",
-      "total_docs": "3778"
+      "adt_count": "112860",
+      "total_docs": "116638"
     },
     {
       "qe_name": "Hixny",
@@ -1804,8 +1804,8 @@
       "ccd_count": "3439",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "3439"
+      "adt_count": "79191",
+      "total_docs": "82630"
     },
     {
       "qe_name": "Hixny",
@@ -1815,8 +1815,8 @@
       "ccd_count": "2402",
       "trn_count": "32",
       "lab_count": "900",
-      "adt_count": "0",
-      "total_docs": "3334"
+      "adt_count": "1339",
+      "total_docs": "4673"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1826,8 +1826,8 @@
       "ccd_count": "953",
       "trn_count": "1",
       "lab_count": "2154",
-      "adt_count": "0",
-      "total_docs": "3108"
+      "adt_count": "11097",
+      "total_docs": "14205"
     },
     {
       "qe_name": "Hixny",
@@ -1837,8 +1837,8 @@
       "ccd_count": "1508",
       "trn_count": "0",
       "lab_count": "1498",
-      "adt_count": "0",
-      "total_docs": "3006"
+      "adt_count": "16",
+      "total_docs": "3022"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -1859,8 +1859,8 @@
       "ccd_count": "1659",
       "trn_count": "50",
       "lab_count": "504",
-      "adt_count": "0",
-      "total_docs": "2213"
+      "adt_count": "3501",
+      "total_docs": "5714"
     },
     {
       "qe_name": "Hixny",
@@ -1870,8 +1870,8 @@
       "ccd_count": "402",
       "trn_count": "149",
       "lab_count": "1607",
-      "adt_count": "0",
-      "total_docs": "2158"
+      "adt_count": "13226",
+      "total_docs": "15384"
     },
     {
       "qe_name": "Hixny",
@@ -1881,8 +1881,8 @@
       "ccd_count": "918",
       "trn_count": "0",
       "lab_count": "873",
-      "adt_count": "0",
-      "total_docs": "1791"
+      "adt_count": "21913",
+      "total_docs": "23704"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -1925,8 +1925,8 @@
       "ccd_count": "349",
       "trn_count": "127",
       "lab_count": "964",
-      "adt_count": "0",
-      "total_docs": "1440"
+      "adt_count": "11584",
+      "total_docs": "13024"
     },
     {
       "qe_name": "HealtheConnections",
@@ -1936,8 +1936,8 @@
       "ccd_count": "613",
       "trn_count": "0",
       "lab_count": "776",
-      "adt_count": "0",
-      "total_docs": "1389"
+      "adt_count": "7302",
+      "total_docs": "8691"
     },
     {
       "qe_name": "Healthix",
@@ -1947,8 +1947,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "1295",
-      "adt_count": "0",
-      "total_docs": "1295"
+      "adt_count": "280630",
+      "total_docs": "281925"
     },
     {
       "qe_name": "Healthix",
@@ -1958,8 +1958,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "1295",
-      "adt_count": "0",
-      "total_docs": "1295"
+      "adt_count": "280630",
+      "total_docs": "281925"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -1991,8 +1991,8 @@
       "ccd_count": "0",
       "trn_count": "889",
       "lab_count": "188",
-      "adt_count": "0",
-      "total_docs": "1077"
+      "adt_count": "2029",
+      "total_docs": "3106"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -2079,8 +2079,8 @@
       "ccd_count": "684",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "684"
+      "adt_count": "89926",
+      "total_docs": "90610"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -2112,8 +2112,8 @@
       "ccd_count": "62",
       "trn_count": "0",
       "lab_count": "560",
-      "adt_count": "0",
-      "total_docs": "622"
+      "adt_count": "9748",
+      "total_docs": "10370"
     },
     {
       "qe_name": "HealtheConnections",
@@ -2123,8 +2123,8 @@
       "ccd_count": "0",
       "trn_count": "508",
       "lab_count": "72",
-      "adt_count": "0",
-      "total_docs": "580"
+      "adt_count": "4076",
+      "total_docs": "4656"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -2376,8 +2376,8 @@
       "ccd_count": "337",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "337"
+      "adt_count": "34058",
+      "total_docs": "34395"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -2563,8 +2563,8 @@
       "ccd_count": "0",
       "trn_count": "50",
       "lab_count": "186",
-      "adt_count": "0",
-      "total_docs": "236"
+      "adt_count": "289233",
+      "total_docs": "289469"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -3157,8 +3157,8 @@
       "ccd_count": "106",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "106"
+      "adt_count": "47185",
+      "total_docs": "47291"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -3201,8 +3201,8 @@
       "ccd_count": "0",
       "trn_count": "2",
       "lab_count": "103",
-      "adt_count": "0",
-      "total_docs": "105"
+      "adt_count": "1198",
+      "total_docs": "1303"
     },
     {
       "qe_name": "HealtheConnections",
@@ -3212,8 +3212,8 @@
       "ccd_count": "0",
       "trn_count": "2",
       "lab_count": "103",
-      "adt_count": "0",
-      "total_docs": "105"
+      "adt_count": "1198",
+      "total_docs": "1303"
     },
     {
       "qe_name": "HealtheConnections",
@@ -3223,8 +3223,8 @@
       "ccd_count": "0",
       "trn_count": "2",
       "lab_count": "103",
-      "adt_count": "0",
-      "total_docs": "105"
+      "adt_count": "1198",
+      "total_docs": "1303"
     },
     {
       "qe_name": "HealtheConnections",
@@ -3234,8 +3234,8 @@
       "ccd_count": "0",
       "trn_count": "2",
       "lab_count": "103",
-      "adt_count": "0",
-      "total_docs": "105"
+      "adt_count": "1198",
+      "total_docs": "1303"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -5104,8 +5104,8 @@
       "ccd_count": "11",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "11"
+      "adt_count": "2741",
+      "total_docs": "2752"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -5522,8 +5522,8 @@
       "ccd_count": "0",
       "trn_count": "1",
       "lab_count": "1",
-      "adt_count": "0",
-      "total_docs": "2"
+      "adt_count": "10734",
+      "total_docs": "10736"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -6842,8 +6842,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "122536",
+      "total_docs": "122536"
     },
     {
       "qe_name": "Healthix",
@@ -6853,8 +6853,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "9671",
+      "total_docs": "9671"
     },
     {
       "qe_name": "Healthix",
@@ -6864,8 +6864,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "9671",
+      "total_docs": "9671"
     },
     {
       "qe_name": "Healthix",
@@ -6875,8 +6875,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "9876",
+      "total_docs": "9876"
     },
     {
       "qe_name": "Healthix",
@@ -6886,8 +6886,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "9876",
+      "total_docs": "9876"
     },
     {
       "qe_name": "HealtheConnections",
@@ -6941,8 +6941,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "8302",
+      "total_docs": "8302"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -6974,8 +6974,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "260974",
+      "total_docs": "260974"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -6985,8 +6985,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "260974",
+      "total_docs": "260974"
     },
     {
       "qe_name": "Healthix",
@@ -7007,8 +7007,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "98984",
+      "total_docs": "98984"
     },
     {
       "qe_name": "Healthix",
@@ -7018,8 +7018,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "98984",
+      "total_docs": "98984"
     },
     {
       "qe_name": "Healthix",
@@ -7128,8 +7128,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "100495",
+      "total_docs": "100495"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -7150,8 +7150,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "146274",
+      "total_docs": "146274"
     },
     {
       "qe_name": "Healthix",
@@ -7161,8 +7161,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "262994",
+      "total_docs": "262994"
     },
     {
       "qe_name": "Healthix",
@@ -7326,8 +7326,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "212415",
+      "total_docs": "212415"
     },
     {
       "qe_name": "Healthix",
@@ -7337,8 +7337,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "422876",
+      "total_docs": "422876"
     },
     {
       "qe_name": "Healthix",
@@ -7348,8 +7348,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "422876",
+      "total_docs": "422876"
     },
     {
       "qe_name": "Healthix",
@@ -7359,8 +7359,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "422876",
+      "total_docs": "422876"
     },
     {
       "qe_name": "Healthix",
@@ -7370,8 +7370,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "422876",
+      "total_docs": "422876"
     },
     {
       "qe_name": "Healthix",
@@ -7381,8 +7381,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "422876",
+      "total_docs": "422876"
     },
     {
       "qe_name": "Healthix",
@@ -7392,8 +7392,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "422876",
+      "total_docs": "422876"
     },
     {
       "qe_name": "Healthix",
@@ -7403,8 +7403,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "422876",
+      "total_docs": "422876"
     },
     {
       "qe_name": "Healthix",
@@ -7414,8 +7414,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "422876",
+      "total_docs": "422876"
     },
     {
       "qe_name": "Healthix",
@@ -7425,8 +7425,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "422876",
+      "total_docs": "422876"
     },
     {
       "qe_name": "Healthix",
@@ -7436,8 +7436,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "422876",
+      "total_docs": "422876"
     },
     {
       "qe_name": "Healthix",
@@ -7447,8 +7447,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "422876",
+      "total_docs": "422876"
     },
     {
       "qe_name": "Healthix",
@@ -7458,8 +7458,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "422876",
+      "total_docs": "422876"
     },
     {
       "qe_name": "Healthix",
@@ -7469,8 +7469,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "422876",
+      "total_docs": "422876"
     },
     {
       "qe_name": "Healthix",
@@ -7480,8 +7480,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "422876",
+      "total_docs": "422876"
     },
     {
       "qe_name": "Healthix",
@@ -7491,8 +7491,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "197803",
+      "total_docs": "197803"
     },
     {
       "qe_name": "Healthix",
@@ -7502,8 +7502,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "165",
+      "total_docs": "165"
     },
     {
       "qe_name": "Healthix",
@@ -7513,8 +7513,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "165",
+      "total_docs": "165"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -7535,8 +7535,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "48288",
+      "total_docs": "48288"
     },
     {
       "qe_name": "HealtheConnections",
@@ -7557,8 +7557,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "199605",
+      "total_docs": "199605"
     },
     {
       "qe_name": "Healthix",
@@ -7568,8 +7568,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "58",
+      "total_docs": "58"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -7590,8 +7590,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "416625",
+      "total_docs": "416625"
     },
     {
       "qe_name": "Healthix",
@@ -7601,8 +7601,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "416625",
+      "total_docs": "416625"
     },
     {
       "qe_name": "Healthix",
@@ -7612,8 +7612,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "416625",
+      "total_docs": "416625"
     },
     {
       "qe_name": "Healthix",
@@ -7623,8 +7623,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "416625",
+      "total_docs": "416625"
     },
     {
       "qe_name": "Healthix",
@@ -7689,8 +7689,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "132838",
+      "total_docs": "132838"
     },
     {
       "qe_name": "Healthix",
@@ -7700,8 +7700,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "88",
+      "total_docs": "88"
     },
     {
       "qe_name": "Healthix",
@@ -7722,8 +7722,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "58835",
+      "total_docs": "58835"
     },
     {
       "qe_name": "Healthix",
@@ -7733,8 +7733,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "110730",
+      "total_docs": "110730"
     },
     {
       "qe_name": "Healthix",
@@ -7744,8 +7744,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "157623",
+      "total_docs": "157623"
     },
     {
       "qe_name": "Healthix",
@@ -7755,8 +7755,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "58",
+      "total_docs": "58"
     },
     {
       "qe_name": "Healthix",
@@ -7766,8 +7766,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "53861",
+      "total_docs": "53861"
     },
     {
       "qe_name": "Healthix",
@@ -7777,8 +7777,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "58938",
+      "total_docs": "58938"
     },
     {
       "qe_name": "Healthix",
@@ -7788,8 +7788,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "158222",
+      "total_docs": "158222"
     },
     {
       "qe_name": "Healthix",
@@ -7799,8 +7799,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "130076",
+      "total_docs": "130076"
     },
     {
       "qe_name": "Healthix",
@@ -7810,8 +7810,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "4480",
+      "total_docs": "4480"
     },
     {
       "qe_name": "Healthix",
@@ -7821,8 +7821,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "6573",
+      "total_docs": "6573"
     },
     {
       "qe_name": "Healthix",
@@ -7832,8 +7832,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "196246",
+      "total_docs": "196246"
     },
     {
       "qe_name": "Healthix",
@@ -7843,8 +7843,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "101812",
+      "total_docs": "101812"
     },
     {
       "qe_name": "Healthix",
@@ -7854,8 +7854,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "186781",
+      "total_docs": "186781"
     },
     {
       "qe_name": "Healthix",
@@ -7865,8 +7865,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "268985",
+      "total_docs": "268985"
     },
     {
       "qe_name": "Healthix",
@@ -7876,8 +7876,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "268985",
+      "total_docs": "268985"
     },
     {
       "qe_name": "Healthix",
@@ -7887,8 +7887,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "246808",
+      "total_docs": "246808"
     },
     {
       "qe_name": "Healthix",
@@ -7898,8 +7898,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "112186",
+      "total_docs": "112186"
     },
     {
       "qe_name": "Healthix",
@@ -7909,8 +7909,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "790",
+      "total_docs": "790"
     },
     {
       "qe_name": "Healthix",
@@ -7920,8 +7920,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "175478",
+      "total_docs": "175478"
     },
     {
       "qe_name": "Healthix",
@@ -7942,8 +7942,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "118571",
+      "total_docs": "118571"
     },
     {
       "qe_name": "Healthix",
@@ -7964,8 +7964,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "141422",
+      "total_docs": "141422"
     },
     {
       "qe_name": "Healthix",
@@ -7975,8 +7975,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "51",
+      "total_docs": "51"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -11143,8 +11143,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "281372",
+      "total_docs": "281372"
     },
     {
       "qe_name": "Healthix",
@@ -11154,8 +11154,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "956",
+      "total_docs": "956"
     },
     {
       "qe_name": "Healthix",
@@ -11165,8 +11165,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "956",
+      "total_docs": "956"
     },
     {
       "qe_name": "Healthix",
@@ -11176,8 +11176,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "400044",
+      "total_docs": "400044"
     },
     {
       "qe_name": "Healthix",
@@ -11187,8 +11187,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "134441",
+      "total_docs": "134441"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -11264,8 +11264,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "159858",
+      "total_docs": "159858"
     },
     {
       "qe_name": "HealtheConnections",
@@ -11275,8 +11275,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "37370",
+      "total_docs": "37370"
     },
     {
       "qe_name": "HealtheConnections",
@@ -11286,8 +11286,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "38390",
+      "total_docs": "38390"
     },
     {
       "qe_name": "HealtheConnections",
@@ -11308,8 +11308,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "236702",
+      "total_docs": "236702"
     },
     {
       "qe_name": "HealtheConnections",
@@ -13244,8 +13244,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "10016",
+      "total_docs": "10016"
     },
     {
       "qe_name": "HealtheConnections",
@@ -13255,8 +13255,8 @@
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
+      "adt_count": "14708",
+      "total_docs": "14708"
     },
     {
       "qe_name": "HealtheConnections",
