@@ -1,7 +1,7 @@
 {
   "scanned_bytes": 50713653933,
   "scanned_gb": 47.2308,
-  "row_count": 1207,
+  "row_count": 1121,
   "rows": [
     {
       "qe_name": "Healthix",
@@ -414,7 +414,7 @@
       "qe_name": "Bronx RHIO",
       "organization_name": "BronxCare Hospital Center",
       "assigning_authority": "BXLEB",
-      "nys_facility_id": "1164",
+      "nys_facility_id": "1178",
       "ccd_count": "0",
       "trn_count": "88413",
       "lab_count": "70810",
@@ -425,7 +425,7 @@
       "qe_name": "Bronx RHIO",
       "organization_name": "BronxCare Hospital Center",
       "assigning_authority": "BXLEB",
-      "nys_facility_id": "1178",
+      "nys_facility_id": "1164",
       "ccd_count": "0",
       "trn_count": "88413",
       "lab_count": "70810",
@@ -623,7 +623,7 @@
       "qe_name": "HEALTHeLINK",
       "organization_name": "UPMC Chautauqua at WCA",
       "assigning_authority": "UPMCEP",
-      "nys_facility_id": "102",
+      "nys_facility_id": "103",
       "ccd_count": "19717",
       "trn_count": "40271",
       "lab_count": "20469",
@@ -634,7 +634,7 @@
       "qe_name": "HEALTHeLINK",
       "organization_name": "UPMC Chautauqua at WCA",
       "assigning_authority": "UPMCEP",
-      "nys_facility_id": "103",
+      "nys_facility_id": "102",
       "ccd_count": "19717",
       "trn_count": "40271",
       "lab_count": "20469",
@@ -973,42 +973,9 @@
     },
     {
       "qe_name": "Rochester RHIO",
-      "organization_name": "CANTON-POTSDAM HOSPITAL",
-      "assigning_authority": "RGHS",
-      "nys_facility_id": "815",
-      "ccd_count": "0",
-      "trn_count": "27853",
-      "lab_count": "0",
-      "adt_count": "1308160",
-      "total_docs": "1336013"
-    },
-    {
-      "qe_name": "Rochester RHIO",
       "organization_name": "CLIFTON SPRINGS HOSPITAL AND CLINIC",
       "assigning_authority": "RGHS",
       "nys_facility_id": "676",
-      "ccd_count": "0",
-      "trn_count": "27853",
-      "lab_count": "0",
-      "adt_count": "1308160",
-      "total_docs": "1336013"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "CLIFTON SPRINGS HOSPITAL AND CLINIC",
-      "assigning_authority": "RGHS",
-      "nys_facility_id": "676",
-      "ccd_count": "0",
-      "trn_count": "27853",
-      "lab_count": "0",
-      "adt_count": "1308160",
-      "total_docs": "1336013"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "GOUVERNEUR HOSPITAL",
-      "assigning_authority": "RGHS",
-      "nys_facility_id": "812",
       "ccd_count": "0",
       "trn_count": "27853",
       "lab_count": "0",
@@ -1039,42 +1006,9 @@
     },
     {
       "qe_name": "Rochester RHIO",
-      "organization_name": "Massena Hospital",
-      "assigning_authority": "RGHS",
-      "nys_facility_id": "804",
-      "ccd_count": "0",
-      "trn_count": "27853",
-      "lab_count": "0",
-      "adt_count": "1308160",
-      "total_docs": "1336013"
-    },
-    {
-      "qe_name": "Rochester RHIO",
       "organization_name": "NEWARK-WAYNE COMMUNITY HOSPITAL",
       "assigning_authority": "RGHS",
       "nys_facility_id": "1028",
-      "ccd_count": "0",
-      "trn_count": "27853",
-      "lab_count": "0",
-      "adt_count": "1308160",
-      "total_docs": "1336013"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "NEWARK-WAYNE COMMUNITY HOSPITAL",
-      "assigning_authority": "RGHS",
-      "nys_facility_id": "1028",
-      "ccd_count": "0",
-      "trn_count": "27853",
-      "lab_count": "0",
-      "adt_count": "1308160",
-      "total_docs": "1336013"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "ROCHESTER GENERAL HOSPITAL",
-      "assigning_authority": "RGHS",
-      "nys_facility_id": "411",
       "ccd_count": "0",
       "trn_count": "27853",
       "lab_count": "0",
@@ -1105,28 +1039,6 @@
     },
     {
       "qe_name": "Rochester RHIO",
-      "organization_name": "THE UNITY HOSPITAL OF ROCHESTER",
-      "assigning_authority": "RGHS",
-      "nys_facility_id": "471",
-      "ccd_count": "0",
-      "trn_count": "27853",
-      "lab_count": "0",
-      "adt_count": "1308160",
-      "total_docs": "1336013"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "UNITED MEMORIAL MEDICAL CENTER BANK STREET CAMPUS",
-      "assigning_authority": "RGHS",
-      "nys_facility_id": "340",
-      "ccd_count": "0",
-      "trn_count": "27853",
-      "lab_count": "0",
-      "adt_count": "1308160",
-      "total_docs": "1336013"
-    },
-    {
-      "qe_name": "Rochester RHIO",
       "organization_name": "UNITED MEMORIAL MEDICAL CENTER BANK STREET CAMPUS",
       "assigning_authority": "RGHS",
       "nys_facility_id": "340",
@@ -1141,28 +1053,6 @@
       "organization_name": "UNITED MEMORIAL MEDICAL CENTER NORTH STREET CAMPUS",
       "assigning_authority": "RGHS",
       "nys_facility_id": "339",
-      "ccd_count": "0",
-      "trn_count": "27853",
-      "lab_count": "0",
-      "adt_count": "1308160",
-      "total_docs": "1336013"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "UNITED MEMORIAL MEDICAL CENTER NORTH STREET CAMPUS",
-      "assigning_authority": "RGHS",
-      "nys_facility_id": "339",
-      "ccd_count": "0",
-      "trn_count": "27853",
-      "lab_count": "0",
-      "adt_count": "1308160",
-      "total_docs": "1336013"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "Unity Specialty Hospital",
-      "assigning_authority": "RGHS",
-      "nys_facility_id": "412",
       "ccd_count": "0",
       "trn_count": "27853",
       "lab_count": "0",
@@ -1588,17 +1478,6 @@
       "total_docs": "40963"
     },
     {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "Wyoming County Community Hospital",
-      "assigning_authority": "WCCHS",
-      "nys_facility_id": "15620",
-      "ccd_count": "2088",
-      "trn_count": "569",
-      "lab_count": "5346",
-      "adt_count": "43744",
-      "total_docs": "51747"
-    },
-    {
       "qe_name": "HEALTHeLINK",
       "organization_name": "Wyoming County Community Hospital",
       "assigning_authority": "WCCHS",
@@ -1608,6 +1487,17 @@
       "lab_count": "5346",
       "adt_count": "60603",
       "total_docs": "68606"
+    },
+    {
+      "qe_name": "Rochester RHIO",
+      "organization_name": "Wyoming County Community Hospital",
+      "assigning_authority": "WCCHS",
+      "nys_facility_id": "15620",
+      "ccd_count": "2088",
+      "trn_count": "569",
+      "lab_count": "5346",
+      "adt_count": "43744",
+      "total_docs": "51747"
     },
     {
       "qe_name": "HealtheConnections",
@@ -2007,17 +1897,6 @@
     },
     {
       "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1522",
-      "nys_facility_id": "39",
-      "ccd_count": "1064",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "1064"
-    },
-    {
-      "qe_name": "Rochester RHIO",
       "organization_name": "THE UNITY HOSPITAL OF ROCHESTER",
       "assigning_authority": "RRH499",
       "nys_facility_id": "471",
@@ -2193,17 +2072,6 @@
       "total_docs": "524"
     },
     {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1723",
-      "nys_facility_id": "39",
-      "ccd_count": "524",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "524"
-    },
-    {
       "qe_name": "Hixny",
       "organization_name": "St. Anthony Community Hospital, a member of WMCHealth",
       "assigning_authority": "WMCBSSACH",
@@ -2271,17 +2139,6 @@
     },
     {
       "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1706",
-      "nys_facility_id": "39",
-      "ccd_count": "380",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "380"
-    },
-    {
-      "qe_name": "Rochester RHIO",
       "organization_name": "St. James Hospital",
       "assigning_authority": "UR1768",
       "nys_facility_id": "870",
@@ -2296,17 +2153,6 @@
       "organization_name": "F F THOMPSON HOSPITAL",
       "assigning_authority": "UR0934",
       "nys_facility_id": "678",
-      "ccd_count": "360",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "360"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR2144",
-      "nys_facility_id": "39",
       "ccd_count": "360",
       "trn_count": "0",
       "lab_count": "0",
@@ -2392,17 +2238,6 @@
     },
     {
       "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR2143",
-      "nys_facility_id": "39",
-      "ccd_count": "326",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "326"
-    },
-    {
-      "qe_name": "Rochester RHIO",
       "organization_name": "THE UNITY HOSPITAL OF ROCHESTER",
       "assigning_authority": "RRH510",
       "nys_facility_id": "471",
@@ -2444,28 +2279,6 @@
       "lab_count": "0",
       "adt_count": "0",
       "total_docs": "283"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1705",
-      "nys_facility_id": "39",
-      "ccd_count": "283",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "283"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1715",
-      "nys_facility_id": "39",
-      "ccd_count": "279",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "279"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -2788,17 +2601,6 @@
     },
     {
       "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1721",
-      "nys_facility_id": "39",
-      "ccd_count": "145",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "145"
-    },
-    {
-      "qe_name": "Rochester RHIO",
       "organization_name": "THE UNITY HOSPITAL OF ROCHESTER",
       "assigning_authority": "RRH540",
       "nys_facility_id": "471",
@@ -2846,17 +2648,6 @@
       "organization_name": "THE UNITY HOSPITAL OF ROCHESTER",
       "assigning_authority": "RRH501",
       "nys_facility_id": "471",
-      "ccd_count": "131",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "131"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1707",
-      "nys_facility_id": "39",
       "ccd_count": "131",
       "trn_count": "0",
       "lab_count": "0",
@@ -3075,28 +2866,6 @@
     {
       "qe_name": "Rochester RHIO",
       "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1708",
-      "nys_facility_id": "39",
-      "ccd_count": "113",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "113"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR2142",
-      "nys_facility_id": "39",
-      "ccd_count": "113",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "113"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
       "assigning_authority": "UR2142",
       "nys_facility_id": "39",
       "ccd_count": "113",
@@ -3165,17 +2934,6 @@
       "organization_name": "ROCHESTER GENERAL HOSPITAL",
       "assigning_authority": "RR575",
       "nys_facility_id": "411",
-      "ccd_count": "106",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "106"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1722",
-      "nys_facility_id": "39",
       "ccd_count": "106",
       "trn_count": "0",
       "lab_count": "0",
@@ -3316,17 +3074,6 @@
     },
     {
       "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR2139",
-      "nys_facility_id": "39",
-      "ccd_count": "96",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "96"
-    },
-    {
-      "qe_name": "Rochester RHIO",
       "organization_name": "UNITED MEMORIAL MEDICAL CENTER NORTH STREET CAMPUS",
       "assigning_authority": "RRH971",
       "nys_facility_id": "339",
@@ -3415,17 +3162,6 @@
     },
     {
       "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1716",
-      "nys_facility_id": "39",
-      "ccd_count": "82",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "82"
-    },
-    {
-      "qe_name": "Rochester RHIO",
       "organization_name": "UNITED MEMORIAL MEDICAL CENTER NORTH STREET CAMPUS",
       "assigning_authority": "RRH990",
       "nys_facility_id": "339",
@@ -3493,17 +3229,6 @@
     {
       "qe_name": "Rochester RHIO",
       "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1500",
-      "nys_facility_id": "39",
-      "ccd_count": "75",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "75"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
       "assigning_authority": "UR1709",
       "nys_facility_id": "39",
       "ccd_count": "74",
@@ -3511,28 +3236,6 @@
       "lab_count": "0",
       "adt_count": "0",
       "total_docs": "74"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1709",
-      "nys_facility_id": "39",
-      "ccd_count": "74",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "74"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1702",
-      "nys_facility_id": "39",
-      "ccd_count": "72",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "72"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -3790,17 +3493,6 @@
     {
       "qe_name": "Rochester RHIO",
       "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1671",
-      "nys_facility_id": "39",
-      "ccd_count": "57",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "57"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
       "assigning_authority": "UR2145",
       "nys_facility_id": "39",
       "ccd_count": "57",
@@ -3808,39 +3500,6 @@
       "lab_count": "0",
       "adt_count": "0",
       "total_docs": "57"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR2145",
-      "nys_facility_id": "39",
-      "ccd_count": "57",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "57"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1499",
-      "nys_facility_id": "39",
-      "ccd_count": "56",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "56"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1499",
-      "nys_facility_id": "39",
-      "ccd_count": "56",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "56"
     },
     {
       "qe_name": "Rochester RHIO",
@@ -3965,17 +3624,6 @@
     },
     {
       "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1699",
-      "nys_facility_id": "39",
-      "ccd_count": "50",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "50"
-    },
-    {
-      "qe_name": "Rochester RHIO",
       "organization_name": "UNITED MEMORIAL MEDICAL CENTER NORTH STREET CAMPUS",
       "assigning_authority": "RRH988",
       "nys_facility_id": "339",
@@ -4067,17 +3715,6 @@
       "organization_name": "THE UNITY HOSPITAL OF ROCHESTER",
       "assigning_authority": "RRH484",
       "nys_facility_id": "471",
-      "ccd_count": "45",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "45"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1714",
-      "nys_facility_id": "39",
       "ccd_count": "45",
       "trn_count": "0",
       "lab_count": "0",
@@ -4295,17 +3932,6 @@
     },
     {
       "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1696",
-      "nys_facility_id": "39",
-      "ccd_count": "39",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "39"
-    },
-    {
-      "qe_name": "Rochester RHIO",
       "organization_name": "CANTON-POTSDAM HOSPITAL",
       "assigning_authority": "RR429",
       "nys_facility_id": "815",
@@ -4463,17 +4089,6 @@
       "organization_name": "ROCHESTER GENERAL HOSPITAL",
       "assigning_authority": "RRH194",
       "nys_facility_id": "411",
-      "ccd_count": "32",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "32"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1701",
-      "nys_facility_id": "39",
       "ccd_count": "32",
       "trn_count": "0",
       "lab_count": "0",
@@ -4713,17 +4328,6 @@
     },
     {
       "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1655",
-      "nys_facility_id": "39",
-      "ccd_count": "24",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "24"
-    },
-    {
-      "qe_name": "Rochester RHIO",
       "organization_name": "NICHOLAS H NOYES MEMORIAL HOSPITAL",
       "assigning_authority": "UR1727",
       "nys_facility_id": "393",
@@ -4856,17 +4460,6 @@
     },
     {
       "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1712",
-      "nys_facility_id": "39",
-      "ccd_count": "19",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "19"
-    },
-    {
-      "qe_name": "Rochester RHIO",
       "organization_name": "Massena Hospital",
       "assigning_authority": "RR519",
       "nys_facility_id": "804",
@@ -4956,28 +4549,6 @@
     {
       "qe_name": "Rochester RHIO",
       "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1717",
-      "nys_facility_id": "39",
-      "ccd_count": "16",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "16"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1720",
-      "nys_facility_id": "39",
-      "ccd_count": "16",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "16"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
       "assigning_authority": "UR1720",
       "nys_facility_id": "39",
       "ccd_count": "16",
@@ -5044,40 +4615,7 @@
     {
       "qe_name": "Rochester RHIO",
       "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1703",
-      "nys_facility_id": "39",
-      "ccd_count": "13",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "13"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
       "assigning_authority": "UR1697",
-      "nys_facility_id": "39",
-      "ccd_count": "12",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "12"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1697",
-      "nys_facility_id": "39",
-      "ccd_count": "12",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "12"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1718",
       "nys_facility_id": "39",
       "ccd_count": "12",
       "trn_count": "0",
@@ -5428,17 +4966,6 @@
     },
     {
       "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1700",
-      "nys_facility_id": "39",
-      "ccd_count": "4",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "4"
-    },
-    {
-      "qe_name": "Rochester RHIO",
       "organization_name": "St. James Hospital",
       "assigning_authority": "UR1769",
       "nys_facility_id": "870",
@@ -5552,17 +5079,6 @@
       "organization_name": "F F THOMPSON HOSPITAL",
       "assigning_authority": "UR0904",
       "nys_facility_id": "678",
-      "ccd_count": "2",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "2"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1711",
-      "nys_facility_id": "39",
       "ccd_count": "2",
       "trn_count": "0",
       "lab_count": "0",
@@ -5716,28 +5232,6 @@
       "qe_name": "Rochester RHIO",
       "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
       "assigning_authority": "UR1862",
-      "nys_facility_id": "39",
-      "ccd_count": "1",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "1"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1862",
-      "nys_facility_id": "39",
-      "ccd_count": "1",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "1"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1879",
       "nys_facility_id": "39",
       "ccd_count": "1",
       "trn_count": "0",
@@ -11224,17 +10718,6 @@
       "total_docs": "0"
     },
     {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "URMC STRONG WEST",
-      "assigning_authority": "SMH",
-      "nys_facility_id": "9531",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
       "qe_name": "Healthix",
       "organization_name": "Mount Sinai South Nassau",
       "assigning_authority": "SNCH",
@@ -11754,28 +11237,6 @@
     {
       "qe_name": "Rochester RHIO",
       "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1518",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1698",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
       "assigning_authority": "UR1698",
       "nys_facility_id": "39",
       "ccd_count": "0",
@@ -11788,28 +11249,6 @@
       "qe_name": "Rochester RHIO",
       "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
       "assigning_authority": "UR1704",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1704",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1710",
       "nys_facility_id": "39",
       "ccd_count": "0",
       "trn_count": "0",
@@ -11874,17 +11313,6 @@
     },
     {
       "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1822",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
       "organization_name": "NICHOLAS H NOYES MEMORIAL HOSPITAL",
       "assigning_authority": "UR1832",
       "nys_facility_id": "393",
@@ -11919,40 +11347,7 @@
     {
       "qe_name": "Rochester RHIO",
       "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1849",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
       "assigning_authority": "UR1850",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1850",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1851",
       "nys_facility_id": "39",
       "ccd_count": "0",
       "trn_count": "0",
@@ -11985,40 +11380,7 @@
     {
       "qe_name": "Rochester RHIO",
       "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1852",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
       "assigning_authority": "UR1853",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1853",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1854",
       "nys_facility_id": "39",
       "ccd_count": "0",
       "trn_count": "0",
@@ -12051,40 +11413,7 @@
     {
       "qe_name": "Rochester RHIO",
       "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1855",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
       "assigning_authority": "UR1856",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1856",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1857",
       "nys_facility_id": "39",
       "ccd_count": "0",
       "trn_count": "0",
@@ -12117,40 +11446,7 @@
     {
       "qe_name": "Rochester RHIO",
       "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1858",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
       "assigning_authority": "UR1859",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1859",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1860",
       "nys_facility_id": "39",
       "ccd_count": "0",
       "trn_count": "0",
@@ -12183,40 +11479,7 @@
     {
       "qe_name": "Rochester RHIO",
       "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1861",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
       "assigning_authority": "UR1863",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1863",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1864",
       "nys_facility_id": "39",
       "ccd_count": "0",
       "trn_count": "0",
@@ -12249,40 +11512,7 @@
     {
       "qe_name": "Rochester RHIO",
       "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1865",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
       "assigning_authority": "UR1866",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1866",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1867",
       "nys_facility_id": "39",
       "ccd_count": "0",
       "trn_count": "0",
@@ -12315,40 +11545,7 @@
     {
       "qe_name": "Rochester RHIO",
       "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1868",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
       "assigning_authority": "UR1869",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1869",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1870",
       "nys_facility_id": "39",
       "ccd_count": "0",
       "trn_count": "0",
@@ -12381,40 +11578,7 @@
     {
       "qe_name": "Rochester RHIO",
       "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1871",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
       "assigning_authority": "UR1872",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1872",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1873",
       "nys_facility_id": "39",
       "ccd_count": "0",
       "trn_count": "0",
@@ -12447,28 +11611,6 @@
     {
       "qe_name": "Rochester RHIO",
       "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1874",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1875",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
       "assigning_authority": "UR1875",
       "nys_facility_id": "39",
       "ccd_count": "0",
@@ -12491,40 +11633,7 @@
     {
       "qe_name": "Rochester RHIO",
       "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1876",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
       "assigning_authority": "UR1877",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1877",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1878",
       "nys_facility_id": "39",
       "ccd_count": "0",
       "trn_count": "0",
@@ -13051,17 +12160,6 @@
     },
     {
       "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1949",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
       "organization_name": "NICHOLAS H NOYES MEMORIAL HOSPITAL",
       "assigning_authority": "UR1951",
       "nys_facility_id": "393",
@@ -13085,40 +12183,7 @@
     {
       "qe_name": "Rochester RHIO",
       "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1955",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
       "assigning_authority": "UR1956",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1956",
-      "nys_facility_id": "39",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR1963",
       "nys_facility_id": "39",
       "ccd_count": "0",
       "trn_count": "0",
@@ -13164,17 +12229,6 @@
       "organization_name": "F F THOMPSON HOSPITAL",
       "assigning_authority": "UR2122",
       "nys_facility_id": "678",
-      "ccd_count": "0",
-      "trn_count": "0",
-      "lab_count": "0",
-      "adt_count": "0",
-      "total_docs": "0"
-    },
-    {
-      "qe_name": "Rochester RHIO",
-      "organization_name": "MEMORIAL HOSP OF WM F & GERTRUDE F JONES A/K/A JONES MEMORIAL HOSP",
-      "assigning_authority": "UR2216",
-      "nys_facility_id": "39",
       "ccd_count": "0",
       "trn_count": "0",
       "lab_count": "0",
