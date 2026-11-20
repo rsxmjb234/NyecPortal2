@@ -218,6 +218,30 @@ VOLUME_SECTION = """
         </div>
       </div>
 
+
+      <!-- Report 4: ADT Volume by Facility (snapshot) -->
+      <div class="report-card full" id="adt-report">
+        <div class="report-title">ADT Volume by Facility</div>
+        <div class="report-sub" style="margin:3px 0 16px">
+          Aug&nbsp;&ndash;&nbsp;Oct&nbsp;2026 (3-month snapshot) &middot; filter by QE
+        </div>
+        <div class="qe-tabs" id="adt-tabs"></div>
+        <div id="adt-badge"></div>
+        <div class="hosp-wrap">
+          <table class="hosp-tbl">
+            <thead><tr>
+              <th>Facility</th><th>AA&nbsp;Code</th><th>Facility&nbsp;ID</th>
+              <th class="r">ADT&nbsp;Messages</th>
+            </tr></thead>
+            <tbody id="adt-tbody"></tbody>
+          </table>
+        </div>
+        <div class="report-meta" style="margin-top:14px">
+          Source: <code>lookup_adt_counts</code> (static snapshot)
+          &middot; 31.6M ADT messages across 6 QEs &middot; per-facility counts summed over 3 months
+        </div>
+      </div>
+
       <!-- Placeholder 3 -->
       <div class="report-card soon">
         <div class="report-soon-title">Doc-Type Mix by QE</div>
@@ -236,11 +260,11 @@ REPORT1_SCRIPT = """
   <script>
   (function () {
     var rows = [
-      { qe: "Healthix",           ccd: 6856187, trn: 3691902, lab: 5822179, adt: 0 },
-      { qe: "HealtheConnections", ccd: 4064234, trn: 2946189, lab: 4940467, adt: 0 },
-      { qe: "HEALTHeLINK",        ccd: 1001590, trn:  989702, lab: 1857966, adt: 0 },
-      { qe: "Hixny",              ccd: 2497901, trn:   86968, lab: 1177507, adt: 0 },
-      { qe: "Bronx RHIO",         ccd:  832486, trn: 1191999, lab: 1209660, adt: 0 }
+      { qe: "Healthix",           ccd: 6856187, trn: 3691902, lab: 5822179, adt: 11822038 },
+      { qe: "HealtheConnections", ccd: 4064234, trn: 2946189, lab: 4940467, adt: 5814192 },
+      { qe: "HEALTHeLINK",        ccd: 1001590, trn:  989702, lab: 1857966, adt: 4992149 },
+      { qe: "Hixny",              ccd: 2497901, trn:   86968, lab: 1177507, adt: 1442585 },
+      { qe: "Bronx RHIO",         ccd:  832486, trn: 1191999, lab: 1209660, adt: 1882379 }
     ];
     rows.sort(function(a, b) {
       return (b.ccd + b.trn + b.lab + b.adt) - (a.ccd + a.trn + a.lab + a.adt);
@@ -445,6 +469,72 @@ REPORT3_SCRIPT = """
   })();
   </script>"""
 
+
+# ============================================================
+# Report 4 render script - ADT volume
+# ============================================================
+REPORT4_SCRIPT = """
+  <script src="./adt_data.js"></script>
+  <script>
+  /* Report 4: ADT Volume render */
+  (function () {
+    if (!window.ADT) return;
+    var D = window.ADT;
+    var QE_COLORS = {
+      'HealtheConnections':'#ea580c', 'Healthix':'#059669', 'Bronx RHIO':'#b91c1c',
+      'HEALTHeLINK':'#1d4ed8', 'Hixny':'#0e7490'
+    };
+    var current = D.qes[0];
+
+    function fmt(n) { return n > 0 ? n.toLocaleString() : '\u2014'; }
+    function esc(s) {
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function render(qe) {
+      // row: [qe, aa, facility_id, facility_name, adt_count]
+      var rows = D.rows.filter(function(r) { return r[0] === qe; });
+      rows.sort(function(a, b) { return b[4] - a[4] || a[3].localeCompare(b[3]); });
+
+      var total = rows.reduce(function(s, r) { return s + r[4]; }, 0);
+      document.getElementById('adt-badge').innerHTML =
+        '<span class="hosp-badge">' + rows.length + ' facilities &middot; ' +
+        total.toLocaleString() + ' ADT messages</span>';
+
+      var html = '';
+      rows.forEach(function(r) {
+        html += '<tr>'
+          + '<td>' + esc(r[3]) + '</td>'
+          + '<td class="code">' + esc(r[1]) + '</td>'
+          + '<td class="code">' + esc(r[2]) + '</td>'
+          + '<td class="r tot">' + fmt(r[4]) + '</td>'
+          + '</tr>';
+      });
+      document.getElementById('adt-tbody').innerHTML = html;
+
+      var color = QE_COLORS[qe] || 'var(--brand)';
+      document.querySelectorAll('#adt-tabs .qe-tab').forEach(function(btn) {
+        var on = btn.dataset.qe === qe;
+        btn.classList.toggle('active', on);
+        btn.style.background  = on ? color : '';
+        btn.style.borderColor = on ? color : '';
+      });
+    }
+
+    var tabs = document.getElementById('adt-tabs');
+    D.qes.forEach(function(qe) {
+      var btn = document.createElement('button');
+      btn.className = 'qe-tab';
+      btn.dataset.qe = qe;
+      btn.textContent = qe;
+      btn.addEventListener('click', function() { current = qe; render(qe); });
+      tabs.appendChild(btn);
+    });
+
+    render(current);
+  })();
+  </script>"""
+
 # ============================================================
 # Assemble index.html
 # ============================================================
@@ -533,6 +623,7 @@ INDEX = f"""<!DOCTYPE html>
 {REPORT1_SCRIPT}
 {REPORT2_SCRIPT}
 {REPORT3_SCRIPT}
+{REPORT4_SCRIPT}
 </body>
 </html>"""
 

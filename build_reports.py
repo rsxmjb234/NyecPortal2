@@ -65,3 +65,26 @@ n = write_js('nonhosp_data.js', 'NONHOSP',
                        'source_sql': 'reportonnonhospitals.sql'}},
              'Re-run build_reports.py after refreshing SQLExamples/reportonnonhospitals.json')
 print(f'Wrote nonhosp_data.js ({n:,} chars, {len(qes)} QEs, {len(rows)} sources)')
+
+# ---------------- ADT (from lookup_adt_counts snapshot) ----------------
+QE_LABEL_ADT = {
+    'healthix': 'Healthix', 'healtheconnections': 'HealtheConnections', 'hixny': 'Hixny',
+    'rochester': 'Rochester RHIO', 'healthelink': 'HEALTHeLINK', 'bronx': 'Bronx RHIO',
+}
+raw = load('SQLExamples/reportonadt.json')
+# [qe, aa, facility_id, facility_name, adt_count]
+rows = [[QE_LABEL_ADT.get(r['qe'], r['qe']), r['assigning_authority'],
+         r['facility_id'], r['facility_name'], int(r['adt_count'])]
+        for r in raw['rows']
+        if QE_LABEL_ADT.get(r['qe'], r['qe']) not in EXCLUDE_QES]
+tot = defaultdict(int)
+for r in rows:
+    tot[r[0]] += r[4]
+qes = sorted(tot, key=lambda q: -tot[q])
+n = write_js('adt_data.js', 'ADT',
+             {'qes': qes, 'rows': rows,
+              'meta': {'scanned_gb': raw['scanned_gb'], 'row_count': raw['row_count'],
+                       'source_sql': 'reportonadt.sql',
+                       'period': 'Aug\u2013Oct 2026 (3-month snapshot)'}},
+             'Re-run build_reports.py after refreshing SQLExamples/reportonadt.json')
+print(f'Wrote adt_data.js ({n:,} chars, {len(qes)} QEs, {len(rows)} facilities)')
