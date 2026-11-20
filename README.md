@@ -3,6 +3,12 @@
 Tools for building patient chart views from synthetic **C-CDA** documents and
 **ORU** (FHIR R4 Observation) lab feeds held in the `nyec-synthetic-data` S3 bucket.
 
+## Live site
+
+**https://main.d3pz3oj6iuj9t4.amplifyapp.com**
+
+Deploy: run `deploy_amplify.ps1` (requires the `304507007699_AWSPowerUserAccess` sandbox profile).
+
 ## Contents
 
 | File | Purpose |

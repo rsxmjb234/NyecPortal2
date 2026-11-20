@@ -66,6 +66,225 @@ def _qe_card(q):
 cards_html = '\n      '.join(_qe_card(q) for q in QES)
 live_n = sum(1 for q in QES if q['live'])
 
+# ============================================================
+# Extra CSS — plain string so CSS braces need no escaping
+# ============================================================
+EXTRA_CSS = """
+  /* ── Understand Volume section ──────────────────────────────────── */
+  .report-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:18px; }
+  .report-card { background:#fff; border:1px solid var(--line); border-radius:14px;
+    padding:20px 22px; box-shadow:0 6px 20px rgba(16,24,40,.08); }
+  .report-card.full { grid-column:1/-1; }
+  .report-card.soon { opacity:.72; }
+  .report-title { font-weight:700; font-size:15.5px; color:var(--ink); }
+  .report-sub { font-size:12px; color:var(--muted); }
+  .vol-row { display:flex; align-items:center; gap:10px; margin-bottom:9px; }
+  .vol-name { width:155px; flex-shrink:0; font-size:12.5px; font-weight:600; color:var(--ink); }
+  .vol-bar-wrap { flex:1; height:18px; background:#f1f5f9; border-radius:4px; overflow:hidden; display:flex; }
+  .vol-bar-seg { height:100%; transition:width .4s; }
+  .vol-total { width:76px; text-align:right; font-size:11.5px; color:var(--muted); flex-shrink:0;
+    font-variant-numeric:tabular-nums; }
+  .vol-legend { display:flex; gap:16px; margin-top:14px; padding-top:12px;
+    border-top:1px solid var(--line); flex-wrap:wrap; }
+  .vol-legend-item { display:flex; align-items:center; gap:5px; font-size:11.5px; color:var(--muted); }
+  .vol-legend-dot { width:10px; height:10px; border-radius:2px; flex-shrink:0; }
+  .report-meta { margin-top:12px; font-size:11px; color:#98a2b3; line-height:1.5; }
+  .report-soon-title { font-size:14px; font-weight:600; color:var(--muted); }
+  .report-badge { display:inline-block; margin-top:10px; background:#f2f4f7; color:#667085;
+    font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.5px;
+    padding:4px 10px; border-radius:999px; }
+
+  /* ── Hospital report (Report 2) ─────────────────────────────────── */
+  .qe-tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
+  .qe-tab { border:1px solid var(--line); background:#fff; color:var(--muted); font-size:12px;
+    font-weight:600; padding:5px 14px; border-radius:999px; cursor:pointer;
+    transition:background .12s,color .12s,border-color .12s; }
+  .qe-tab:hover { border-color:var(--brand); color:var(--brand); }
+  .qe-tab.active { color:#fff; }
+  .hosp-badge { display:inline-block; background:#ecfdf5; color:#059669; font-size:12px;
+    font-weight:700; padding:3px 10px; border-radius:999px; margin-bottom:12px; }
+  .hosp-wrap { overflow-x:auto; max-height:460px; overflow-y:auto;
+    border:1px solid var(--line); border-radius:8px; }
+  .hosp-tbl { width:100%; border-collapse:collapse; font-size:12.5px; }
+  .hosp-tbl th { position:sticky; top:0; background:#f8fafc; text-align:left;
+    color:var(--muted); font-size:11px; font-weight:700; text-transform:uppercase;
+    letter-spacing:.5px; padding:8px 12px 6px; border-bottom:2px solid var(--line); }
+  .hosp-tbl th.r { text-align:right; }
+  .hosp-tbl td { padding:7px 12px; border-bottom:1px solid var(--line); }
+  .hosp-tbl td.r { text-align:right; font-variant-numeric:tabular-nums; }
+  .hosp-tbl td.code { font-family:ui-monospace,monospace; font-size:11px; color:var(--muted); }
+  .hosp-tbl td.tot { font-weight:700; }
+  .hosp-tbl tr.zero td { color:#c5cdd6; }
+  .hosp-tbl tbody tr:hover td { background:#f8fafc; }
+  .hosp-tbl tr.zero:hover td { background:#fafbfc; }"""
+
+# ============================================================
+# "Understand Volume" section HTML — plain string
+# ============================================================
+VOLUME_SECTION = """
+    <div class="sec-h" style="margin-top:36px">Understand Volume</div>
+    <div class="report-grid">
+
+      <!-- Report 1: Volume by QE \u2013 Highest Level (hardcoded from Athena run) -->
+      <div class="report-card full">
+        <div class="report-title">Volume by QE &mdash; Highest Level</div>
+        <div class="report-sub" style="margin:3px 0 16px">
+          28-day total &middot; Oct&nbsp;18&nbsp;&ndash;&nbsp;Nov&nbsp;14,&nbsp;2026 &middot; Verato-matched sources only
+        </div>
+        <div id="vol-chart"></div>
+        <div class="vol-legend">
+          <div class="vol-legend-item"><div class="vol-legend-dot" style="background:#0ea5a4"></div>CCD</div>
+          <div class="vol-legend-item"><div class="vol-legend-dot" style="background:#3b82f6"></div>TRN</div>
+          <div class="vol-legend-item"><div class="vol-legend-dot" style="background:#94a3b8"></div>LAB</div>
+        </div>
+        <div class="report-meta">
+          Source: <code>DailyVolumeByQE-28Day-SingleSnapshot-ExcludeOrphans.sql</code>
+          &middot; 47.24&nbsp;GB scanned &middot; excludes backload &amp; orphan sources
+        </div>
+      </div>
+
+      <!-- Report 2: Hospital Volume \u2013 Last 10 Days -->
+      <div class="report-card full" id="hosp-report">
+        <div class="report-title">Hospital Volume &mdash; Last 10 Days</div>
+        <div class="report-sub" style="margin:3px 0 16px">
+          Nov&nbsp;4&nbsp;&ndash;&nbsp;Nov&nbsp;13,&nbsp;2026 &middot; Article&nbsp;28 hospitals &middot; CCD&nbsp;+&nbsp;TRN &middot; filter by QE
+        </div>
+        <div class="qe-tabs" id="hosp-tabs"></div>
+        <div id="hosp-badge"></div>
+        <div class="hosp-wrap">
+          <table class="hosp-tbl">
+            <thead><tr>
+              <th>Hospital</th><th>AA&nbsp;Code</th>
+              <th class="r">CCD</th><th class="r">TRN</th><th class="r">Total</th>
+            </tr></thead>
+            <tbody id="hosp-tbody"></tbody>
+          </table>
+        </div>
+        <div class="report-meta" style="margin-top:14px">
+          Source: <code>reportonhospitals.sql</code>
+          &middot; 47.23&nbsp;GB scanned &middot; SFDC registry (Article&nbsp;28 only)
+          &middot; hospitals with no recent activity shown at bottom
+        </div>
+      </div>
+
+      <!-- Placeholder 3 -->
+      <div class="report-card soon">
+        <div class="report-soon-title">Doc-Type Mix by QE</div>
+        <div style="color:var(--muted);font-size:13px;margin-top:6px;line-height:1.5">
+          CCD vs TRN vs LAB share per QE with week-over-week change &mdash; surfaces shifts in submission patterns.
+        </div>
+        <span class="report-badge">Coming soon</span>
+      </div>
+
+    </div><!-- /report-grid -->"""
+
+# ============================================================
+# Report 1 render script — plain string (JS braces safe here)
+# ============================================================
+REPORT1_SCRIPT = """
+  <script>
+  (function () {
+    var rows = [
+      { qe: "Healthix",           ccd: 6856187, trn: 3691902, lab: 5822179 },
+      { qe: "HealtheConnections", ccd: 4064234, trn: 2946189, lab: 4940467 },
+      { qe: "TechBD",             ccd: 1001590, trn:  989702, lab: 1857966 },
+      { qe: "Hixny",              ccd: 2497901, trn:   86968, lab: 1177507 },
+      { qe: "Bronx RHIO",         ccd:  832486, trn: 1191999, lab: 1209660 },
+      { qe: "Rochester RHIO",     ccd: 1159667, trn:  656012, lab:       0 }
+    ];
+    rows.sort(function(a, b) {
+      return (b.ccd + b.trn + b.lab) - (a.ccd + a.trn + a.lab);
+    });
+    var maxTotal = Math.max.apply(null, rows.map(function(r) { return r.ccd + r.trn + r.lab; }));
+    function fmt(n) { return n.toLocaleString(); }
+    function pct(v) { return (v / maxTotal * 100).toFixed(2) + '%'; }
+    var container = document.getElementById('vol-chart');
+    rows.forEach(function(r) {
+      var total = r.ccd + r.trn + r.lab;
+      var div = document.createElement('div');
+      div.className = 'vol-row';
+      div.innerHTML =
+        '<div class="vol-name">' + r.qe + '</div>' +
+        '<div class="vol-bar-wrap">' +
+          '<div class="vol-bar-seg" style="width:' + pct(r.ccd) + ';background:#0ea5a4" title="CCD: ' + fmt(r.ccd) + '"></div>' +
+          '<div class="vol-bar-seg" style="width:' + pct(r.trn) + ';background:#3b82f6" title="TRN: ' + fmt(r.trn) + '"></div>' +
+          '<div class="vol-bar-seg" style="width:' + pct(r.lab) + ';background:#94a3b8" title="LAB: ' + fmt(r.lab) + '"></div>' +
+        '</div>' +
+        '<div class="vol-total">' + fmt(total) + '</div>';
+      container.appendChild(div);
+    });
+  })();
+  </script>"""
+
+# ============================================================
+# Report 2 render script — plain string
+# ============================================================
+REPORT2_SCRIPT = """
+  <script src="./hosp_data.js"></script>
+  <script>
+  /* Report 2: Hospital Volume render */
+  (function () {
+    if (!window.HOSP) return;
+    var HOSP = window.HOSP;
+    var QE_COLORS = {
+      'HealtheConnections':'#ea580c', 'Healthix':'#059669', 'Bronx RHIO':'#b91c1c',
+      'HEALTHeLINK':'#1d4ed8', 'Rochester RHIO':'#7c3aed', 'Hixny':'#0e7490'
+    };
+    var current = HOSP.qes[0];
+
+    function fmt(n) { return n > 0 ? n.toLocaleString() : '\u2014'; }
+
+    function render(qe) {
+      var rows = HOSP.rows.filter(function(r) { return r[0] === qe; });
+      rows.sort(function(a, b) {
+        var ta = a[3]+a[4], tb = b[3]+b[4];
+        return tb !== ta ? tb - ta : a[1].localeCompare(b[1]);
+      });
+      var active = rows.filter(function(r) { return r[3]+r[4] > 0; }).length;
+
+      document.getElementById('hosp-badge').innerHTML =
+        '<span class="hosp-badge">' + active + ' of ' + rows.length +
+        ' hospitals submitting</span>';
+
+      var html = '';
+      rows.forEach(function(r) {
+        var tot = r[3] + r[4];
+        html += '<tr' + (tot === 0 ? ' class="zero"' : '') + '>'
+          + '<td>' + r[1] + '</td>'
+          + '<td class="code">' + r[2] + '</td>'
+          + '<td class="r">' + fmt(r[3]) + '</td>'
+          + '<td class="r">' + fmt(r[4]) + '</td>'
+          + '<td class="r tot">' + fmt(tot) + '</td>'
+          + '</tr>';
+      });
+      document.getElementById('hosp-tbody').innerHTML = html;
+
+      var color = QE_COLORS[qe] || 'var(--brand)';
+      document.querySelectorAll('#hosp-tabs .qe-tab').forEach(function(btn) {
+        var on = btn.dataset.qe === qe;
+        btn.classList.toggle('active', on);
+        btn.style.background  = on ? color : '';
+        btn.style.borderColor = on ? color : '';
+      });
+    }
+
+    var tabs = document.getElementById('hosp-tabs');
+    HOSP.qes.forEach(function(qe) {
+      var btn = document.createElement('button');
+      btn.className = 'qe-tab';
+      btn.dataset.qe = qe;
+      btn.textContent = qe;
+      btn.addEventListener('click', function() { current = qe; render(qe); });
+      tabs.appendChild(btn);
+    });
+
+    render(current);
+  })();
+  </script>"""
+
+# ============================================================
+# Assemble index.html
+# ============================================================
 INDEX = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -114,6 +333,7 @@ INDEX = f"""<!DOCTYPE html>
   .note b {{ color:var(--ink); }}
   .foot {{ text-align:center; color:var(--muted); font-size:11.5px; padding:0 0 26px; }}
   .mark svg {{ width:26px; height:26px; }}
+{EXTRA_CSS}
 </style>
 </head>
 <body>
@@ -138,11 +358,14 @@ INDEX = f"""<!DOCTYPE html>
       de-duplication: an ORU result matching a CCD lab on LOINC&nbsp;+&nbsp;date is shown as
       <b>preferred</b> and the duplicate CCD value is <b>crossed off, never deleted</b>.
     </div>
+{VOLUME_SECTION}
   </div>
 
   <div class="foot">Synthetic demonstration data only. QE names and links belong to their
     respective organizations; styled wordmarks are shown in place of official logos.
     FHIR&reg; is an HL7 trademark.</div>
+{REPORT1_SCRIPT}
+{REPORT2_SCRIPT}
 </body>
 </html>"""
 
