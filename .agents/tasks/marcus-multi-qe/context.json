@@ -1,0 +1,25 @@
+{
+  "project_type": "Python data-processing pipeline producing static HTML patient portal pages from C-CDA XML and HL7 v2 ORU files",
+  "language": "Python 3",
+  "build_system": "Single-step: python.exe build_home.py regenerates all HTML. build_marcus_bundle.py regenerates the data bundle from Synthea base CCDs.",
+  "test_framework": "No formal test suite. Verification is running the build and checking output.",
+  "build_command": "python.exe build_home.py",
+  "test_command": "python.exe build_home.py (must succeed and produce 5 QE HTML files + index.html)",
+  "verification_instructions": "1) Run python.exe build_marcus_bundle.py to regenerate data. 2) Run python.exe build_home.py to build all views. 3) Verify each QE HTML has exactly 3 MRNs in the MRN array. 4) No Rochester/GRRHIO data in any output.",
+  "snapshot_or_generated_files": "*.xml, *.hl7, *.csv are gitignored generated data. HTML files are gitignored generated output. Only .py, .ps1, .md, .js files are tracked in git.",
+  "environment_constraints": "Python must be invoked as python.exe (NOT python). ccds/ and marcus_bundle/ are gitignored — Synthea base CCDs live at the main repo root ccds/ and must be copied into the worktree or referenced by absolute path. HEALTHeLINK is also known as Techbydesign/TBX in the system.",
+  "contribution_requirements": "Commit locally on the branch, never push. Only .py, .ps1, .md, .js files are tracked (data files are gitignored).",
+  "key_patterns": "build_home.py sets env vars (CHART_CCD_DIR, CHART_ORU_HL7, CHART_OUT, CHART_QE, CHART_TITLE) then imports build_smart/build_chart/build_bronx which each read those env vars at module level and run the build as a side effect of import. merge_by_person() groups CCD records by person_key (the .mpid value). Each QE's view should NOT merge across QEs because each QE folder only has its 3 CCDs.",
+  "relevant_files": [
+    "build_marcus_bundle.py — script that generates marcus_bundle/ from Synthea base CCDs, must be rewritten for per-QE folder structure",
+    "build_home.py — orchestrator that builds all QE views + index.html, must be updated for 5 QEs",
+    "build_smart.py — SMART/FHIR style renderer (used by HIXNY, and will be reloaded for Healthix + HealtheConnections)",
+    "build_chart.py — HEALTHeLINK Fusion style renderer",
+    "build_bronx.py — Bronx RHIO IMAT style renderer",
+    "ccda_parse.py — shared CCD parser (parse_ccd, load_oru_hl7, merge_by_person). No changes needed for core parsing.",
+    "deploy_amplify.ps1 — deploy script, must add marcus_healthix.html and marcus_healtheconn.html",
+    "marcus_bundle/README.md — data bundle readme, must be updated for 15-source structure",
+    "marcus_bundle/mpi/marcus_mpi.csv — MRN mapping, must be updated for 15 rows"
+  ],
+  "directory_structure": "Root has Python build scripts, ccds/ (Synthea base CCDs, gitignored), marcus_bundle/ (generated data bundle, gitignored). developer-spec/ has project docs. QE-Example-Materials/ has reference screenshots. docs/ has reports."
+}

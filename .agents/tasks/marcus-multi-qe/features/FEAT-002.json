@@ -1,0 +1,36 @@
+{
+  "id": "FEAT-002",
+  "type": "feat",
+  "description": "Update the build pipeline (build_home.py, build_smart.py, build_chart.py, build_bronx.py) to produce 5 per-QE HTML views from the new per-QE folder structure. Add TRN loading support. Update deploy_amplify.ps1 and index.html. Depends on FEAT-001 data being in place.",
+  "status": "completed",
+  "steps": [
+    "Step 1: Add TRN directory support to all 3 build renderers. In each of build_smart.py, build_chart.py, and build_bronx.py, add a TRN_DIR env var read and extend the file globbing at the build section (module-level code near the bottom). The pattern is the same in all 3 files. Find the line:\n  files = sorted(glob.glob(os.path.join(CCD_DIR, '*.xml')))\nand change to:\n  TRN_DIR = os.environ.get('CHART_TRN_DIR', '')\n  files = sorted(glob.glob(os.path.join(CCD_DIR, '*.xml')))\n  if TRN_DIR:\n      files += sorted(glob.glob(os.path.join(TRN_DIR, '*.xml')))\n\nIMPORTANT: In build_chart.py, this pattern appears TWICE — once in the inline code and once at the bottom where ccda_parse is re-imported. The second (bottom) occurrence is the one that actually runs. Add TRN_DIR there.",
+
+    "Step 2: Parameterize the hardcoded 'HIXNY' in build_smart.py. Currently the HTML template has:\n  <div class=\"sub\">HIXNY &middot; demonstration</div>\nand\n  <title>{E(TITLE)} &mdash; HIXNY</title>\nReplace 'HIXNY' in both places with {E(VIEW_QE)} (which already exists as a variable read from CHART_QE env var). This ensures Healthix and HealtheConnections views show their own QE name.",
+
+    "Step 3: Rewrite build_home.py to build 5 QE views from per-QE folders. The key changes:\n\na) Add 'import importlib' at the top.\n\nb) For each QE, set env vars pointing to that QE's subfolder and call the appropriate build module:\n  - HIXNY -> import build_smart (first import, SMART/FHIR style) -> marcus_fhir.html\n  - HEALTHELINK -> import build_chart (first import, Fusion style) -> marcus_fusion.html\n  - HEALTHIX -> importlib.reload(build_smart) -> marcus_healthix.html\n  - HEALTHECONN -> importlib.reload(build_smart) -> marcus_healtheconn.html\n  - BRONX -> import build_bronx (first import, IMAT style) -> marcus_bronx.html\n\nFor each build, set these env vars:\n  CHART_CCD_DIR = marcus_bundle/{qe_lower}/ccda\n  CHART_ORU_HL7 = marcus_bundle/{qe_lower}/oru-hl7\n  CHART_TRN_DIR = marcus_bundle/{qe_lower}/trn\n  CHART_OUT = marcus_{view_name}.html\n  CHART_QE = {QE_NAME}\n  CHART_TITLE = SHIN-NY Community Health Record (for SMART builds)\n\nc) Update the QES list for index.html:\n  - Hixny: href='marcus_fhir.html', live=True\n  - HEALTHeLINK: href='marcus_fusion.html', live=True\n  - Healthix: href='marcus_healthix.html', live=True, color='#059669'\n  - HealtheConnections: href='marcus_healtheconn.html', live=True, color='#ea580c'\n  - Bronx RHIO: href='marcus_bronx.html', live=True\n  - REMOVE Rochester RHIO entirely from the QES list\n\nd) Update the descriptive note in index.html to reflect the new per-QE data structure (each QE shows its own 3 sources, not the merged record from all sources).\n\ne) Update the print statement at the end to list all 5 output files.",
+
+    "Step 4: Update deploy_amplify.ps1. In the Copy-Item line, add marcus_healthix.html and marcus_healtheconn.html:\n  Copy-Item index.html, marcus_fhir.html, marcus_fusion.html, marcus_healthix.html, marcus_healtheconn.html, marcus_bronx.html, hosp_data.js, nonhosp_data.js _site\\",
+
+    "Step 5: Run the full build: python.exe build_home.py. Verify:\n  - Command succeeds (exit code 0)\n  - 6 output files exist: index.html, marcus_fhir.html, marcus_fusion.html, marcus_healthix.html, marcus_healtheconn.html, marcus_bronx.html\n  - Each QE HTML contains exactly 3 MRN entries (check data-mrns attribute in the HTML)\n  - index.html has all 5 QEs as live with correct links\n  - No GRRHIO or Rochester references in any HTML"
+  ],
+  "acceptance_criteria": [
+    "python.exe build_home.py succeeds and produces 6 HTML files (5 QE views + index.html)",
+    "Each QE HTML shows Marcus with exactly 3 MRNs, not 15",
+    "marcus_fhir.html (HIXNY) has MRNs for SPLPCPRIME, ALBMC, ELLS only",
+    "marcus_fusion.html (HEALTHELINK) has MRNs for KINGSB, ECMC, RPCI only",
+    "marcus_healthix.html has MRNs for MSSM, NYP, BELLEVUE only",
+    "marcus_healtheconn.html has MRNs for UHS, SJHHC, UPSTATE only",
+    "marcus_bronx.html has MRNs for BXLEB, SBH, MMC only",
+    "index.html has 5 QE cards, all marked live, no Rochester",
+    "TRN encounter data appears in the Encounters section of each QE view",
+    "deploy_amplify.ps1 includes all 5 QE HTML files",
+    "No Rochester/GRRHIO data in any output file"
+  ],
+  "verification": [
+    "python.exe build_home.py completes with exit code 0",
+    "Check each generated HTML file for data-mrns attribute content using Select-String or similar"
+  ],
+  "blocked_reason": null,
+  "findings": "Build pipeline produces 5 per-QE HTML views + index.html (6 files total). Each QE view has exactly 3 MRNs from its own sources. TRN encounter data loads correctly in all 3 renderer styles. importlib.reload(build_smart) handles Healthix and HealtheConnections builds. deploy_amplify.ps1 includes all 5 QE HTML files. Rochester removed from QES list. All QE cards are live. VIEW_QE parameterized in build_smart.py template header/title."
+}

@@ -1,0 +1,45 @@
+{
+  "id": "FEAT-001",
+  "type": "feat",
+  "description": "Rewrite build_marcus_bundle.py to generate 15 CCDs + 15 ORUs + 15 TRNs organized into per-QE subfolders under marcus_bundle/, plus updated MPI CSV and README. Remove Rochester/GRRHIO. Each QE gets 3 sources with distinct clinical content.",
+  "status": "completed",
+  "steps": [
+    "Step 1: Ensure base CCDs are accessible. Copy ccds/ from the main repo root (c:\\Users\\mberger\\OneDrive - New York e-Health Collaborative\\Documents\\code\\portal 3.0\\ccds) into the worktree ccds/ directory. These 10 Synthea base CCDs are needed as input for re-stamping.",
+
+    "Step 2: Rewrite build_marcus_bundle.py with the full 15-source configuration. The SOURCES list must contain these entries (qe, source, mrn, eid, base_ccd). Within each QE, each source uses a different base CCD for clinical variety:\n\nHIXNY:\n  SPLPCPRIME  mrn=956304  eid=HI-EID-5976  base=BRONX-MPID-000032_Dwain139_Hartmann983_e6b63232-7089-e00b-b09c-7fec1e30a1e6.xml\n  ALBMC       mrn=945947  eid=HI-EID-5392  base=BRONX-MPID-000053_Deshawn686_Wilkinson796_6357b2bc-ccf3-bd9d-36a1-21e38ba7b8e5.xml\n  ELLS        mrn=671234  eid=HI-EID-6012  base=BRONX-MPID-000068_Shenita872_Osinski784_eb4a5007-18fc-ba60-2811-54dd5820fde0.xml\n\nHEALTHELINK:\n  KINGSB      mrn=832368  eid=HE-EID-9965  base=BRONX-MPID-000024_Peter292_Olson653_1dea7120-75ab-3049-0e6c-42721886f034.xml\n  ECMC        mrn=881691  eid=HE-EID-9109  base=BRONX-MPID-000031_Millard193_Beahan375_ab53fbf2-df39-cfce-bd37-05c891d6114e.xml\n  RPCI        mrn=748293  eid=HE-EID-7541  base=BRONX-MPID-000092_Janeth814_Loree183_Schmitt836_4dcf8aea-5afd-c06f-1518-52dfa8ccf531.xml\n\nHEALTHIX:\n  MSSM        mrn=340474  eid=HE-EID-8304  base=BRONX-MPID-000003_Lessie363_Cartwright189_3d8cfae0-76e6-8b05-3421-f81320276a38.xml\n  NYP         mrn=811058  eid=HE-EID-6843  base=BRONX-MPID-000005_Cary869_Mante251_94f83860-c645-ca9d-ba62-ec22edb1cc5b.xml\n  BELLEVUE    mrn=529417  eid=HE-EID-4218  base=BRONX-MPID-000094_Haydee844_Elna874_Beahan375_0c7cfb67-ad2f-4381-ff1b-c7e334dc0c85.xml\n\nHEALTHECONN:\n  UHS         mrn=826608  eid=HE-EID-2717  base=BRONX-MPID-000101_Carly657_Sparkle906_Bins636_880bba7a-b046-c5b7-4995-579eee711aa5.xml\n  SJHHC       mrn=413856  eid=HE-EID-3298  base=BRONX-MPID-000003_Lessie363_Cartwright189_3d8cfae0-76e6-8b05-3421-f81320276a38.xml\n  UPSTATE     mrn=697215  eid=HE-EID-5107  base=BRONX-MPID-000031_Millard193_Beahan375_ab53fbf2-df39-cfce-bd37-05c891d6114e.xml\n\nBRONX:\n  BXLEB       mrn=515366  eid=BR-EID-1665  base=BRONX-MPID-000094_Haydee844_Elna874_Beahan375_0c7cfb67-ad2f-4381-ff1b-c7e334dc0c85.xml\n  SBH         mrn=284731  eid=BR-EID-2194  base=BRONX-MPID-000024_Peter292_Olson653_1dea7120-75ab-3049-0e6c-42721886f034.xml\n  MMC         mrn=362948  eid=BR-EID-3017  base=BRONX-MPID-000053_Deshawn686_Wilkinson796_6357b2bc-ccf3-bd9d-36a1-21e38ba7b8e5.xml\n\nNo GRRHIO/Rochester entries.",
+
+    "Step 3: In build_marcus_bundle.py, update the output folder structure. Instead of writing to marcus_bundle/ccda/ and marcus_bundle/oru-hl7/, write per-QE:\n  marcus_bundle/{qe_lower}/ccda/MARCUS_{QE}_{SOURCE}_{MRN}.xml\n  marcus_bundle/{qe_lower}/oru-hl7/MARCUS_{QE}_{SOURCE}_{MRN}_ORU.hl7\n  marcus_bundle/{qe_lower}/trn/MARCUS_{QE}_{SOURCE}_{MRN}_TRN.xml\nwhere qe_lower is the QE name lowercased (hixny, healthelink, healthix, healtheconn, bronx). Create all subdirectories. Delete any old flat ccda/, oru-hl7/ dirs at the marcus_bundle level if present.",
+
+    "Step 4: Update the make_ccd(src) function to accept a base_ccd parameter (path to the specific base CCD). Currently it hardcodes BASE_CCD. Change it to take the base path as an argument. Each source dict should include a 'base' key with the filename, and make_ccd reads from os.path.join(CCDS_DIR, src['base']). CCDS_DIR defaults to 'ccds' but can be overridden via env var SYNTHEA_CCDS_DIR.",
+
+    "Step 5: Update the ORU generation to produce 15 ORUs with varied lab values. The existing oru_message() function is reusable. Each ORU should contain a Basic Metabolic Panel but with slightly different values for variety:\n  - Glucose: vary between 78-95 mg/dL (ref range 70-99)\n  - Creatinine: vary between 0.85-1.25 mg/dL (ref range 0.70-1.30)\n  - Sodium: vary between 137-144 mmol/L (ref range 136-145)\n  - HbA1c: vary between 5.8-6.5% (ref range 4.0-5.6, always flagged High for Marcus's diabetes)\nUse per-source message IDs (e.g., MSG_HIXNY_SPLPCPRIME_001). Use per-source collection dates that vary slightly (e.g., 20250314-20250316 range). The script should define a list of 15 tuples of lab values, one per source, so each ORU is distinct.",
+
+    "Step 6: Add TRN generation. Create a make_trn(src) function that produces a minimal C-CDA discharge summary. Structure:\n  - Standard CDA envelope (same namespace, templateId for C-CDA R2.1)\n  - patientRole block identical to CCD identity (same QE|SOURCE assigningAuthorityName, same MRN, EID, MPID, Marcus demographics)\n  - A 'Encounters' section with one inpatient hospital encounter. Each TRN should have a unique encounter:\n    * Vary admit dates (spread across 2024-2025)\n    * Vary encounter types (Inpatient, Emergency, Observation, etc.)\n    * Use a facility name derived from the source code (e.g., SPLPCPRIME -> 'SPLPC Primary Care', ALBMC -> 'Albany Medical Center')\n  - A 'Problems' section listing Marcus's 5 shared conditions (Diabetes type 2, Essential hypertension, Hyperlipidemia, CKD stage 3, Osteoarthritis) — all Active\n  - No other clinical sections (no labs, meds, vitals, immunizations, procedures)\n  The TRN must be valid enough for parse_ccd() to extract the Encounters and Problems without errors. Follow the exact XML structure from the existing CCDs for the identity block and section format.",
+
+    "Step 7: Update MPI CSV generation. Write marcus_bundle/mpi/marcus_mpi.csv with 15 rows (header + 15 source rows). Same schema: qe,source,mrn,eid,mpid,first_name,last_name,dob,gender. No GRRHIO rows.",
+
+    "Step 8: Update README.md generation. Write marcus_bundle/README.md describing the 15-source structure, per-QE folder layout, the 3 file types (CCD, ORU, TRN), and the source-to-base-CCD mapping.",
+
+    "Step 9: Run the script: python.exe build_marcus_bundle.py. Verify it completes without errors. Check that the output structure matches: 5 QE folders, each with ccda/ (3 files), oru-hl7/ (3 files), trn/ (3 files). Total: 15 CCDs + 15 ORUs + 15 TRNs = 45 files. MPI CSV has 15 rows. No GRRHIO files anywhere."
+  ],
+  "acceptance_criteria": [
+    "build_marcus_bundle.py runs successfully with python.exe",
+    "marcus_bundle/ has 5 QE subfolders: hixny, healthelink, healthix, healtheconn, bronx",
+    "Each QE subfolder has ccda/ (3 .xml), oru-hl7/ (3 .hl7), trn/ (3 .xml)",
+    "All 45 data files have correct Marcus identity (name, DOB, gender, address, MPID)",
+    "Each CCD has assigningAuthorityName='QE|SOURCE' with the correct MRN",
+    "Each ORU has PID-3 with correct MRN^^^QE&Source^MR format",
+    "Lab values differ across ORUs",
+    "Each TRN has an Encounters section with a hospital encounter",
+    "No GRRHIO/Rochester files or references in any output",
+    "marcus_bundle/mpi/marcus_mpi.csv has 15 rows + header",
+    "No flat ccda/ or oru-hl7/ directories at the marcus_bundle level"
+  ],
+  "verification": [
+    "python.exe build_marcus_bundle.py completes with exit code 0",
+    "Count files: 15 XMLs in */ccda/, 15 HL7s in */oru-hl7/, 15 XMLs in */trn/",
+    "Spot-check one CCD, one ORU, one TRN for correct identity block"
+  ],
+  "blocked_reason": null,
+  "findings": "build_marcus_bundle.py generates 45 files (15 CCD + 15 ORU + 15 TRN) across 5 per-QE subfolders (hixny, healthelink, healthix, healtheconn, bronx). Each QE folder has ccda/, oru-hl7/, trn/ with 3 files each. MPI CSV has 15 rows. TRN files parse correctly with ccda_parse.py (encounters + 5 problems). No GRRHIO/Rochester data. Lab values vary per source. CCDS_DIR can be overridden via SYNTHEA_CCDS_DIR env var. build_home.py and build renderers will need updating to read from the new per-QE subfolder structure (marcus_bundle/{qe_lower}/ccda/ instead of marcus_bundle/ccda/)."
+}

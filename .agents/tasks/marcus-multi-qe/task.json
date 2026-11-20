@@ -1,0 +1,7 @@
+{
+  "task_id": "task-marcus-multi-qe",
+  "task_description": "Restructure Marcus Evans patient demo so each QE portal view shows only that QE's data. Create 7 new CCDs, 7 new ORUs, 15 TRNs organized into per-QE folders. Update build pipeline to produce 5 separate QE views. Remove Rochester/GRRHIO.",
+  "status": "pending",
+  "feature_order": ["FEAT-001", "FEAT-002"],
+  "blocked_reason": null
+}
