@@ -357,7 +357,7 @@ REPORT2_SCRIPT = """
       rows.forEach(function(r) {
         var aa = r[2];
         if (!seen[aa]) {
-          seen[aa] = { aa: aa, ccd: r[3], trn: r[4], lab: r[5], adt: r[6], items: [] };
+          seen[aa] = { aa: aa, ccd: r[3], trn: r[4], lab: r[5], adt: r[6], chain: r[8] || '', items: [] };
           groups.push(seen[aa]);
         }
         seen[aa].items.push({ name: r[1], fid: r[7] || '' });
@@ -396,7 +396,7 @@ REPORT2_SCRIPT = """
           // Multiple hospitals share this AA â€” group header + sub-rows
           var pctG = maxTot > 0 ? (tot / maxTot * 100).toFixed(1) : 0;
           html += '<tr class="aa-grp">'
-            + '<td class="aa-head"><span class="aa-count">' + g.items.length + ' hospitals</span></td>'
+            + '<td class="aa-head">' + (g.chain ? '<b>' + g.chain + '</b> ' : '') + '<span class="aa-count">' + g.items.length + ' hospitals</span></td>'
             + '<td class="code"><span class="aa-label">' + g.aa + '</span></td>'
             + '<td class="r">' + fmtC(g.ccd) + '</td>'
             + '<td class="r">' + fmtC(g.trn) + '</td>'

@@ -27,9 +27,25 @@ EXCLUDE_QES = {'Rochester RHIO'}
 
 # ---------------- hospitals ----------------
 raw = load('SQLExamples/reportonhospitals.json')
+
+# Load chain/system names for multi-hospital AAs
+import csv
+chain_map = {}  # key = (qe, aa) -> system name
+try:
+    with open('ChainCheetSheetTemp.csv', encoding='utf-8-sig') as f:
+        for row in csv.DictReader(f):
+            qe = row.get('QE', '').strip()
+            aa = row.get('Assigning Authority', '').strip()
+            name = row.get('Best Guess Organization / Place', '').strip()
+            if qe and aa and name:
+                chain_map[(qe, aa)] = name
+except FileNotFoundError:
+    pass
+
 rows = [[r['qe_name'], r['organization_name'], r['assigning_authority'],
          int(r['ccd_count']), int(r['trn_count']), int(r['lab_count']), int(r['adt_count']),
-         r.get('nys_facility_id', '')]
+         r.get('nys_facility_id', ''),
+         chain_map.get((r['qe_name'], r['assigning_authority']), '')]
         for r in raw['rows']
         if r['qe_name'] not in EXCLUDE_QES]
 tot = defaultdict(int)
