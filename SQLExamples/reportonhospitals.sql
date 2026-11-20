@@ -31,7 +31,7 @@ WITH params AS (
 -- Full hospital AA list from SFDC lookup.
 -- One row per hospital; multiple rows per AA when hospitals share the same code.
 hospitals AS (
-    SELECT
+    SELECT DISTINCT
         upper(trim(code))              AS aa_key,
         trim(code)                     AS assigning_authority,
         trim(organization_name)        AS organization_name,
