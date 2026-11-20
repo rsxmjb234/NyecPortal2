@@ -239,8 +239,7 @@ REPORT1_SCRIPT = """
       { qe: "HealtheConnections", ccd: 4064234, trn: 2946189, lab: 4940467 },
       { qe: "HEALTHeLINK",          ccd: 1001590, trn:  989702, lab: 1857966 },
       { qe: "Hixny",              ccd: 2497901, trn:   86968, lab: 1177507 },
-      { qe: "Bronx RHIO",         ccd:  832486, trn: 1191999, lab: 1209660 },
-      { qe: "Rochester RHIO",     ccd: 1159667, trn:  656012, lab:       0 }
+      { qe: "Bronx RHIO",         ccd:  832486, trn: 1191999, lab: 1209660 }
     ];
     rows.sort(function(a, b) {
       return (b.ccd + b.trn + b.lab) - (a.ccd + a.trn + a.lab);
@@ -278,7 +277,7 @@ REPORT2_SCRIPT = """
     var HOSP = window.HOSP;
     var QE_COLORS = {
       'HealtheConnections':'#ea580c', 'Healthix':'#059669', 'Bronx RHIO':'#b91c1c',
-      'HEALTHeLINK':'#1d4ed8', 'Rochester RHIO':'#7c3aed', 'Hixny':'#0e7490'
+      'HEALTHeLINK':'#1d4ed8', 'Hixny':'#0e7490'
     };
     var current = HOSP.qes[0];
 
@@ -378,7 +377,7 @@ REPORT3_SCRIPT = """
     var D = window.NONHOSP;
     var QE_COLORS = {
       'HealtheConnections':'#ea580c', 'Healthix':'#059669', 'Bronx RHIO':'#b91c1c',
-      'HEALTHeLINK':'#1d4ed8', 'Rochester RHIO':'#7c3aed', 'Hixny':'#0e7490'
+      'HEALTHeLINK':'#1d4ed8', 'Hixny':'#0e7490'
     };
     var current = D.qes[0];
 
