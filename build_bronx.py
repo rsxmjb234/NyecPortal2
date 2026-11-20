@@ -244,7 +244,10 @@ def render_patient(P, idx):
 
 
 # ---------- build ----------
+TRN_DIR = os.environ.get('CHART_TRN_DIR', '')
 files = sorted(glob.glob(os.path.join(CCD_DIR, '*.xml')))
+if TRN_DIR:
+    files += sorted(glob.glob(os.path.join(TRN_DIR, '*.xml')))
 patients = [parse_ccd(f) for f in files]
 for P in patients:
     P['oru'] = []

@@ -543,7 +543,10 @@ def load_oru(patients):
 # names over the inline copies above, so both views behave identically).
 from ccda_parse import parse_ccd, load_oru, load_oru_hl7, merge_by_person  # noqa: E402
 
+TRN_DIR = os.environ.get('CHART_TRN_DIR', '')
 files = sorted(glob.glob(os.path.join(CCD_DIR, '*.xml')))
+if TRN_DIR:
+    files += sorted(glob.glob(os.path.join(TRN_DIR, '*.xml')))
 patients = [parse_ccd(f) for f in files]
 for P in patients:
     P['oru'] = []

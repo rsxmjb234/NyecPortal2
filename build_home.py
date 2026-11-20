@@ -1,33 +1,49 @@
 ﻿"""
-Build the demo home screen plus both renderings of the SAME Marcus cohort:
-  - marcus_fhir.html    SMART on FHIR style (build_smart)
-  - marcus_fusion.html  HEALTHeLINK / Fusion style (build_chart)
-  - index.html          landing page that links to both
-Same bundle (marcus_bundle), same parser, same HL7 ORU + de-duplication rules.
+Build 5 per-QE Marcus portal views + index.html landing page.
+Each QE reads from its own subfolder under marcus_bundle/{qe_lower}/.
+  - marcus_fhir.html         HIXNY       (SMART on FHIR style)
+  - marcus_fusion.html       HEALTHeLINK (Fusion style)
+  - marcus_healthix.html     Healthix    (SMART on FHIR style)
+  - marcus_healtheconn.html  HealtheConnections (SMART on FHIR style)
+  - marcus_bronx.html        Bronx RHIO  (IMAT style)
+  - index.html               landing page
 """
 import os
+import importlib
 import html
 
-CCD = os.path.join('marcus_bundle', 'ccda')
-ORU = os.path.join('marcus_bundle', 'oru-hl7')
 E = html.escape
 
-# ---- FHIR / SMART on FHIR style ----
-os.environ['CHART_CCD_DIR'] = CCD
-os.environ['CHART_ORU_HL7'] = ORU
-os.environ['CHART_OUT'] = 'marcus_fhir.html'
-os.environ['CHART_TITLE'] = 'SHIN-NY Community Health Record'
-os.environ['CHART_QE'] = 'HIXNY'          # this view represents the Hixny portal
-import build_smart  # noqa: E402,F401  (runs the build with the env above)
 
-# ---- HEALTHeLINK / Fusion style ----
-os.environ['CHART_OUT'] = 'marcus_fusion.html'
-os.environ['CHART_QE'] = 'HEALTHELINK'     # this view represents the HEALTHeLINK portal
+def _set_env(qe_folder, out_file, qe_name, title=''):
+    """Set env vars for a per-QE build."""
+    os.environ['CHART_CCD_DIR'] = os.path.join('marcus_bundle', qe_folder, 'ccda')
+    os.environ['CHART_ORU_HL7'] = os.path.join('marcus_bundle', qe_folder, 'oru-hl7')
+    os.environ['CHART_TRN_DIR'] = os.path.join('marcus_bundle', qe_folder, 'trn')
+    os.environ['CHART_OUT'] = out_file
+    os.environ['CHART_QE'] = qe_name
+    if title:
+        os.environ['CHART_TITLE'] = title
+
+
+# ---- HIXNY: SMART on FHIR style (first import) ----
+_set_env('hixny', 'marcus_fhir.html', 'HIXNY', 'SHIN-NY Community Health Record')
+import build_smart  # noqa: E402,F401
+
+# ---- HEALTHeLINK: Fusion style ----
+_set_env('healthelink', 'marcus_fusion.html', 'HEALTHELINK')
 import build_chart  # noqa: E402,F401
 
-# ---- Bronx RHIO / IMAT Solutions style ----
-os.environ['CHART_OUT'] = 'marcus_bronx.html'
-os.environ['CHART_QE'] = 'BRONX'           # this view represents the Bronx RHIO (IMAT) portal
+# ---- Healthix: SMART on FHIR style (reload) ----
+_set_env('healthix', 'marcus_healthix.html', 'HEALTHIX', 'SHIN-NY Community Health Record')
+importlib.reload(build_smart)
+
+# ---- HealtheConnections: SMART on FHIR style (reload) ----
+_set_env('healtheconn', 'marcus_healtheconn.html', 'HEALTHECONN', 'SHIN-NY Community Health Record')
+importlib.reload(build_smart)
+
+# ---- Bronx RHIO: IMAT style ----
+_set_env('bronx', 'marcus_bronx.html', 'BRONX')
 import build_bronx  # noqa: E402,F401
 
 n_people = len(build_smart.patients)
@@ -39,11 +55,9 @@ QES = [
     {'name': 'HEALTHeLINK', 'region': 'Western New York', 'color': '#1d4ed8',
      'site': 'https://wnyhealthelink.com', 'href': 'marcus_fusion.html', 'live': True},
     {'name': 'Healthix', 'region': 'NYC & Long Island', 'color': '#059669',
-     'site': 'https://healthix.org', 'href': '', 'live': False},
+     'site': 'https://healthix.org', 'href': 'marcus_healthix.html', 'live': True},
     {'name': 'HealtheConnections', 'region': 'Central NY, North Country & more', 'color': '#ea580c',
-     'site': 'https://www.healtheconnections.org', 'href': '', 'live': False},
-    {'name': 'Rochester RHIO', 'region': 'Finger Lakes & Southern Tier', 'color': '#7c3aed',
-     'site': 'https://rochesterrhio.org', 'href': '', 'live': False},
+     'site': 'https://www.healtheconnections.org', 'href': 'marcus_healtheconn.html', 'live': True},
     {'name': 'Bronx RHIO', 'region': 'The Bronx (IMAT Solutions)', 'color': '#b91c1c',
      'site': 'https://bronxrhio.org', 'href': 'marcus_bronx.html', 'live': True},
 ]
@@ -498,11 +512,12 @@ INDEX = f"""<!DOCTYPE html>
     </div>
 
     <div class="note">
-      Each QE will render the <b>same underlying record</b> in its own look &amp; feel. The two live
-      views (Hixny, HEALTHeLINK) are built from one bundle &mdash; the same 5 C-CDA documents and the
-      same genuine <b>HL7 v2.5.1 ORU</b> lab feeds, parsed by the same code &mdash; and apply the same
-      de-duplication: an ORU result matching a CCD lab on LOINC&nbsp;+&nbsp;date is shown as
-      <b>preferred</b> and the duplicate CCD value is <b>crossed off, never deleted</b>.
+      Each QE renders <b>Marcus</b> in its own look &amp; feel using <b>only that QE&rsquo;s data</b>.
+      Every QE folder contains 3 C-CDA documents, 3 HL7&nbsp;v2.5.1 ORU lab feeds, and 3 TRN
+      (discharge summary) encounter records &mdash; 9 files per QE, 45 total across 5 QEs. The same
+      parser and de-duplication rules apply everywhere: an ORU result matching a CCD lab on
+      LOINC&nbsp;+&nbsp;date is shown as <b>preferred</b> and the duplicate CCD value is
+      <b>crossed off, never deleted</b>.
     </div>
 {VOLUME_SECTION}
   </div>
@@ -519,5 +534,5 @@ INDEX = f"""<!DOCTYPE html>
 with open('index.html', 'w', encoding='utf-8') as f:
     f.write(INDEX)
 
-print('Wrote: index.html, marcus_fhir.html, marcus_fusion.html')
-print(f'Patients: {n_people}')
+print('Wrote: index.html, marcus_fhir.html, marcus_fusion.html, marcus_healthix.html, marcus_healtheconn.html, marcus_bronx.html')
+print(f'Patients per QE view: {n_people}')

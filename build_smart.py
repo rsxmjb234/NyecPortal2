@@ -306,7 +306,10 @@ def render_patient(P, idx):
 
 
 # ---------- build ----------
+TRN_DIR = os.environ.get('CHART_TRN_DIR', '')
 files = sorted(glob.glob(os.path.join(CCD_DIR, '*.xml')))
+if TRN_DIR:
+    files += sorted(glob.glob(os.path.join(TRN_DIR, '*.xml')))
 patients = [parse_ccd(f) for f in files]
 for P in patients:
     P['oru'] = []
@@ -328,7 +331,7 @@ HTML = f"""<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{E(TITLE)} &mdash; HIXNY</title>
+<title>{E(TITLE)} &mdash; {E(VIEW_QE)}</title>
 <style>
   :root {{
     --brand:#0ea5a4; --brand-d:#0b7c7b; --brand-2:#0e7490; --accent:#f97316;
@@ -473,7 +476,7 @@ HTML = f"""<!DOCTYPE html>
       <div class="mark">{icon('pulse')}</div>
       <div>
         <div class="name">{E(TITLE)}</div>
-        <div class="sub">HIXNY &middot; demonstration</div>
+        <div class="sub">{E(VIEW_QE)} &middot; demonstration</div>
       </div>
     </div>
     <div class="spacer"></div>
